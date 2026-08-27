@@ -42,6 +42,13 @@ powershell -ExecutionPolicy Bypass -File serve.ps1
 GitLab Pages via `.gitlab-ci.yml` – nach jedem Push auf den Default-Branch wird die
 Seite automatisch veröffentlicht (Projekt → Deploy → Pages).
 
+## Englische Seite
+
+`driving-school.html` ist bewusst komplett auf Englisch – die Original-Website
+(`fahrschule-ch.ch/ch/driving-school-zuerich/`) hat diese Seite ebenfalls in Englisch
+für englischsprachige Fahrschüler:innen. Im Menü heisst der Punkt „English“, oben auf
+der Seite steht ein Hinweis mit Link zurück zur deutschen Startseite.
+
 ## Hinweise / offene Punkte
 
 - **Doppellektion:** Preisseite nennt 100 Minuten, die AGB der Original-Seite 105 Minuten –
