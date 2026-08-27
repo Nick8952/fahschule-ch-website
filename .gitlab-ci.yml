@@ -1,0 +1,17 @@
+# GitLab Pages – veröffentlicht die statische Website automatisch.
+# Nach dem Push läuft der Job und die Seite ist unter der Pages-URL erreichbar
+# (Projekt → Deploy → Pages).
+
+pages:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - mkdir -p public
+    - cp *.html public/
+    - cp robots.txt sitemap.xml public/
+    - cp -r css js assets public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
