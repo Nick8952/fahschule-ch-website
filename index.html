@@ -141,9 +141,12 @@
       </div>
       <div class="hero-stack" aria-label="Eindrücke von Fahrschule CH">
         <div class="stack-frame" aria-hidden="true"></div>
-        <button class="hero-videochip" type="button" data-video aria-haspopup="dialog">
+        <button class="hero-videochip" type="button" data-video data-hover-video aria-haspopup="dialog" aria-label="Video von Fahrlehrer Costa abspielen (Klick für Vollbild mit Ton)">
+          <video class="chip-video" muted loop playsinline preload="metadata" poster="assets/img/hero-3.webp">
+            <source src="assets/video/intro.mp4" type="video/mp4">
+          </video>
           <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-          <span>Video ansehen<br><b>Fahrlehrer Costa</b></span>
+          <span class="chip-label">Fahrlehrer Costa</span>
         </button>
         <div class="shot is-current"><img src="assets/img/hero-2.webp" alt="Fahrlehrer Costa Chatzis mit Autoschlüssel im Fahrschulauto" width="2048" height="683"></div>
         <div class="shot"><img src="assets/img/hero-1.webp" alt="Costa Chatzis am weissen Fahrschulauto von Fahrschule CH" width="2037" height="679"></div>

@@ -334,20 +334,43 @@ body.menu-open .mobile-sheet { transform: translateY(0); visibility: visible; }
 }
 .hero-stack .stack-dots button.is-current { background: #fff; width: 22px; }
 .hero-videochip {
-  position: absolute; left: -18px; top: 18px; z-index: 4;
-  background: var(--white); border-radius: 14px; padding: .5rem;
-  box-shadow: var(--shadow-md); display: flex; align-items: center; gap: .6rem;
-  font-family: var(--font-display); font-weight: 600; font-size: .8rem;
-  padding-right: .95rem;
+  position: absolute; left: -22px; top: 16px; z-index: 4;
+  width: clamp(150px, 42%, 208px); aspect-ratio: 16 / 11;
+  border: 3px solid var(--white); border-radius: 16px; overflow: hidden;
+  box-shadow: var(--shadow-lg); cursor: pointer; padding: 0; background: var(--ink);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.hero-videochip:hover, .hero-videochip:focus-visible {
+  transform: translateY(-3px) scale(1.03); outline: none;
+}
+.hero-videochip .chip-video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
 }
 .hero-videochip .play {
-  width: 34px; height: 34px; border-radius: 999px; background: var(--cobalt);
-  display: grid; place-items: center;
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 40px; height: 40px; border-radius: 999px; background: rgba(20, 60, 140, .92);
+  display: grid; place-items: center; z-index: 2;
+  transition: opacity .3s var(--ease), transform .3s var(--ease);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
 }
-.hero-videochip .play svg { width: 14px; height: 14px; fill: #fff; }
-.hero-videochip { border: none; cursor: pointer; text-align: left; transition: transform .2s var(--ease); }
-.hero-videochip:hover { transform: translateY(-2px); }
-.hero-videochip span:last-child { line-height: 1.25; }
+.hero-videochip .play svg { width: 15px; height: 15px; fill: #fff; margin-left: 2px; }
+.hero-videochip .chip-label {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  padding: .5rem .6rem .45rem; text-align: left;
+  font-family: var(--font-display); font-weight: 600; font-size: .72rem; color: #fff;
+  background: linear-gradient(transparent, rgba(10, 14, 24, .78));
+  display: flex; align-items: center; gap: .35rem;
+}
+.hero-videochip .chip-label::before {
+  content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--go);
+  flex: none; box-shadow: 0 0 0 0 rgba(47, 158, 87, .6);
+}
+.hero-videochip.is-playing .play { opacity: 0; transform: translate(-50%, -50%) scale(.6); }
+.hero-videochip.is-playing .chip-label::before { animation: live-pulse 1.6s ease-out infinite; }
+@keyframes live-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(47, 158, 87, .55); }
+  100% { box-shadow: 0 0 0 7px rgba(47, 158, 87, 0); }
+}
 
 .video-modal {
   position: fixed; inset: 0; z-index: 200;

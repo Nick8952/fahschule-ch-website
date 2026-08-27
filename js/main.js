@@ -266,13 +266,42 @@
     stack.style.transition = "transform .3s var(--ease)";
   }
 
+  /* ---------- Hover-Vorschau: Video läuft beim Überfahren ---------- */
+  doc.querySelectorAll("[data-hover-video]").forEach(function (wrap) {
+    var v = wrap.querySelector("video");
+    if (!v) return;
+    var playPreview = function () {
+      v.muted = true;
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+      wrap.classList.add("is-playing");
+    };
+    var stopPreview = function () {
+      v.pause();
+      try { v.currentTime = 0; } catch (e) {}
+      wrap.classList.remove("is-playing");
+    };
+    wrap.addEventListener("mouseenter", playPreview);
+    wrap.addEventListener("mouseleave", stopPreview);
+    // Touch: einmal antippen startet die Vorschau (statt Hover)
+    wrap.addEventListener("touchstart", function () {
+      if (wrap.classList.contains("is-playing")) stopPreview();
+      else playPreview();
+    }, { passive: true });
+    wrap._stopPreview = stopPreview;
+  });
+
   /* ---------- Video-Modal ---------- */
   var vm = doc.getElementById("videoModal");
   if (vm) {
     var vmVideo = vm.querySelector("video");
     var openVm = function () {
+      doc.querySelectorAll("[data-hover-video]").forEach(function (w) {
+        if (w._stopPreview) w._stopPreview();
+      });
       vm.hidden = false;
       doc.body.style.overflow = "hidden";
+      if (vmVideo) { var p = vmVideo.play(); if (p && p.catch) p.catch(function () {}); }
     };
     var closeVm = function () {
       vm.hidden = true;
