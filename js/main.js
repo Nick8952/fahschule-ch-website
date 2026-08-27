@@ -12,6 +12,9 @@
 (function () {
   "use strict";
   var doc = document;
+  var prefersReduced = function () {
+    return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  };
 
   /* ---------- Kopfleiste ---------- */
   var header = doc.querySelector(".site-header");
@@ -207,6 +210,61 @@
       box.appendChild(frame);
     });
   });
+
+  /* ---------- Lese-Fortschrittsbalken ---------- */
+  if (header && !prefersReduced()) {
+    var bar = doc.createElement("div");
+    bar.className = "scroll-progress";
+    header.appendChild(bar);
+    var updateBar = function () {
+      var h = doc.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+    };
+    updateBar();
+    window.addEventListener("scroll", updateBar, { passive: true });
+    window.addEventListener("resize", updateBar);
+  }
+
+  /* ---------- Zahlen hochzählen ---------- */
+  var nums = doc.querySelectorAll(".hero-facts .num");
+  if (nums.length && "IntersectionObserver" in window && !prefersReduced()) {
+    var numIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        numIo.unobserve(en.target);
+        var el = en.target;
+        var m = (el.textContent || "").replace(/ /g, " ").match(/^(\D*)(\d+)(.*)$/);
+        if (!m) return;
+        var target = parseInt(m[2], 10);
+        if (target > 1000) return; // Jahreszahlen o. Ä. nicht animieren
+        var pre = m[1], post = m[3], start = null, dur = 1100;
+        var step = function (ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = pre + Math.round(eased * target) + post;
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(function (n) { numIo.observe(n); });
+  }
+
+  /* ---------- Hero-Fotostapel: sanfte Parallaxe ---------- */
+  if (stack && window.matchMedia("(pointer: fine)").matches && !prefersReduced()) {
+    stack.addEventListener("pointermove", function (e) {
+      var r = stack.getBoundingClientRect();
+      var dx = (e.clientX - r.left) / r.width - 0.5;
+      var dy = (e.clientY - r.top) / r.height - 0.5;
+      stack.style.setProperty("transform", "perspective(900px) rotateY(" + (dx * 5).toFixed(2) + "deg) rotateX(" + (-dy * 5).toFixed(2) + "deg)");
+    });
+    stack.addEventListener("pointerleave", function () {
+      stack.style.removeProperty("transform");
+    });
+    stack.style.transition = "transform .3s var(--ease)";
+  }
 
   /* ---------- Video-Modal ---------- */
   var vm = doc.getElementById("videoModal");
