@@ -1,0 +1,43 @@
+{
+  "theoriekurs": {
+    "fee": "CHF 50",
+    "voucher": "Du erhältst einen Gutschein über CHF 50 für deine Fahrstunden.",
+    "intro": "Simulation der Theorieprüfung in Zürich – kostenlos für unsere Schüler:innen. Mit unserer Prüfungssimulation kannst du die offiziellen Prüfungsfragen unter realistischen Bedingungen beantworten. Wer die Verkehrsregeln sicher beherrscht, benötigt weniger Fahrstunden – und spart dadurch Zeit und Geld.",
+    "times": ["Mo: 17.30 bis 19.00 Uhr", "Mi: 17.30 bis 19.00 Uhr"],
+    "location": "Fahrschulcenter Albisrieden, Badenerstrasse 333, 8003 Zürich – 2. Stock über «Coop» beim Albisriederplatz",
+    "note": "Die Prüfungssimulation ist für unsere Fahrschüler:innen kostenlos."
+  },
+  "nothelferkurs": {
+    "fee": "CHF 120",
+    "voucher": "inkl. Gutschein über CHF 20 für Fahrstunden",
+    "intro": "Der Nothelferkurs ist der erste Schritt auf dem Weg zum Führerausweis. Er kann bereits vor dem 18. Geburtstag besucht werden und ist 6 Jahre gültig."
+  },
+  "vkuDeutsch": {
+    "fee": "CHF 120",
+    "feeEnglish": "CHF 160",
+    "intro": "Die Verkehrskunde umfasst die theoretischen Grundlagen des Führens eines Fahrzeugs. Auf Basis der Gefahrenlehre wird das Verkehrsbewusstsein geschult. Ziel ist es, Risiken und Unfälle im Strassenverkehr zu vermeiden. Fahrschule CH bietet monatliche VKU-Kurse auf Deutsch (oder Englisch) in Zürich an.",
+    "includes": "Keine versteckten Kosten: Kurshefte, Bearbeitungsgebühr und Kursbestätigung inklusive.",
+    "bring": "Lernfahrausweis",
+    "location": "Fahrschulcenter Albisriederplatz, Badenerstrasse 333, 8003 Zürich – 2. Stock über «Coop» beim Albisriederplatz. Erreichbar mit Tram 2 und 3; Bus 33, 72 und 83.",
+    "iframeUrl": "https://iframe.vku-pgs.asa.ch/de/public/coursegroup/extended/VktVXzE5Mjg/1/vku/"
+  },
+  "vkuEnglish": {
+    "fee": "CHF 160",
+    "intro": "Traffic theory covers the theoretical basics of driving a vehicle. Traffic awareness is trained on the basis of hazard theory. The aim is to avoid risks and accidents in road traffic. Fahrschule CH offers monthly VKU English intensive courses in Zurich.",
+    "feeNote": "Course fee CHF 160 cash. If desired: get a voucher for a free driving lesson at Fahrschule CH.",
+    "requirements": "Valid category A, A1 or B learner's driving licence. Missed courses can be repeated monthly.",
+    "bring": "Learner's permit",
+    "location": "Fahrschulcenter Albisriederplatz, Badenerstrasse 333, 8003 Zürich – 2nd floor above the «Coop» supermarket at Albisriederplatz. Tram 2 and 3; bus 33, 72 and 83.",
+    "datesNote": "Kursdaten laut aktueller Website von Fahrschule CH. Bitte den gewünschten Termin vor der Anmeldung kurz mit dem Fahrlehrer bestätigen.",
+    "dates": [
+      { "label": "VKU 9 · September", "friday": "Fr. 12.9.2025 17–21 Uhr", "saturday": "Sa. 13.9.2025 10–14 Uhr", "bookable": false, "value": "" },
+      { "label": "VKU 10 · Oktober", "friday": "Fr. 31.10.2025 17–21 Uhr", "saturday": "Sa. 1.11.2025 10–14 Uhr", "bookable": false, "value": "" },
+      { "label": "VKU 12 · Dezember", "friday": "Fr. 5.12.2025 17–21 Uhr", "saturday": "Sa. 6.12.2025 10–14 Uhr", "bookable": false, "value": "" },
+      { "label": "VKU 1 · Februar", "friday": "Fr. 6.2.2026 17–21 Uhr", "saturday": "Sa. 7.2.2026 10–14 Uhr", "bookable": true, "value": "Fr. 6.2.2026 + Sa. 7.2.2026" },
+      { "label": "VKU 2 · März", "friday": "Fr. 20.3.2026 17–21 Uhr", "saturday": "Sa. 21.3.2026 10–14 Uhr", "bookable": true, "value": "Fr. 20.3.2026 + Sa. 21.3.2026" },
+      { "label": "VKU 3 · April", "friday": "Fr. 17.4.2026 17–21 Uhr", "saturday": "Sa. 18.4.2026 10–14 Uhr", "bookable": true, "value": "Fr. 17.4.2026 + Sa. 18.4.2026" },
+      { "label": "VKU 4 · Mai", "friday": "Fr. 29.5.2026 17–21 Uhr", "saturday": "Sa. 30.5.2026 10–14 Uhr", "bookable": true, "value": "Fr. 29.5.2026 + Sa. 30.5.2026" },
+      { "label": "VKU 5 · Juni", "friday": "Fr. 26.6.2026 17–21 Uhr", "saturday": "Sa. 27.6.2026 10–14 Uhr", "bookable": true, "value": "Fr. 26.6.2026 + Sa. 27.6.2026" }
+    ]
+  }
+}

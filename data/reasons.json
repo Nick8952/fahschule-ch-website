@@ -1,0 +1,24 @@
+{
+  "warum": [
+    { "title": "Top Standort", "body": "Fahrstunden im Prüfungsgebiet. Wir starten neben dem Theorielokal auf Privatparkplätzen. Der Albisriederplatz ist ideal erreichbar." },
+    { "title": "Happy Schüler:innen", "body": "Keine Praktikanten als Fahrlehrer – nur Top-Ausbildung. Zufriedene Fahrschüler:innen motivieren mich sehr. Fahren lernen mit Freude!" },
+    { "title": "Sprachtalent", "body": "Das schätzen viele meiner Fahrschüler:innen sehr: Deutsch, Englisch, Französisch und Griechisch – fliessend und akzentfrei." },
+    { "title": "Klare Zielsetzung", "body": "Klare Zielsetzung, direktes Feedback. Die Ausbildung ist auf Modulen mit Taxonomie und Noten aufgebaut – damit du immer weisst, woran du arbeiten musst." },
+    { "title": "Attraktive Preise", "body": "Faire Preise ohne versteckte Kosten. Ende Monat erhältst du eine Abrechnung. Doppellektion 100 Minuten, Einzellektion 50 Minuten (statt 90 bzw. 45 Minuten)." },
+    { "title": "Moderne Autos", "body": "Lerne mit modernen Autos: Automatik (Mazda 2 Hybrid – Kleinwagen, leichter parkieren) oder Schaltung (BMW 120 – ideales Getriebe zum Schalten lernen)." }
+  ],
+  "vorteile": [
+    "Zentraler Treffpunkt beim Albisriederplatz, neben dem Theorielokal",
+    "Fahrstunden im Prüfungsgebiet – du übst, wo du geprüft wirst",
+    "Doppellektionen 100 Minuten (statt 90), Einzellektionen 50 Minuten (statt 45)",
+    "Deutsch, Englisch, Französisch und Griechisch",
+    "Unterricht auf Modulen aufgebaut – mit Taxonomie und Noten",
+    "Übersichtliche Monatsabrechnung – keine Vorauszahlung"
+  ],
+  "trustStrip": [
+    "Fahrstunden im Prüfungsgebiet",
+    "Doppellektionen 100 Minuten",
+    "Übersichtliche Monatsabrechnung",
+    "Mitglied Zürcher Fahrlehrerverband"
+  ]
+}

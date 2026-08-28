@@ -1,0 +1,301 @@
+# Sveltia CMS – Konfiguration der Inhaltsbearbeitung für Fahrschule CH.
+# Nach dem Anlegen der GitLab-OAuth-App die "app_id" unten eintragen (siehe HANDOVER.md).
+
+backend:
+  name: gitlab
+  repo: Nick-tbz/fahrschule-ch-website
+  branch: main
+  auth_type: pkce
+  app_id: "REPLACE-WITH-GITLAB-OAUTH-APP-ID"
+
+publish_mode: simple
+site_url: https://nick-tbz.gitlab.io/fahrschule-ch-website
+display_url: https://nick-tbz.gitlab.io/fahrschule-ch-website
+logo_url: https://nick-tbz.gitlab.io/fahrschule-ch-website/img/logo.png
+
+media_folder: "public/img/uploads"
+public_folder: "/img/uploads"
+
+i18n:
+  structure: single_file
+  locales: [de]
+
+collections:
+  # ─────────────────────────────────────────── Firmendaten & Einstellungen
+  - name: firmendaten
+    label: "Firmendaten & Einstellungen"
+    editor: { preview: false }
+    files:
+      - name: site
+        label: "Firmendaten"
+        file: "data/site.json"
+        fields:
+          - { name: demo, label: "Demo-Modus (Suchmaschinen ausschliessen)", widget: boolean, default: true, hint: "AN = die Seite wird von Google & Co. ausgeschlossen. Bei Go-Live AUS schalten." }
+          - { name: web3formsKey, label: "Web3Forms Zugriffs-Schlüssel", widget: string, hint: "Schlüssel von web3forms.com für info@fahrschule-ch.ch. Ohne Schlüssel funktionieren die Formulare nicht." }
+          - { name: name, label: "Name", widget: string }
+          - { name: legalName, label: "Rechtlicher Name", widget: string }
+          - { name: instructor, label: "Fahrlehrer", widget: string }
+          - { name: tagline, label: "Slogan", widget: string }
+          - { name: blurb, label: "Kurzbeschreibung (Footer)", widget: text }
+          - name: address
+            label: "Adresse"
+            widget: object
+            fields:
+              - { name: street, label: "Strasse & Nr.", widget: string }
+              - { name: zip, label: "PLZ", widget: string }
+              - { name: city, label: "Ort", widget: string }
+              - { name: center, label: "Center-Name", widget: string }
+              - { name: floorNote, label: "Stockwerk-Hinweis", widget: string }
+          - name: phone
+            label: "Telefon"
+            widget: object
+            fields:
+              - { name: display, label: "Anzeige (z. B. 078 843 91 76)", widget: string }
+              - { name: tel, label: "Wählbar (z. B. +41788439176)", widget: string }
+          - { name: email, label: "E-Mail", widget: string }
+          - name: social
+            label: "Social Media"
+            widget: object
+            fields:
+              - { name: instagram, label: "Instagram-URL", widget: string }
+              - { name: facebook, label: "Facebook-URL", widget: string }
+          - { name: transit, label: "Anfahrt ÖV (Tram/Bus)", widget: string }
+          - { name: membership, label: "Mitgliedschaft", widget: string }
+          - { name: mapQuery, label: "Karten-Suchbegriff", widget: string }
+          - { name: languages, label: "Unterrichtssprachen", widget: list, field: { name: lang, label: "Sprache", widget: string } }
+          - name: stats
+            label: "Kennzahlen"
+            widget: object
+            fields:
+              - { name: students, label: "Anzahl Schüler:innen", widget: string }
+              - { name: studentsLabel, label: "Label dazu", widget: string }
+              - { name: firstTryPass, label: "Erstprüfungs-Quote", widget: string }
+              - { name: firstTryPassLabel, label: "Label dazu", widget: string }
+              - { name: sinceYear, label: "Fachausweis seit", widget: string }
+              - { name: sinceYearLabel, label: "Label dazu", widget: string }
+          - { name: themeColor, label: "Theme-Farbe (Hex)", widget: string }
+
+  # ─────────────────────────────────────────── Preise
+  - name: preise
+    label: "Preise"
+    editor: { preview: false }
+    files:
+      - name: prices
+        label: "Preise & Rechner"
+        file: "data/prices.json"
+        fields:
+          - { name: offer, label: "Aktuelles Angebot", widget: text }
+          - name: vehicles
+            label: "Fahrzeuge"
+            widget: object
+            fields:
+              - { name: automat, label: "Automat", widget: string }
+              - { name: geschaltet, label: "Geschaltet", widget: string }
+          - { name: vehicleNote, label: "Fahrzeug-Hinweis", widget: text }
+          - name: lessonLengths
+            label: "Lektionslängen"
+            widget: object
+            fields:
+              - { name: single, label: "Einzellektion", widget: string }
+              - { name: onehalf, label: "1,5 Lektion", widget: string }
+              - { name: double, label: "Doppellektion", widget: string }
+          - name: tiers
+            label: "Pakete (Rechner & Tabelle)"
+            widget: list
+            hint: "Diese 3 Zeilen erscheinen im Preis-Rechner UND in der Preistabelle."
+            fields:
+              - { name: key, label: "Schlüssel (nicht ändern)", widget: string }
+              - { name: name, label: "Paketname", widget: string }
+              - { name: cond, label: "Bedingung", widget: string }
+              - { name: minLessons, label: "Ab X Fahrstunden/Monat", widget: number, value_type: int }
+              - { name: automat, label: "Preis Automat (CHF)", widget: number, value_type: int }
+              - { name: geschaltet, label: "Preis Geschaltet (CHF)", widget: number, value_type: int }
+          - { name: tierIncludes, label: "Im Paket enthalten", widget: list, field: { name: item, widget: string } }
+          - name: calc
+            label: "Rechner-Einstellungen"
+            widget: object
+            fields:
+              - { name: heading, label: "Überschrift", widget: string }
+              - { name: intro, label: "Einleitung", widget: text }
+              - { name: rangeMin, label: "Slider Minimum", widget: number, value_type: int }
+              - { name: rangeMax, label: "Slider Maximum", widget: number, value_type: int }
+              - { name: default, label: "Slider Startwert", widget: number, value_type: int }
+              - { name: priceSuffix, label: "Preis-Zusatz", widget: string }
+          - name: extraRows
+            label: "Weitere Tabellenzeilen"
+            widget: list
+            fields:
+              - { name: label, label: "Leistung", widget: string }
+              - { name: automat, label: "Automat", widget: string }
+              - { name: geschaltet, label: "Geschaltet", widget: string }
+              - { name: free, label: "Gratis-Hervorhebung", widget: boolean, default: false, required: false }
+          - { name: disclaimer, label: "Hinweis unter der Tabelle", widget: text }
+
+  # ─────────────────────────────────────────── Kurse
+  - name: kurse
+    label: "Kurse"
+    editor: { preview: false }
+    files:
+      - name: courses
+        label: "Kurse & VKU-Termine"
+        file: "data/courses.json"
+        fields:
+          - name: theoriekurs
+            label: "Theoriekurs"
+            widget: object
+            fields:
+              - { name: fee, label: "Gebühr", widget: string }
+              - { name: voucher, label: "Gutschein-Hinweis", widget: string }
+              - { name: intro, label: "Einleitung", widget: text }
+              - { name: times, label: "Zeiten", widget: list, field: { name: t, widget: string } }
+              - { name: location, label: "Ort", widget: text }
+              - { name: note, label: "Callout-Hinweis", widget: string }
+          - name: nothelferkurs
+            label: "Nothelferkurs"
+            widget: object
+            fields:
+              - { name: fee, label: "Gebühr", widget: string }
+              - { name: voucher, label: "Gutschein-Hinweis", widget: string }
+              - { name: intro, label: "Text", widget: text }
+          - name: vkuDeutsch
+            label: "Verkehrskunde Deutsch"
+            widget: object
+            fields:
+              - { name: fee, label: "Gebühr Deutsch", widget: string }
+              - { name: feeEnglish, label: "Gebühr Englisch", widget: string }
+              - { name: intro, label: "Einleitung", widget: text }
+              - { name: includes, label: "Inklusive", widget: text }
+              - { name: bring, label: "Mitbringen", widget: string }
+              - { name: location, label: "Ort", widget: text }
+              - { name: iframeUrl, label: "Kurskalender-URL (asa.ch)", widget: string }
+          - name: vkuEnglish
+            label: "Verkehrskunde Englisch"
+            widget: object
+            fields:
+              - { name: fee, label: "Fee", widget: string }
+              - { name: intro, label: "Intro", widget: text }
+              - { name: feeNote, label: "Fee note", widget: text }
+              - { name: requirements, label: "Requirements", widget: text }
+              - { name: bring, label: "Bring along", widget: string }
+              - { name: location, label: "Location", widget: text }
+              - { name: datesNote, label: "Hinweis über der Terminliste", widget: text }
+              - name: dates
+                label: "Kurstermine"
+                widget: list
+                hint: "«Buchbar» markierte Termine erscheinen im Anmelde-Dropdown."
+                fields:
+                  - { name: label, label: "Bezeichnung (z. B. VKU 2 · März)", widget: string }
+                  - { name: friday, label: "Freitag", widget: string }
+                  - { name: saturday, label: "Samstag", widget: string }
+                  - { name: bookable, label: "Buchbar (im Formular wählbar)", widget: boolean, default: true }
+                  - { name: value, label: "Wert im Dropdown", widget: string, required: false }
+
+  # ─────────────────────────────────────────── Weitere Inhalte
+  - name: inhalte
+    label: "Weitere Inhalte"
+    editor: { preview: false }
+    files:
+      - name: testimonials
+        label: "Bewertungen"
+        file: "data/testimonials.json"
+        fields:
+          - { name: intro, label: "Einleitungstext", widget: text }
+          - name: items
+            label: "Bewertungen"
+            widget: list
+            fields:
+              - { name: name, label: "Name", widget: string }
+              - { name: lang, label: "Sprache", widget: select, options: [de, en], default: de }
+              - { name: text, label: "Text", widget: text }
+      - name: steps
+        label: "Der Weg (10 Schritte)"
+        file: "data/steps.json"
+        fields:
+          - { name: intro, label: "Einleitung", widget: text }
+          - name: items
+            label: "Schritte"
+            widget: list
+            fields:
+              - { name: n, label: "Nummer", widget: number, value_type: int }
+              - { name: title, label: "Titel", widget: string }
+              - { name: body, label: "Text", widget: text }
+              - { name: badge, label: "Badge", widget: string }
+      - name: modules
+        label: "Lernmodule"
+        file: "data/modules.json"
+        fields:
+          - { name: heading, label: "Überschrift", widget: string }
+          - { name: intro, label: "Einleitung", widget: text }
+          - name: items
+            label: "Module"
+            widget: list
+            fields:
+              - { name: range, label: "Modul-Nr. (z. B. 3–4)", widget: string }
+              - { name: level, label: "Taxonomiestufe (1–6)", widget: number, value_type: int, min: 1, max: 6 }
+              - { name: title, label: "Titel", widget: string }
+              - { name: body, label: "Text", widget: text }
+      - name: reasons
+        label: "Gründe & Vorteile"
+        file: "data/reasons.json"
+        fields:
+          - name: warum
+            label: "«Warum Fahrschule CH?» (6 Gründe)"
+            widget: list
+            fields:
+              - { name: title, label: "Titel", widget: string }
+              - { name: body, label: "Text", widget: text }
+          - { name: vorteile, label: "«Deine Vorteile» (Liste)", widget: list, field: { name: v, widget: string } }
+          - { name: trustStrip, label: "Vertrauensband (Startseite)", widget: list, field: { name: t, widget: string } }
+      - name: nav
+        label: "Navigation & Footer"
+        file: "data/nav.json"
+        fields:
+          - name: primary
+            label: "Hauptmenü"
+            widget: list
+            fields:
+              - { name: label, label: "Beschriftung", widget: string }
+              - { name: href, label: "Ziel (z. B. /kurse)", widget: string }
+              - { name: lang, label: "Sprach-Kennung (optional)", widget: string, required: false }
+          - { name: ctaLabel, label: "CTA-Button-Text", widget: string }
+          - { name: ctaHref, label: "CTA-Button-Ziel", widget: string }
+
+  # ─────────────────────────────────────────── Seiten-Texte
+  - name: pages
+    label: "Seiten-Texte"
+    label_singular: "Seite"
+    folder: "content/pages"
+    extension: md
+    format: frontmatter
+    create: false
+    delete: false
+    identifier_field: seoTitle
+    editor: { preview: false }
+    fields:
+      - { name: seoTitle, label: "SEO-Titel (Browser-Tab & Google)", widget: string }
+      - { name: seoDescription, label: "SEO-Beschreibung", widget: text }
+      - { name: ogImage, label: "Vorschaubild (Social)", widget: image, required: false }
+      - { name: body, label: "Freitext / Fliesstext", widget: markdown, required: false }
+      - { name: hero, label: "Hero (Kopfbereich)", widget: object, required: false, fields: [
+          { name: eyebrow, label: "Überzeile", widget: string, required: false },
+          { name: title, label: "Titel", widget: string, required: false },
+          { name: lead, label: "Lead-Text", widget: text, required: false },
+          { name: badge, label: "Badge (nur Startseite)", widget: string, required: false } ] }
+
+  # ─────────────────────────────────────────── Rechtstexte
+  - name: legal
+    label: "Rechtstexte"
+    label_singular: "Rechtstext"
+    folder: "content/legal"
+    extension: md
+    format: frontmatter
+    create: false
+    delete: false
+    identifier_field: title
+    editor: { preview: false }
+    fields:
+      - { name: title, label: "Titel", widget: string }
+      - { name: subtitle, label: "Untertitel", widget: text, required: false }
+      - { name: seoTitle, label: "SEO-Titel", widget: string, required: false }
+      - { name: seoDescription, label: "SEO-Beschreibung", widget: text, required: false }
+      - { name: body, label: "Inhalt", widget: markdown }

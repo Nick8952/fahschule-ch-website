@@ -1,17 +1,23 @@
-# GitLab Pages – veröffentlicht die statische Website automatisch.
-# Nach dem Push läuft der Job und die Seite ist unter der Pages-URL erreichbar
-# (Projekt → Deploy → Pages).
+# GitLab Pages – baut den Next.js-Static-Export und veröffentlicht ihn.
+# Nach jedem Push auf den Default-Branch (auch CMS-Commits) läuft dieser Job.
+
+image: node:22-alpine
 
 pages:
   stage: deploy
-  image: alpine:latest
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
   script:
-    - mkdir -p public
-    - cp *.html public/
-    - cp robots.txt sitemap.xml public/
-    - cp -r css js assets public/
+    - npm ci --cache .npm --prefer-offline
+    - npm run build
+    - rm -rf public
+    - mv out public
   artifacts:
     paths:
       - public
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

@@ -1,62 +1,60 @@
-# Fahrschule CH – Demo-Website
+# Fahrschule CH – Website
 
-Statische Demo-Website für **Fahrschule CH – Costa Chatzis**, Zürich (Albisriederplatz).
-Neu aufgebaut auf Basis der Inhalte von [fahrschule-ch.ch](https://www.fahrschule-ch.ch/).
+Website für **Fahrschule CH – Costa Chatzis**, Zürich (Albisriederplatz).
+Next.js 15 (statischer Export) + Sveltia CMS, deployed auf GitLab Pages.
+
+**Live:** https://nick-tbz.gitlab.io/fahrschule-ch-website/
+**Inhalte bearbeiten:** https://nick-tbz.gitlab.io/fahrschule-ch-website/admin/ → siehe [HANDOVER.md](HANDOVER.md)
 
 ## Technik
 
-- Reines HTML/CSS/JS, **kein Build-Tool nötig**
-- Responsive, mobil getestet (kein horizontales Scrollen, Touch-Ziele ≥ 44 px)
-- SEO-Basics: Meta-Tags, Open Graph, `schema.org/DrivingSchool`, `sitemap.xml`, `robots.txt`
-- Kontakt- und VKU-Formular per **vorbefülltem `mailto:`** (kein Backend)
-- Externe Komponenten (VKU-Kurskalender der asa.ch, Google Maps) werden nur nach
-  Klick / als Link geladen – kein Tracking
+- **Next.js 15** App Router, TypeScript, Tailwind CSS, Framer Motion – `output: "export"`
+- **basePath** `/fahrschule-ch-website` (Pfad auf GitLab Pages). Bei eigener Domain in
+  `next.config.mjs` auf `""` setzen (siehe HANDOVER.md).
+- **Sveltia CMS** unter `public/admin/` – Git-basiert, Login via GitLab-OAuth (PKCE),
+  CMS-Bundle vendored (`public/admin/sveltia-cms.js`, Version 0.201.1).
+- **Formulare** via Web3Forms (native POST → `/danke/`).
+- **Karte** OpenStreetMap-Embed; **VKU-Kalender** asa.ch-iframe (Consent-Load).
+- SEO: Metadata API, `sitemap.xml`, `robots.txt`, `schema.org/DrivingSchool`.
+- `data/site.json` → `demo: true` = `noindex` (Demo-Schutz). Bei Go-Live auf `false`.
 
-## Struktur
+## Inhalt (wo was liegt)
 
 | Datei | Inhalt |
 |---|---|
-| `index.html` | Startseite |
-| `angebot-preise.html` | Angebote, Preis-Rechner, vollständige Preisliste |
-| `agb.html` | AGB |
-| `ueber-mich.html` | Costa Chatzis |
-| `kurse.html` | Kursübersicht |
-| `theoriekurs.html` · `verkehrskunde.html` · `verkehrskunde-englisch.html` | Kurse |
-| `kontrollfahrt.html` | Kontrollfahrt |
-| `der-weg.html` | 10 Schritte zum Führerausweis |
-| `kontakt.html` | Kontaktformular & Anfahrt |
-| `driving-school.html` | Englische Seite |
-| `impressum.html` · `datenschutz.html` · `inhaltsverzeichnis.html` | Rechtliches / Sitemap |
-| `css/style.css` · `js/main.js` | Design-System & Interaktionen |
-| `assets/img` · `assets/video` | Logo, Originalfotos, Intro-Video |
+| `data/site.json` | Firmendaten, Kontakt, Kennzahlen, **Web3Forms-Key**, **demo-Flag** |
+| `data/prices.json` | Preistabelle + Rechner-Pakete (eine Quelle) |
+| `data/courses.json` | Theoriekurs, Nothelfer, VKU DE/EN, **VKU-Termine** (Liste + Anmelde-Dropdown, eine Quelle) |
+| `data/testimonials.json` | Bewertungen |
+| `data/steps.json` | „Der Weg" – 10 Schritte |
+| `data/modules.json` | Lernmodule (Kompetenzleiter) |
+| `data/reasons.json` | „Warum", „Vorteile", Vertrauensband |
+| `data/nav.json` | Menü + Footer-Spalten |
+| `data/pages.json` | Seiten-spezifische Karten/Listen (Leistungen, Über-mich-Punkte, …) |
+| `content/pages/*.md` | Pro Seite: SEO-Titel/-Beschreibung, Hero-Text, Freitext |
+| `content/legal/*.md` | AGB, Impressum, Datenschutz |
+| `public/img/` | Logo, Fotos (CMS-Uploads → `public/img/uploads/`) |
 
-## Lokal ansehen
+## Lokal entwickeln
 
-```powershell
-powershell -ExecutionPolicy Bypass -File serve.ps1
-# → http://localhost:8130/
+```bash
+npm install
+npm run dev        # http://localhost:3000/fahrschule-ch-website
+npm run build      # statischer Export nach out/
 ```
 
 ## Deployment
 
-GitLab Pages via `.gitlab-ci.yml` – nach jedem Push auf den Default-Branch wird die
-Seite automatisch veröffentlicht (Projekt → Deploy → Pages).
+GitLab CI (`.gitlab-ci.yml`): `npm ci && npm run build && mv out public`. Läuft bei jedem
+Push auf `main` (auch CMS-Commits) → ~1–2 Min später live.
 
-## Englische Seite
+## Bekannte inhaltliche Punkte
 
-`driving-school.html` ist bewusst komplett auf Englisch – die Original-Website
-(`fahrschule-ch.ch/ch/driving-school-zuerich/`) hat diese Seite ebenfalls in Englisch
-für englischsprachige Fahrschüler:innen. Im Menü heisst der Punkt „English“, oben auf
-der Seite steht ein Hinweis mit Link zurück zur deutschen Startseite.
+- **Doppellektion:** Preisseite 100 Min, AGB-Wortlaut 105 Min – hier durchgehend 100 (AGB unverändert).
+- **VKU Englisch:** durchgehend CHF 160.
+- **VKU-Englisch-Termine** teils vergangen – sichtbarer Hinweis; im CMS aktualisieren.
+- Bilder/Logo/Video von der bestehenden Website der Fahrschule CH.
+- Einige Karten-Texte auf Unterseiten liegen in `data/pages.json` und sind (noch) nicht im CMS
+  – bei Bedarf als weitere CMS-Sammlung ergänzen.
 
-## Hinweise / offene Punkte
-
-- **Doppellektion:** Preisseite nennt 100 Minuten, die AGB der Original-Seite 105 Minuten –
-  hier durchgehend **100 Minuten** verwendet (AGB-Text im Wortlaut belassen).
-- **VKU-Englisch-Preis:** durchgehend **CHF 160** (eine Unterseite der Original-Seite nannte
-  an einer Stelle 200 – nicht übernommen).
-- **VKU-Englisch-Termine** sind der Original-Website entnommen und teils vergangen –
-  Hinweis auf der Seite, Daten bitte mit dem Fahrlehrer bestätigen bzw. aktualisieren.
-- Bilder/Logo/Video stammen von der bestehenden Website der Fahrschule CH.
-
-Unverbindliche Demo, erstellt zu Präsentationszwecken.
+Alte statische Version: Branch `archive/v1-static`, Tag `v1-static-demo`.

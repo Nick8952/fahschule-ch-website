@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   Fahrschule CH — "Ruhige Hand"
+   ========================================================================== */
+
+:root {
+  --paper: #f4f6f3;
+  --panel: #e9ede7;
+  --pine-tint: #dce4dc;
+  --line: #d4dad1;
+  --ink: #161a17;
+  --ink-soft: #4a5450;
+  --pine: #1f3d2f;
+  --pine-deep: #132a20;
+  --signal: #e5482d;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --header-h: 68px;
+}
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-h) + 1.5rem);
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-feature-settings: "ss01", "cv05";
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 {
+    font-family: theme("fontFamily.display");
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  ::selection {
+    background: var(--pine);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--pine);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+  a {
+    text-underline-offset: 0.2em;
+  }
+}
+
+@layer components {
+  .wrap {
+    width: min(75rem, 92vw);
+    margin-inline: auto;
+  }
+  .wrap-eng {
+    width: min(44rem, 92vw);
+    margin-inline: auto;
+  }
+  .section {
+    padding-block: clamp(3.5rem, 8vw, 7rem);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: theme("fontFamily.mono");
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pine);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.6rem;
+    height: 1px;
+    background: var(--signal);
+  }
+
+  /* Buttons -------------------------------------------------------------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 46px;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    font-family: theme("fontFamily.body");
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+    border: 1.5px solid transparent;
+    transition: transform 0.25s var(--ease), background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-primary {
+    background: var(--signal);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: #c93b22;
+  }
+  .btn-pine {
+    background: var(--pine);
+    color: #fff;
+  }
+  .btn-pine:hover {
+    background: var(--pine-deep);
+  }
+  .btn-ghost {
+    border-color: var(--pine);
+    color: var(--pine);
+  }
+  .btn-ghost:hover {
+    background: var(--pine);
+    color: #fff;
+  }
+  .on-dark .btn-ghost {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
+  }
+  .on-dark .btn-ghost:hover {
+    background: #fff;
+    color: var(--pine-deep);
+  }
+
+  /* Prose (Markdown / Rechtstexte) ------------------------------------- */
+  .prose {
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+  .prose > * + * {
+    margin-top: 1.05rem;
+  }
+  .prose h2 {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    color: var(--ink);
+    margin-top: 2.6rem;
+  }
+  .prose h3 {
+    font-family: theme("fontFamily.body");
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-top: 1.8rem;
+  }
+  .prose strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .prose ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+  .prose ul li {
+    padding-left: 1.4rem;
+    position: relative;
+  }
+  .prose ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--signal);
+  }
+  .prose a {
+    color: var(--pine);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+  .prose a:hover {
+    color: var(--signal);
+  }
+
+  /* Scroll-Reveal ----------------------------------------------------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.4rem);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,4 +1,10 @@
+node_modules/
+.next/
+out/
+_originals/
+.cache/
+.npm/
+*.log
 .DS_Store
 Thumbs.db
-*.log
-.vscode/
+next-env.d.ts

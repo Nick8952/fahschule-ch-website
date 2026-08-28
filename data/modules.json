@@ -1,0 +1,11 @@
+{
+  "heading": "Auf 8 Modulen aufgebaut – bis zur Prüfungssimulation",
+  "intro": "Mein Unterricht folgt einem klaren Aufbau. Du bestimmst das Tempo, ich passe die Module an deine Stärken an – von den ersten Metern bis zur kompletten Prüfungssimulation. Jedes Modul wird mit einer Taxonomiestufe bewertet, damit du immer weisst, woran du arbeitest.",
+  "items": [
+    { "range": "1–2", "level": 1, "title": "Grundlagen & Fahrzeugbedienung", "body": "Sicheres Anfahren, Blicktechnik und Fahrzeuggefühl auf ruhigen Strecken." },
+    { "range": "3–4", "level": 2, "title": "Verkehr & Manöver", "body": "Kreuzungen, Kreisel, Spurwechsel und alle Prüfungsmanöver Schritt für Schritt." },
+    { "range": "5–6", "level": 4, "title": "Prüfungsgebiet Zürich", "body": "Training genau dort, wo die praktische Prüfung stattfindet – inklusive Autobahn und Ausserorts." },
+    { "range": "7", "level": 5, "title": "Selbstständiges Fahren", "body": "Längere Fahrten mit Zielführung, direktes Feedback nach jeder Lektion." },
+    { "range": "8", "level": 6, "title": "Prüfungssimulation", "body": "Kompletter Prüfungsablauf unter realistischen Bedingungen – damit du am Prüfungstag ruhig bleibst." }
+  ]
+}

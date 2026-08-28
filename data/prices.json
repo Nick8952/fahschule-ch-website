@@ -1,0 +1,44 @@
+{
+  "vehicles": {
+    "automat": "Mazda 2 Hybrid (Automat)",
+    "geschaltet": "BMW 120 (geschaltet)"
+  },
+  "vehicleNote": "Automatik: Mazda 2 Hybrid – Kleinwagen, leichter parkieren. Schaltung: BMW 120 – ideales Getriebe zum Schalten lernen.",
+  "lessonLengths": {
+    "single": "Einzellektion 50 Minuten (statt 45)",
+    "onehalf": "1,5 Lektion 75 Minuten",
+    "double": "Doppellektion 100 Minuten (statt 90)"
+  },
+  "offer": "Probelektion nur CHF 50 – oder 1 Fahrstunde gratis nach VKU-Besuch bei Fahrschule CH. Angebote sind nicht kumulierbar.",
+  "tiers": [
+    { "key": "full", "name": "Full Drive", "cond": "mehr als 10 Fahrstunden / Monat", "minLessons": 11, "automat": 88, "geschaltet": 90 },
+    { "key": "boost", "name": "Boost", "cond": "mehr als 5 Fahrstunden / Monat", "minLessons": 6, "automat": 90, "geschaltet": 92 },
+    { "key": "basic", "name": "Basic", "cond": "1–5 Fahrstunden / Monat", "minLessons": 1, "automat": 95, "geschaltet": 97 }
+  ],
+  "tierIncludes": [
+    "Doppellektionen (100 Minuten)",
+    "Keine Vorauszahlung",
+    "Abrechnung Ende Monat",
+    "Fahrzeug wahlweise Automat oder geschaltet"
+  ],
+  "calc": {
+    "rangeMin": 1,
+    "rangeMax": 15,
+    "default": 6,
+    "priceSuffix": "/ Doppellektion (100 Min.)",
+    "heading": "Stell dir deinen Monat zusammen",
+    "intro": "Der Preis pro Doppellektion richtet sich nach der Anzahl Fahrstunden pro Monat. Je mehr du fährst, desto günstiger wird es."
+  },
+  "extraRows": [
+    { "label": "Probelektion", "automat": "CHF 50", "geschaltet": "CHF 50" },
+    { "label": "1 Fahrstunde gratis nach VKU-Besuch bei Fahrschule CH", "automat": "CHF 0", "geschaltet": "CHF 0", "free": true },
+    { "label": "Administrative Versicherungspauschale, einmalig (Vollkasko- und Unfallversicherung für die gesamte Ausbildungsdauer)", "automat": "CHF 130", "geschaltet": "CHF 130" },
+    { "label": "Praktische Prüfung (inkl. «Warm-up»-Fahrstunde zuvor)", "automat": "CHF 200", "geschaltet": "CHF 200" },
+    { "label": "Zuschlag pro Ratenzahlung", "automat": "CHF 15", "geschaltet": "CHF 15" },
+    { "label": "Verkehrskunde (VKU)", "automat": "CHF 120", "geschaltet": "CHF 120" },
+    { "label": "Verkehrskunde Englisch", "automat": "CHF 160", "geschaltet": "CHF 160" },
+    { "label": "Nothelferkurs (inkl. Gutschein über CHF 20 für Fahrstunden)", "automat": "CHF 120", "geschaltet": "CHF 120" },
+    { "label": "Theoriekurs (inkl. Gutschein über CHF 50 für Fahrstunden)", "automat": "CHF 50", "geschaltet": "CHF 50" }
+  ],
+  "disclaimer": "Angebote sind nicht kumulierbar. Es gelten die AGB. Fahrschule CH behält sich Preisänderungen vor. Keine Vorauszahlung – du erhältst Ende Monat eine übersichtliche Abrechnung."
+}

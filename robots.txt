@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://nick-tbz.gitlab.io/fahrschule-ch-website/sitemap.xml

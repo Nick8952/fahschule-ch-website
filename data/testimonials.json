@@ -1,0 +1,13 @@
+{
+  "intro": "Die Zufriedenheit meiner Fahrschüler:innen motiviert mich jeden Tag. Ihr Vertrauen ist die Basis meines Erfolges – vielen Dank dafür!",
+  "items": [
+    { "name": "Roman Neumann", "lang": "de", "text": "Sehr geduldiger und ruhiger Fahrlehrer! Prüfung auch dank seiner Geheimtipps bestanden. :)" },
+    { "name": "Paul Würmli", "lang": "de", "text": "Sucht man den besten Fahrlehrer in Zürich, dann findet man ihn in Costa! Er ist sehr geduldig, aber auch beharrlich in seinen Lektionen. Ausserdem ist er sehr flexibel in der Terminfindung." },
+    { "name": "Igor Kudriashov", "lang": "en", "text": "I passed my exam from the first attempt. My driving instructor was Costa. I highly recommend him as a teacher. Costa estimated from the first lesson how many lessons I needed and we followed the plan until the exam. He is responsive, flexible in time and very friendly." },
+    { "name": "Anita Asamoah", "lang": "en", "text": "Great instructor especially for English speakers." },
+    { "name": "Uida Santos", "lang": "de", "text": "Costa war stets geduldig und hilfreich. Nach anfänglichen Schwierigkeiten meinerseits wurde ich immer ruhiger – auch dank Costa. Dank ihm habe ich die Prüfung beim ersten Mal bestanden." },
+    { "name": "Addis", "lang": "en", "text": "A 5-star driving school. Awesome and patient instructors to beef up my driving skills and to overcome my nervousness. Thank you Costa for your great encouragement and excellent advice." },
+    { "name": "Florian Feder", "lang": "de", "text": "Costa war in seiner Art zu unterrichten ruhig aber bestimmt, in einer verlässlichen Kontinuität. Er hatte zu jedem meiner Defizite illustrative Hilfsmittel zur Hand. Er wusste genau einzuschätzen, wann ich bereit war – und so habe ich problemlos bestanden." },
+    { "name": "Filip Nordström", "lang": "en", "text": "Costa is a great teacher! He takes time to listen, gives great advice on improvements in a constructive way. His English level is excellent and so is his motivation for having successful clients." }
+  ]
+}

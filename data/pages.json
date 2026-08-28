@@ -1,0 +1,109 @@
+{
+  "home": {
+    "sections": {
+      "warum": "Sechs Gründe, warum du hier gut aufgehoben bist",
+      "leistungen": "Kurse & Angebote bei Fahrschule CH",
+      "vorteile": "Das bekommst du bei Fahrschule CH",
+      "testimonials": "Das sagen meine Fahrschüler:innen"
+    },
+    "services": [
+      {
+        "tag": "Theorieprüfung Zürich",
+        "title": "Theorieprüfung",
+        "body": "Sicher durch die Theorieprüfung? Fahrschule CH in Zürich bietet realistische Prüfungssimulationen und individuelle Unterstützung. Wer die Verkehrsregeln sicher beherrscht, braucht weniger Fahrstunden – und spart Zeit und Geld.",
+        "price": "Theoriekurs CHF 50 · inkl. Gutschein über CHF 50 für Fahrstunden",
+        "href": "/theoriekurs",
+        "image": "/img/hero-1.webp"
+      },
+      {
+        "tag": "Verkehrskunde Zürich",
+        "title": "Verkehrskunde (VKU)",
+        "body": "Monatliche VKU-Intensivkurse in unserem Theorielokal beim Albisriederplatz – auf Deutsch oder Englisch. Die Verkehrskunde ist Pflicht vor der praktischen Prüfung.",
+        "price": "VKU Deutsch CHF 120 · VKU English CHF 160",
+        "href": "/verkehrskunde",
+        "image": "/img/hero-3.webp"
+      },
+      {
+        "tag": "Kontrollfahrt Zürich",
+        "title": "Kontrollfahrt",
+        "body": "Fahrschule CH bereitet dich intensiv auf deine Kontrollfahrt im Strassenverkehrsamt Zürich vor – für den Umtausch deines ausländischen Führerausweises. Wichtig: Du musst beim ersten Mal bestehen. Melde dich rechtzeitig an.",
+        "price": "",
+        "href": "/kontrollfahrt",
+        "image": "/img/hero-2.webp"
+      }
+    ]
+  },
+  "ueberMich": {
+    "sections": {
+      "intro": "Sicher, effizient und mit Freude ans Ziel",
+      "konzept": "Individuell, modular, zielgerichtet",
+      "auszeichnet": "Persönlich, mehrsprachig, modern unterwegs"
+    },
+    "introBody": "Mein Name ist Costa Chatzis, und ich bin Fahrlehrer mit eidgenössischem Fachausweis. Seit 2014 begleite ich Fahrschülerinnen und Fahrschüler in Zürich auf ihrem Weg zur praktischen Prüfung. Mein Ziel ist es, dich nicht nur sicher und effizient zum Führerausweis zu bringen, sondern auch eine angenehme und motivierende Lernatmosphäre zu schaffen.",
+    "konzeptPunkte": [
+      { "title": "Individuell & effizient", "body": "Alle Kurse in derselben Fahrschule. Du bestimmst das Tempo – ich passe den Unterricht an deine Stärken an." },
+      { "title": "Modulares Training", "body": "Mein Unterricht basiert auf 8 Modulen, inklusive Prüfungssimulation." },
+      { "title": "Zielgerichtete Vorbereitung", "body": "Fahrstunden finden im Prüfungsgebiet statt." },
+      { "title": "Langjährige Erfahrung", "body": "Über 600 erfolgreich ausgebildete Fahrschüler:innen in 9 Jahren." },
+      { "title": "Hohe Erfolgsquote", "body": "Mehr als 80 % meiner Fahrschüler:innen bestehen beim ersten Versuch." },
+      { "title": "Doppellektionen", "body": "Effizienter lernen und einfacher planen – auch Einzellektionen oder 1,5 Lektionen möglich." }
+    ],
+    "auszeichnetPunkte": [
+      { "title": "Mehrsprachig", "body": "Ich unterrichte auf Hochdeutsch, Züri-Dütsch, Englisch, Französisch und Griechisch." },
+      { "title": "Individuelle Betreuung", "body": "Ich gehe auf deine persönlichen Bedürfnisse ein – sei es Unsicherheit, Prüfungsangst oder spezielle Lernmethoden." },
+      { "title": "Moderne Fahrzeuge", "body": "Ich schule auf einem schwarzen Mazda 2 Hybrid (klein, einfacher parkieren) und einem BMW (Schaltgetriebe, weiss, Benziner)." },
+      { "title": "Zentrale Lage", "body": "Treffpunkt am Albisriederplatz in Zürich – neben dem Theorielokal." }
+    ]
+  },
+  "kurse": {
+    "cards": [
+      {
+        "tag": "Theoriekurs",
+        "title": "Theoriekurs",
+        "body": "Simulation der Theorieprüfung in Zürich – kostenlos für unsere Schüler:innen. Beantworte die offiziellen Prüfungsfragen unter realistischen Bedingungen.",
+        "points": ["Kursgebühr CHF 50 (inkl. Gutschein über CHF 50 für Fahrstunden)", "Mo & Mi, 17.30–19.00 Uhr"],
+        "href": "/theoriekurs",
+        "image": "/img/hero-1.webp"
+      },
+      {
+        "tag": "Verkehrskunde Deutsch",
+        "title": "Verkehrskunde (VKU) – Deutsch",
+        "body": "Monatliche VKU-Intensivkurse auf Deutsch. Auf Basis der Gefahrenlehre wird das Verkehrsbewusstsein geschult – Ziel ist es, Risiken und Unfälle im Strassenverkehr zu vermeiden.",
+        "price": "CHF 120 – Kurshefte, Bearbeitungsgebühr und Kursbestätigung inklusive",
+        "href": "/verkehrskunde",
+        "image": "/img/hero-3.webp"
+      },
+      {
+        "tag": "Verkehrskunde Englisch",
+        "title": "Verkehrskunde (VKU) – Englisch",
+        "body": "Monthly VKU English intensive courses in Zurich. Traffic awareness training on the basis of hazard theory.",
+        "price": "CHF 160",
+        "href": "/verkehrskunde-englisch",
+        "image": "/img/hero-2.webp"
+      }
+    ]
+  },
+  "kontrollfahrt": {
+    "callout": "Wichtig: Du musst beim 1. Mal bestehen! Wenn du nicht bestehst, musst du die gesamte Ausbildung von vorne beginnen.",
+    "gutZuWissen": [
+      "Die Kontrollfahrt wird mit Automatikgetriebe absolviert. Mit dem Schweizer Führerausweis darfst du danach auch Fahrzeuge mit Schaltgetriebe fahren.",
+      "Deinen ausländischen Führerausweis solltest du innerhalb eines Jahres nach Einreise in die Schweiz umtauschen.",
+      "Erfolgt die Anmeldung nach dem ersten Jahr Aufenthalt, muss die Kontrollfahrt innerhalb von drei Monaten absolviert werden.",
+      "Im Ausland erworbene Führerausweise werden nur anerkannt, wenn du dort mindestens 12 Monate gelebt hast (mit offiziellen Dokumenten nachweisbar)."
+    ]
+  },
+  "drivingSchool": {
+    "langNote": "This page is in English for our English-speaking learners.",
+    "langNoteLink": { "label": "Zur deutschen Website →", "href": "/" },
+    "sections": { "intro": "Individual driving lessons made to measure", "reasonsTitle": "Reasons to learn with me" },
+    "intro": "The driving licence cat. B makes you privately and professionally independent. As a driving instructor, it is my job and pleasure to motivate you and accompany you personally – from the emergency helper course to the practical test. You set the pace, because I adapt the lessons to your strengths. True to the motto: from simple to difficult. My driving lessons are at least 50 minutes.",
+    "reasons": [
+      { "title": "Top location", "body": "Driving lessons (at least 50 minutes) and meeting point in the test area on private parking lots. Albisriederplatz is easily accessible – a perfect starting point for our lessons." },
+      { "title": "Happy customers", "body": "No «cheap driving school» with interns or part-time instructors. The many positive Google reviews motivate me a lot. My motto: experience success together, with joy in driving." },
+      { "title": "Language talent", "body": "Many of my learner drivers appreciate this very much: German, English, French and Greek – fluent and without an accent." },
+      { "title": "Clear objectives", "body": "Achievable goals every driving hour. At the end of each lesson you receive important feedback so you know what to improve next. And I train myself regularly to stay up to date with the latest didactics and technology." },
+      { "title": "Modern cars", "body": "At Fahrschule CH you drive modern, state-of-the-art cars. You choose between automatic (Mazda 2 Hybrid) or manual (BMW 120)." },
+      { "title": "Good prices", "body": "Attractive prices for driving lessons in Zurich. No hidden costs. In addition, lessons last at least 50 minutes instead of 45." }
+    ]
+  }
+}

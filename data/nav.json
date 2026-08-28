@@ -1,0 +1,44 @@
+{
+  "primary": [
+    { "label": "Angebote & Preise", "href": "/angebot-preise" },
+    { "label": "Über mich", "href": "/ueber-mich" },
+    { "label": "Kurse", "href": "/kurse" },
+    { "label": "Kontrollfahrt", "href": "/kontrollfahrt" },
+    { "label": "Der Weg", "href": "/der-weg" },
+    { "label": "Kontakt", "href": "/kontakt" },
+    { "label": "English", "href": "/driving-school", "lang": "en" }
+  ],
+  "mobileExtra": [
+    { "label": "Theoriekurs", "href": "/theoriekurs" },
+    { "label": "Verkehrskunde Deutsch", "href": "/verkehrskunde" },
+    { "label": "Verkehrskunde Englisch", "href": "/verkehrskunde-englisch" }
+  ],
+  "ctaLabel": "Probelektion",
+  "ctaHref": "/kontakt",
+  "footerColumns": [
+    {
+      "title": "Seiten",
+      "links": [
+        { "label": "Start", "href": "/" },
+        { "label": "Angebote & Preise", "href": "/angebot-preise" },
+        { "label": "Über mich", "href": "/ueber-mich" },
+        { "label": "Kurse", "href": "/kurse" },
+        { "label": "Kontrollfahrt", "href": "/kontrollfahrt" },
+        { "label": "Der Weg", "href": "/der-weg" },
+        { "label": "English", "href": "/driving-school" }
+      ]
+    },
+    {
+      "title": "Kurse & Recht",
+      "links": [
+        { "label": "Theoriekurs", "href": "/theoriekurs" },
+        { "label": "Verkehrskunde Deutsch", "href": "/verkehrskunde" },
+        { "label": "Verkehrskunde Englisch", "href": "/verkehrskunde-englisch" },
+        { "label": "AGB", "href": "/agb" },
+        { "label": "Impressum", "href": "/impressum" },
+        { "label": "Datenschutz", "href": "/datenschutz" },
+        { "label": "Inhaltsverzeichnis", "href": "/inhaltsverzeichnis" }
+      ]
+    }
+  ]
+}
