@@ -13,7 +13,7 @@ export default function PageHero({
   crumb?: string;
 }) {
   return (
-    <section className="block-light border-b-2 border-signal">
+    <section className="block-light">
       <div className="wrap pb-12 pt-14 sm:pb-16 sm:pt-20">
         <Reveal>
           <nav className="mb-5 flex flex-wrap gap-2 font-mono text-[0.72rem] uppercase tracking-[0.12em] text-ink-soft/70">
@@ -30,6 +30,7 @@ export default function PageHero({
           )}
         </Reveal>
       </div>
+      <div className="hero-seam" aria-hidden />
     </section>
   );
 }
