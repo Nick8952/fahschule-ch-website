@@ -8,7 +8,7 @@ Es gibt dafür keine API – einmal von Hand in GitLab:
 
 1. `https://gitlab.com/-/user_settings/applications` öffnen → **Add new application**
 2. **Name:** `Fahrschule CH – Website CMS`
-3. **Redirect URI:** `https://nick-tbz.gitlab.io/fahrschule-ch-website/admin/`
+3. **Redirect URI:** `https://fahrschule-ch-website-f63075.gitlab.io/admin/`
    (exakt so, mit Schrägstrich am Ende)
 4. **Confidential:** Häkchen **entfernen**
 5. **Scopes:** nur **`api`**
@@ -28,7 +28,7 @@ Ohne (a) kann sich niemand ins CMS einloggen; ohne (b) kommen keine Formular-Anf
 
 ## 2. Inhalte bearbeiten (für Costa / den Kunden)
 
-1. **`https://nick-tbz.gitlab.io/fahrschule-ch-website/admin/`** aufrufen
+1. **`https://fahrschule-ch-website-f63075.gitlab.io/admin/`** aufrufen
 2. **„Sign in with GitLab"** → mit dem GitLab-Konto anmelden, das Zugriff auf das Projekt hat
 3. Links eine Sammlung wählen, Felder ausfüllen, oben rechts **„Publish"**
 4. Nach ~1–2 Minuten ist die Änderung live (GitLab baut die Seite automatisch neu)

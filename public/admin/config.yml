@@ -9,9 +9,9 @@ backend:
   app_id: "REPLACE-WITH-GITLAB-OAUTH-APP-ID"
 
 publish_mode: simple
-site_url: https://nick-tbz.gitlab.io/fahrschule-ch-website
-display_url: https://nick-tbz.gitlab.io/fahrschule-ch-website
-logo_url: https://nick-tbz.gitlab.io/fahrschule-ch-website/img/logo.png
+site_url: https://fahrschule-ch-website-f63075.gitlab.io
+display_url: https://fahrschule-ch-website-f63075.gitlab.io
+logo_url: https://fahrschule-ch-website-f63075.gitlab.io/img/logo.png
 
 media_folder: "public/img/uploads"
 public_folder: "/img/uploads"

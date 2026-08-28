@@ -3,14 +3,14 @@
 Website für **Fahrschule CH – Costa Chatzis**, Zürich (Albisriederplatz).
 Next.js 15 (statischer Export) + Sveltia CMS, deployed auf GitLab Pages.
 
-**Live:** https://nick-tbz.gitlab.io/fahrschule-ch-website/
-**Inhalte bearbeiten:** https://nick-tbz.gitlab.io/fahrschule-ch-website/admin/ → siehe [HANDOVER.md](HANDOVER.md)
+**Live:** https://fahrschule-ch-website-f63075.gitlab.io/
+**Inhalte bearbeiten:** https://fahrschule-ch-website-f63075.gitlab.io/admin/ → siehe [HANDOVER.md](HANDOVER.md)
 
 ## Technik
 
 - **Next.js 15** App Router, TypeScript, Tailwind CSS, Framer Motion – `output: "export"`
-- **basePath** `/fahrschule-ch-website` (Pfad auf GitLab Pages). Bei eigener Domain in
-  `next.config.mjs` auf `""` setzen (siehe HANDOVER.md).
+- Läuft auf der GitLab-Pages-Unique-Domain (Root, kein Pfadpräfix). `next.config.mjs`
+  `BASE_PATH = ""`; bei eigener Domain nur `SITE_ORIGIN` anpassen (siehe HANDOVER.md).
 - **Sveltia CMS** unter `public/admin/` – Git-basiert, Login via GitLab-OAuth (PKCE),
   CMS-Bundle vendored (`public/admin/sveltia-cms.js`, Version 0.201.1).
 - **Formulare** via Web3Forms (native POST → `/danke/`).
@@ -39,7 +39,7 @@ Next.js 15 (statischer Export) + Sveltia CMS, deployed auf GitLab Pages.
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000/fahrschule-ch-website
+npm run dev        # http://localhost:3000
 npm run build      # statischer Export nach out/
 ```
 

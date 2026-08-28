@@ -2,7 +2,7 @@
 
 export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://nick-tbz.gitlab.io/fahrschule-ch-website";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://fahrschule-ch-website-f63075.gitlab.io";
 
 /** Für plain <img>/<video>/<source> und CSS-Hintergründe: stellt das Basispräfix voran.
  *  (next/link und next/image machen das automatisch – dort NICHT verwenden.) */

@@ -1,17 +1,16 @@
 /** @type {import('next').NextConfig} */
 
-// Die Seite liegt auf GitLab Pages unter einem Pfad-Präfix:
-//   https://nick-tbz.gitlab.io/fahrschule-ch-website/
-// Bei einer eigenen Domain (fahrschule-ch.ch) auf "" setzen und die
-// absoluten URLs in lib/site.ts sowie in der Sveltia-Config anpassen.
-const BASE_PATH = "/fahrschule-ch-website";
-const SITE_ORIGIN = "https://nick-tbz.gitlab.io";
+// Die Seite läuft auf der GitLab-Pages-Unique-Domain (Root, kein Pfadpräfix):
+//   https://fahrschule-ch-website-f63075.gitlab.io/
+// Bei einer eigenen Domain (fahrschule-ch.ch) nur SITE_ORIGIN anpassen.
+const BASE_PATH = "";
+const SITE_ORIGIN = "https://fahrschule-ch-website-f63075.gitlab.io";
 
 const nextConfig = {
   output: "export",
   trailingSlash: true,
-  basePath: BASE_PATH,
-  assetPrefix: BASE_PATH,
+  basePath: BASE_PATH || undefined,
+  assetPrefix: BASE_PATH || undefined,
   images: { unoptimized: true },
   reactStrictMode: true,
   env: {
