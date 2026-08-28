@@ -84,18 +84,18 @@ export default function PriceModel() {
                 </g>
               );
             })}
-          <motion.path d={areaPath} fill="#FF4D2E" initial={{ opacity: 0 }} animate={{ opacity: 0.12 }} transition={{ duration: 0.6 }} />
-          <motion.path
+          <path d={areaPath} fill="#FF4D2E" opacity={0.14} />
+          <path
             d={stepPath}
             fill="none"
             stroke="#FF4D2E"
-            strokeWidth={3}
+            strokeWidth={4}
             strokeLinejoin="round"
             strokeLinecap="round"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           />
+          {Array.from({ length: rangeMax - rangeMin + 1 }, (_, i) => rangeMin + i).map((l) => (
+            <circle key={l} cx={x(l)} cy={y(priceAt(l, gear).price)} r={2.5} fill="#FF7A63" />
+          ))}
           <motion.line y1={PAD.t} y2={H - PAD.b} stroke="#FF4D2E" strokeWidth={1} strokeDasharray="3 4" opacity={0.6} initial={false} animate={{ x1: dotX, x2: dotX }} transition={{ type: "spring", stiffness: 260, damping: 28 }} />
           <motion.circle r={7} fill="#FF4D2E" stroke="#0C1220" strokeWidth={3} initial={false} animate={{ cx: dotX, cy: dotY }} transition={{ type: "spring", stiffness: 260, damping: 28 }} />
         </svg>
