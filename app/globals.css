@@ -150,14 +150,15 @@
     border-color: currentColor;
     color: currentColor;
   }
-  .btn-ghost:hover {
-    background: currentColor;
-  }
   .block-light .btn-ghost:hover {
+    background: var(--ink);
     color: var(--chalk);
+    border-color: var(--ink);
   }
   .block-dark .btn-ghost:hover {
+    background: var(--chalk);
     color: var(--midnight);
+    border-color: var(--chalk);
   }
 
   /* Prose */
