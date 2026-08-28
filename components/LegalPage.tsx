@@ -25,7 +25,7 @@ export default function LegalPage({ slug }: { slug: string }) {
   return (
     <>
       <PageHero title={frontmatter.title} lead={frontmatter.subtitle} crumb={frontmatter.title} />
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
             <Prose html={html} />

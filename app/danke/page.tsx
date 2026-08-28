@@ -14,13 +14,13 @@ export const metadata: Metadata = pageMeta("/danke", {
 
 export default function Page() {
   return (
-    <section className="section">
+    <section className="section block-light">
       <div className="wrap-eng text-center">
         <p className="eyebrow justify-center mb-3">{fm.hero.eyebrow}</p>
         <h1 className="text-step-4">{fm.hero.title}</h1>
         <p className="mx-auto mt-4 max-w-[48ch] text-step-1 text-ink-soft">{fm.hero.lead}</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link href="/" className="btn btn-pine">
+          <Link href="/" className="btn btn-signal">
             Zur Startseite
           </Link>
           <Link href="/angebot-preise" className="btn btn-ghost">

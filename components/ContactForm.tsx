@@ -6,7 +6,7 @@ export default function ContactForm() {
     <form
       action="https://api.web3forms.com/submit"
       method="POST"
-      className="rounded-lg border border-line bg-white p-6 shadow-m sm:p-8"
+      className="card !p-6 sm:!p-8"
     >
       <Web3FormsHidden subject="Neue Anfrage – Probelektion / Fahrstunden (fahrschule-ch.ch)" />
 
@@ -33,7 +33,7 @@ export default function ContactForm() {
           {["Noch keine Fahrstunden", "Ich hatte bereits Fahrstunden"].map((opt, i) => (
             <label
               key={opt}
-              className="cursor-pointer rounded-pill border border-line px-3.5 py-2 text-[0.9rem] has-[:checked]:border-pine has-[:checked]:bg-pine-tint"
+              className="cursor-pointer border border-ink/20 px-3.5 py-2 text-[0.9rem] has-[:checked]:border-signal has-[:checked]:bg-signal/10"
             >
               <input
                 type="radio"
@@ -63,18 +63,18 @@ export default function ContactForm() {
         <input type="checkbox" required className="mt-0.5 h-5 w-5 accent-signal" />
         <span>
           Ich habe die{" "}
-          <Link href="/datenschutz" className="text-pine underline">
+          <Link href="/datenschutz" className="text-signal underline">
             Datenschutzerklärung
           </Link>{" "}
           /{" "}
-          <Link href="/agb" className="text-pine underline">
+          <Link href="/agb" className="text-signal underline">
             AGB
           </Link>{" "}
           gelesen und akzeptiere sie.
         </span>
       </label>
 
-      <button type="submit" className="btn btn-primary mt-6 w-full sm:w-auto">
+      <button type="submit" className="btn btn-signal mt-6 w-full sm:w-auto">
         Absenden
       </button>
     </form>

@@ -3,163 +3,201 @@
 @tailwind utilities;
 
 /* ============================================================================
-   Fahrschule CH — "Ruhige Hand"
+   Fahrschule CH — "Nachtfahrt"
    ========================================================================== */
 
 :root {
-  --paper: #f4f6f3;
-  --panel: #e9ede7;
-  --pine-tint: #dce4dc;
-  --line: #d4dad1;
-  --ink: #161a17;
-  --ink-soft: #4a5450;
-  --pine: #1f3d2f;
-  --pine-deep: #132a20;
-  --signal: #e5482d;
+  --midnight: #0c1220;
+  --midnight-2: #141d33;
+  --midnight-3: #1d2942;
+  --steel: #2a3856;
+  --chalk: #f2f1ec;
+  --chalk-2: #e7e5dc;
+  --ink: #12151c;
+  --ink-soft: #454a55;
+  --signal: #ff4d2e;
+  --on-dark: #edeef2;
+  --on-dark-soft: #9aa4bc;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --header-h: 68px;
+  --header-h: 64px;
 }
 
 @layer base {
   * {
-    border-color: var(--line);
+    border-color: color-mix(in srgb, var(--ink) 14%, transparent);
   }
   html {
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: calc(var(--header-h) + 1.5rem);
   }
   body {
-    background: var(--paper);
+    background: var(--midnight);
     color: var(--ink);
-    font-feature-settings: "ss01", "cv05";
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     font-family: theme("fontFamily.display");
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.98;
     text-wrap: balance;
   }
   ::selection {
-    background: var(--pine);
+    background: var(--signal);
     color: #fff;
   }
   :focus-visible {
-    outline: 2px solid var(--pine);
+    outline: 2px solid var(--signal);
     outline-offset: 3px;
-    border-radius: 3px;
-  }
-  a {
-    text-underline-offset: 0.2em;
+    border-radius: 2px;
   }
 }
 
 @layer components {
   .wrap {
-    width: min(75rem, 92vw);
+    width: min(78rem, 92vw);
     margin-inline: auto;
   }
   .wrap-eng {
     width: min(44rem, 92vw);
     margin-inline: auto;
   }
+
+  /* Farbblöcke — jede Sektion ist ganz hell ODER ganz dunkel */
+  .block-light {
+    background: var(--chalk);
+    color: var(--ink);
+  }
+  .block-dark {
+    background: var(--midnight);
+    color: var(--on-dark);
+  }
+  .block-dark h1,
+  .block-dark h2,
+  .block-dark h3 {
+    color: #fff;
+  }
+  .block-dark p {
+    color: var(--on-dark-soft);
+  }
   .section {
-    padding-block: clamp(3.5rem, 8vw, 7rem);
+    padding-block: clamp(3.5rem, 8vw, 7.5rem);
   }
 
+  /* Eyebrow — DM-Mono-Label mit Signal-Strich */
   .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.7rem;
     font-family: theme("fontFamily.mono");
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--pine);
+    color: var(--signal);
   }
   .eyebrow::before {
     content: "";
-    width: 1.6rem;
-    height: 1px;
+    width: 1.8rem;
+    height: 2px;
     background: var(--signal);
   }
 
-  /* Buttons -------------------------------------------------------------- */
+  /* Grosse Sektionsnummer an der Naht */
+  .seam-num {
+    font-family: theme("fontFamily.mono");
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: currentColor;
+    opacity: 0.5;
+  }
+
+  /* Buttons */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-height: 46px;
-    padding: 0.7rem 1.4rem;
-    border-radius: 999px;
-    font-family: theme("fontFamily.body");
-    font-weight: 600;
-    font-size: 0.95rem;
-    line-height: 1;
+    min-height: 48px;
+    padding: 0.8rem 1.5rem;
+    font-family: theme("fontFamily.mono");
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     border: 1.5px solid transparent;
-    transition: transform 0.25s var(--ease), background 0.2s, border-color 0.2s, color 0.2s;
+    border-radius: 2px;
+    transition:
+      transform 0.2s var(--ease),
+      background 0.2s,
+      border-color 0.2s,
+      color 0.2s;
   }
   .btn:hover {
     transform: translateY(-2px);
   }
-  .btn-primary {
+  .btn-signal {
     background: var(--signal);
     color: #fff;
   }
-  .btn-primary:hover {
-    background: #c93b22;
-  }
-  .btn-pine {
-    background: var(--pine);
-    color: #fff;
-  }
-  .btn-pine:hover {
-    background: var(--pine-deep);
+  .btn-signal:hover {
+    background: #e23b1e;
   }
   .btn-ghost {
-    border-color: var(--pine);
-    color: var(--pine);
+    border-color: currentColor;
+    color: currentColor;
   }
   .btn-ghost:hover {
-    background: var(--pine);
-    color: #fff;
+    background: currentColor;
   }
-  .on-dark .btn-ghost {
-    border-color: rgba(255, 255, 255, 0.4);
-    color: #fff;
+  .block-light .btn-ghost:hover {
+    color: var(--chalk);
   }
-  .on-dark .btn-ghost:hover {
-    background: #fff;
-    color: var(--pine-deep);
+  .block-dark .btn-ghost:hover {
+    color: var(--midnight);
   }
 
-  /* Prose (Markdown / Rechtstexte) ------------------------------------- */
+  /* Prose */
   .prose {
     font-size: 1.02rem;
     line-height: 1.75;
     color: var(--ink-soft);
   }
+  .block-dark .prose {
+    color: var(--on-dark-soft);
+  }
   .prose > * + * {
     margin-top: 1.05rem;
   }
   .prose h2 {
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-family: theme("fontFamily.display");
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
     color: var(--ink);
     margin-top: 2.6rem;
+    letter-spacing: -0.03em;
+  }
+  .block-dark .prose h2 {
+    color: #fff;
   }
   .prose h3 {
     font-family: theme("fontFamily.body");
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.1rem;
     color: var(--ink);
     margin-top: 1.8rem;
   }
+  .block-dark .prose h3 {
+    color: #fff;
+  }
   .prose strong {
     color: var(--ink);
     font-weight: 600;
+  }
+  .block-dark .prose strong {
+    color: #fff;
   }
   .prose ul {
     list-style: none;
@@ -168,37 +206,73 @@
     gap: 0.55rem;
   }
   .prose ul li {
-    padding-left: 1.4rem;
+    padding-left: 1.5rem;
     position: relative;
   }
   .prose ul li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0.65em;
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 999px;
+    top: 0.62em;
+    width: 0.7rem;
+    height: 2px;
     background: var(--signal);
   }
   .prose a {
-    color: var(--pine);
+    color: var(--signal);
     text-decoration: underline;
     text-decoration-thickness: 1px;
-  }
-  .prose a:hover {
-    color: var(--signal);
+    text-underline-offset: 0.2em;
   }
 
-  /* Scroll-Reveal ----------------------------------------------------- */
+  /* Karten — passen sich dem Farbblock an */
+  .card {
+    border: 1.5px solid;
+    padding: 1.5rem;
+    transition:
+      transform 0.25s var(--ease),
+      border-color 0.25s;
+  }
+  .block-light .card {
+    background: #fff;
+    border-color: color-mix(in srgb, var(--ink) 12%, transparent);
+  }
+  .block-dark .card {
+    background: var(--midnight-2);
+    border-color: var(--steel);
+  }
+  .card-hover:hover {
+    transform: translateY(-3px);
+    border-color: var(--signal);
+  }
+
+  /* Scroll-Reveal */
   .reveal {
     opacity: 0;
-    transform: translateY(1.4rem);
-    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    transform: translateY(1.6rem);
+    transition:
+      opacity 0.7s var(--ease),
+      transform 0.7s var(--ease);
   }
   .reveal.in {
     opacity: 1;
     transform: none;
+  }
+
+  /* Hero-Zeilen-Maske */
+  .line-mask {
+    display: block;
+    overflow: hidden;
+  }
+  .line-mask > span {
+    display: block;
+    transform: translateY(110%);
+    animation: line-up 0.8s var(--ease) forwards;
+  }
+  @keyframes line-up {
+    to {
+      transform: translateY(0);
+    }
   }
 }
 
@@ -214,5 +288,9 @@
   .reveal {
     opacity: 1 !important;
     transform: none !important;
+  }
+  .line-mask > span {
+    transform: none;
+    animation: none;
   }
 }

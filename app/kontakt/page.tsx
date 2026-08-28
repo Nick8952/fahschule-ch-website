@@ -21,7 +21,7 @@ export default function Page() {
   return (
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Kontakt" />
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap grid items-start gap-8 lg:grid-cols-2">
           <Reveal>
             <ContactForm />
@@ -37,12 +37,12 @@ export default function Page() {
               {site.address.street}, {site.address.zip} {site.address.city}
               <br />
               Tel.:{" "}
-              <a href={`tel:${site.phone.tel}`} className="text-pine">
+              <a href={`tel:${site.phone.tel}`} className="text-signal">
                 +41 78 843 91 76
               </a>
               <br />
               E-Mail:{" "}
-              <a href={`mailto:${site.email}`} className="text-pine">
+              <a href={`mailto:${site.email}`} className="text-signal">
                 {site.email}
               </a>
             </InfoCard>

@@ -25,9 +25,9 @@ export default function Page() {
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Über mich" />
 
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap grid items-center gap-10 lg:grid-cols-2">
-          <Reveal className="overflow-hidden rounded-lg shadow-m">
+          <Reveal className="overflow-hidden rounded-lg">
             <Image
               src={asset("/img/hero-3.webp")}
               alt={`${site.instructor} am Zürichsee`}
@@ -48,8 +48,8 @@ export default function Page() {
                 [site.stats.firstTryPass, site.stats.firstTryPassLabel],
               ].map(([n, l]) => (
                 <div key={l}>
-                  <dt className="font-display text-step-2 text-pine">{n}</dt>
-                  <dd className="font-mono text-[0.76rem] uppercase tracking-[0.04em] text-ink-faint">
+                  <dt className="font-display text-step-2 text-signal">{n}</dt>
+                  <dd className="font-mono text-[0.76rem] uppercase tracking-[0.04em] text-ink-soft/60">
                     {l}
                   </dd>
                 </div>
@@ -59,20 +59,20 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="section bg-panel">
+      <section className="section block-light">
         <div className="wrap">
           <SectionHead eyebrow="Mein Unterrichtskonzept" title={p.sections.konzept} />
           <ReasonGrid items={p.konzeptPunkte} />
         </div>
       </section>
 
-      <section className="section">
+      <section className="section block-dark">
         <div className="wrap">
           <ModuleLadder />
         </div>
       </section>
 
-      <section className="section bg-panel">
+      <section className="section block-light">
         <div className="wrap">
           <SectionHead eyebrow="Was mich auszeichnet" title={p.sections.auszeichnet} />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -83,7 +83,7 @@ export default function Page() {
             ))}
           </div>
           <Reveal className="mt-8">
-            <Link href="/kontakt" className="btn btn-primary">
+            <Link href="/kontakt" className="btn btn-signal">
               Probelektion vereinbaren
             </Link>
           </Reveal>

@@ -22,7 +22,7 @@ export default function Page() {
   return (
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Theoriekurs" />
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
             <Prose html={html} />
@@ -43,7 +43,7 @@ export default function Page() {
               <strong>Gut zu wissen:</strong> {t.note}
             </Callout>
             <p className="mt-6">
-              <Link href="/kontakt" className="btn btn-primary">
+              <Link href="/kontakt" className="btn btn-signal">
                 Zur Anmeldung
               </Link>
             </p>

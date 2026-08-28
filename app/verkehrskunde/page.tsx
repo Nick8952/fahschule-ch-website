@@ -19,7 +19,7 @@ export default function Page() {
   return (
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Verkehrskunde Deutsch" />
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
             <p className="prose">{v.intro}</p>

@@ -15,11 +15,11 @@ export default function Page() {
   return (
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Der Weg" />
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap">
           <PathSteps />
           <Reveal className="mt-10">
-            <Link href="/kontakt" className="btn btn-primary">
+            <Link href="/kontakt" className="btn btn-signal">
               Fragen? Jetzt Kontakt aufnehmen
             </Link>
           </Reveal>

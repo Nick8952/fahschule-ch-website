@@ -7,40 +7,35 @@ export function SectionHead({
   eyebrow,
   title,
   intro,
-  center,
+  num,
 }: {
   eyebrow?: string;
   title: string;
   intro?: string;
-  center?: boolean;
+  num?: string;
 }) {
   return (
-    <Reveal className={`mb-10 max-w-[54ch] ${center ? "mx-auto text-center" : ""}`}>
-      {eyebrow && <p className={`eyebrow mb-3 ${center ? "justify-center" : ""}`}>{eyebrow}</p>}
-      <h2 className="text-step-3">{title}</h2>
-      {intro && <p className="mt-3 text-ink-soft">{intro}</p>}
+    <Reveal className="mb-10 max-w-[52ch]">
+      <div className="flex items-baseline justify-between gap-4">
+        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+        {num && <span className="seam-num">{num}</span>}
+      </div>
+      <h2 className="mt-4 text-step-3 font-extrabold">{title}</h2>
+      {intro && <p className="mt-3">{intro}</p>}
     </Reveal>
   );
 }
 
-export function ReasonGrid({
-  items,
-}: {
-  items: { title: string; body: string }[];
-}) {
+export function ReasonGrid({ items }: { items: { title: string; body: string }[] }) {
   return (
-    <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((r, i) => (
-        <Reveal
-          key={r.title}
-          delay={(i % 2) * 60}
-          className="bg-white p-6 transition-colors hover:bg-panel/60 sm:p-7"
-        >
-          <span className="font-mono text-[0.8rem] text-signal">
+        <Reveal key={r.title} delay={(i % 3) * 60} className="card card-hover">
+          <span className="font-mono text-[0.78rem] text-signal">
             {String(i + 1).padStart(2, "0")}
           </span>
-          <h3 className="mt-2 font-display text-step-1">{r.title}</h3>
-          <p className="mt-1.5 text-[0.94rem] leading-relaxed text-ink-soft">{r.body}</p>
+          <h3 className="mt-2 font-display text-step-1 font-bold">{r.title}</h3>
+          <p className="mt-1.5 text-[0.93rem] leading-relaxed">{r.body}</p>
         </Reveal>
       ))}
     </div>
@@ -65,8 +60,8 @@ export function ServiceRow({
   flip?: boolean;
 }) {
   return (
-    <Reveal className="grid items-center gap-6 sm:gap-10 lg:grid-cols-2">
-      <div className={`relative overflow-hidden rounded-lg shadow-m ${flip ? "lg:order-2" : ""}`}>
+    <Reveal className="grid items-center gap-6 sm:gap-12 lg:grid-cols-2">
+      <div className={`relative overflow-hidden ${flip ? "lg:order-2" : ""}`}>
         <Image
           src={asset(image)}
           alt={title}
@@ -75,15 +70,15 @@ export function ServiceRow({
           className="aspect-[16/11] w-full object-cover transition-transform duration-700 hover:scale-[1.04]"
           unoptimized
         />
-        <span className="absolute bottom-3 left-3 rounded-pill bg-ink/80 px-3 py-1 font-mono text-[0.72rem] uppercase tracking-[0.06em] text-white backdrop-blur">
+        <span className="absolute bottom-0 left-0 bg-signal px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.06em] text-white">
           {tag}
         </span>
       </div>
       <div>
-        <h3 className="text-step-2">{title}</h3>
-        <p className="mt-3 text-ink-soft">{body}</p>
-        {price && <p className="mt-3 font-mono text-[0.9rem] font-medium text-pine">{price}</p>}
-        <Link href={href} className="btn btn-ghost mt-5">
+        <h3 className="text-step-2 font-extrabold">{title}</h3>
+        <p className="mt-3">{body}</p>
+        {price && <p className="mt-3 font-mono text-[0.9rem] text-signal">{price}</p>}
+        <Link href={href} className="btn btn-ghost mt-6">
           Mehr Informationen
         </Link>
       </div>
@@ -101,18 +96,16 @@ export function InfoCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-lg border border-line bg-white p-6">
-      {big && <span className="font-display text-step-3 text-pine">{big}</span>}
-      <h3 className="mt-1 font-display text-step-1">{title}</h3>
-      <div className="mt-1.5 text-[0.94rem] leading-relaxed text-ink-soft">{children}</div>
+    <div className="card">
+      {big && <span className="font-display text-step-3 font-extrabold text-signal">{big}</span>}
+      <h3 className="mt-1 font-display text-step-1 font-bold">{title}</h3>
+      <div className="mt-1.5 text-[0.93rem] leading-relaxed">{children}</div>
     </div>
   );
 }
 
 export function Callout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded border-l-2 border-signal bg-signal/[0.06] px-5 py-4 text-ink-soft">
-      {children}
-    </div>
+    <div className="border-l-2 border-signal bg-signal/[0.07] px-5 py-4">{children}</div>
   );
 }

@@ -27,7 +27,7 @@ export default function Page() {
         lead={fm.hero.lead}
         crumb="Verkehrskunde Englisch"
       />
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
             <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />

@@ -7,7 +7,7 @@ export default function VkuRegistrationForm() {
     <form
       action="https://api.web3forms.com/submit"
       method="POST"
-      className="rounded-lg border border-line bg-white p-6 shadow-m sm:p-8"
+      className="card !p-6 sm:!p-8"
     >
       <Web3FormsHidden subject="VKU English – Anmeldung (fahrschule-ch.ch)" />
 
@@ -64,7 +64,7 @@ export default function VkuRegistrationForm() {
           <input type="checkbox" required className="mt-0.5 h-5 w-5 accent-signal" />
           <span>
             I have read the{" "}
-            <Link href="/datenschutz" className="text-pine underline">
+            <Link href="/datenschutz" className="text-signal underline">
               Privacy Policy
             </Link>{" "}
             and accept it.
@@ -72,7 +72,7 @@ export default function VkuRegistrationForm() {
         </label>
       </div>
 
-      <button type="submit" className="btn btn-primary mt-6 w-full sm:w-auto">
+      <button type="submit" className="btn btn-signal mt-6 w-full sm:w-auto">
         Send registration
       </button>
     </form>

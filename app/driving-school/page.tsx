@@ -29,10 +29,10 @@ export const metadata: Metadata = pageMeta("/driving-school", {
 export default function Page() {
   return (
     <div lang="en">
-      <div className="bg-pine-tint">
+      <div className="bg-signal/10">
         <div className="wrap flex flex-wrap items-center gap-x-3 gap-y-1 py-2.5 text-[0.88rem] text-ink-soft">
           <span>{p.langNote}</span>
-          <Link href={p.langNoteLink.href} hrefLang="de" className="font-semibold text-pine">
+          <Link href={p.langNoteLink.href} hrefLang="de" className="font-semibold text-signal">
             {p.langNoteLink.label}
           </Link>
         </div>
@@ -40,9 +40,9 @@ export default function Page() {
 
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="English" />
 
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap grid items-center gap-10 lg:grid-cols-2">
-          <Reveal className="overflow-hidden rounded-lg shadow-m">
+          <Reveal className="overflow-hidden rounded-lg">
             <Image
               src={asset("/img/hero-2.webp")}
               alt={`${site.instructor}, driving instructor at Fahrschule CH`}
@@ -59,19 +59,19 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="section bg-panel">
+      <section className="section block-light">
         <div className="wrap">
           <SectionHead eyebrow="Why Fahrschule CH?" title={p.sections.reasonsTitle} />
           <ReasonGrid items={p.reasons} />
         </div>
       </section>
 
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
             <Prose html={html} />
             <p className="mt-6 flex flex-wrap gap-3">
-              <Link href="/kontakt" className="btn btn-primary">
+              <Link href="/kontakt" className="btn btn-signal">
                 Book a trial lesson
               </Link>
               <Link href="/verkehrskunde-englisch" className="btn btn-ghost">

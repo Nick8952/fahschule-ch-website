@@ -13,19 +13,21 @@ export default function PageHero({
   crumb?: string;
 }) {
   return (
-    <section className="border-b border-line bg-panel">
-      <div className="wrap pb-10 pt-12 sm:pb-14 sm:pt-16">
+    <section className="block-light border-b-2 border-signal">
+      <div className="wrap pb-12 pt-14 sm:pb-16 sm:pt-20">
         <Reveal>
-          <nav className="mb-4 flex flex-wrap gap-2 font-mono text-[0.74rem] uppercase tracking-[0.1em] text-ink-faint">
-            <Link href="/" className="hover:text-pine">
+          <nav className="mb-5 flex flex-wrap gap-2 font-mono text-[0.72rem] uppercase tracking-[0.12em] text-ink-soft/70">
+            <Link href="/" className="hover:text-signal">
               Start
             </Link>
             <span aria-hidden>/</span>
-            <span className="text-ink-soft">{crumb ?? title}</span>
+            <span className="text-ink">{crumb ?? title}</span>
           </nav>
-          {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
-          <h1 className="max-w-[20ch] text-step-4">{title}</h1>
-          {lead && <p className="mt-4 max-w-[58ch] text-step-1 text-ink-soft">{lead}</p>}
+          {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
+          <h1 className="max-w-[16ch] text-step-4 font-extrabold">{title}</h1>
+          {lead && (
+            <p className="mt-5 max-w-[56ch] text-step-1 text-ink-soft">{lead}</p>
+          )}
         </Reveal>
       </div>
     </section>

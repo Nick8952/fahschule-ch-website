@@ -1,24 +1,23 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Darker_Grotesque, Archivo, DM_Mono } from "next/font/google";
 import { site } from "@/lib/data";
 import { absUrl } from "@/lib/site";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
 
-const display = Instrument_Serif({
-  weight: "400",
-  style: ["normal", "italic"],
+const display = Darker_Grotesque({
   subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 });
-const body = Hanken_Grotesk({
+const body = Archivo({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
-const mono = JetBrains_Mono({
+const mono = DM_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-mono",
@@ -48,10 +47,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de" className={`${display.variable} ${body.variable} ${mono.variable}`}>
-      <body className="font-body text-step-0 antialiased">
+      <body className="font-body text-step-0">
         <a
           href="#inhalt"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-pine focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-signal focus:px-4 focus:py-2 focus:text-white"
         >
           Zum Inhalt springen
         </a>

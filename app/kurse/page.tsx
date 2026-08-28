@@ -21,7 +21,7 @@ export default function Page() {
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Kurse" />
 
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap">
           <SectionHead eyebrow="Kursübersicht" title="Buche jetzt deinen nächsten Schritt" />
           <div className="grid gap-16">
@@ -52,7 +52,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="section bg-panel">
+      <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
             <Prose html={html} />

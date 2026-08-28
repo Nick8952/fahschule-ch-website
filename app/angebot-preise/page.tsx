@@ -28,7 +28,7 @@ export default function Page() {
         crumb="Angebote & Preise"
       />
 
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap">
           <SectionHead
             eyebrow="Aktuelles Angebot"
@@ -53,13 +53,13 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="section bg-panel">
+      <section className="section block-dark">
         <div className="wrap">
           <PriceModel />
         </div>
       </section>
 
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap">
           <SectionHead
             eyebrow="Pakete"
@@ -68,14 +68,14 @@ export default function Page() {
           />
           <div className="grid gap-4 sm:grid-cols-3">
             {prices.tiers.map((t) => (
-              <Reveal key={t.key} className="rounded-lg border border-line bg-white p-6">
-                <span className="font-display text-step-3 text-pine">CHF {t.automat}</span>
+              <Reveal key={t.key} className="card !p-6">
+                <span className="font-display text-step-3 text-signal">CHF {t.automat}</span>
                 <h3 className="mt-1 font-display text-step-1">«{t.name}»</h3>
                 <p className="mt-1 text-[0.92rem] text-ink-soft">
                   {t.cond}.<br />
                   Geschaltet: CHF {t.geschaltet}.
                 </p>
-                <Link href="/kontakt" className="btn btn-primary mt-4 w-full">
+                <Link href="/kontakt" className="btn btn-signal mt-4 w-full">
                   Anmelden
                 </Link>
               </Reveal>
@@ -84,7 +84,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="section bg-panel">
+      <section className="section block-light">
         <div className="wrap">
           <SectionHead eyebrow="Vollständige Preisliste" title="Alle Preise auf einen Blick" />
           <Reveal>

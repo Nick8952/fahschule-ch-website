@@ -35,20 +35,18 @@ export default function PathSteps() {
           <button
             key={s.n}
             type="button"
-            onClick={() =>
-              refs.current[i]?.scrollIntoView({ behavior: "smooth", block: "start" })
-            }
-            className={`flex shrink-0 items-center gap-2 whitespace-nowrap rounded px-3 py-2 text-left font-mono text-[0.82rem] transition-colors lg:grid lg:grid-cols-[24px_1fr] ${
-              active === i ? "bg-pine-tint text-ink" : "text-ink-faint hover:text-ink"
+            onClick={() => refs.current[i]?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            className={`flex shrink-0 items-center gap-2 whitespace-nowrap px-3 py-2 text-left font-mono text-[0.78rem] transition-colors lg:grid lg:grid-cols-[24px_1fr] ${
+              active === i ? "bg-signal/10 text-ink" : "text-ink-soft/60 hover:text-ink"
             }`}
           >
-            <b className="font-medium text-pine">{String(s.n).padStart(2, "0")}</b>
+            <b className="font-medium text-signal">{String(s.n).padStart(2, "0")}</b>
             <span className="hidden lg:inline">{s.title}</span>
           </button>
         ))}
       </nav>
 
-      <ol className="grid gap-4">
+      <ol className="grid gap-3">
         {items.map((s, i) => (
           <li
             key={s.n}
@@ -56,16 +54,16 @@ export default function PathSteps() {
               refs.current[i] = el;
             }}
             id={`schritt-${s.n}`}
-            className="scroll-mt-[calc(var(--header-h)+1rem)] rounded-lg border border-line bg-white p-6 sm:p-7"
+            className="card scroll-mt-[calc(var(--header-h)+1rem)]"
           >
             <div className="mb-2 flex items-center gap-3">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded bg-pine font-display text-lg text-white">
+              <span className="grid h-11 w-11 shrink-0 place-items-center bg-signal font-display text-xl font-extrabold text-white">
                 {s.n}
               </span>
-              <h3 className="font-display text-step-1">{s.title}</h3>
+              <h3 className="font-display text-step-1 font-bold text-ink">{s.title}</h3>
             </div>
-            <p className="text-[0.96rem] leading-relaxed text-ink-soft">{s.body}</p>
-            <span className="mt-3 inline-flex rounded-pill bg-pine-tint px-3 py-1 font-mono text-[0.74rem] text-pine">
+            <p className="text-[0.95rem] leading-relaxed">{s.body}</p>
+            <span className="mt-3 inline-flex border border-signal/40 bg-signal/5 px-3 py-1 font-mono text-[0.72rem] uppercase tracking-[0.04em] text-signal-600">
               {s.badge}
             </span>
           </li>

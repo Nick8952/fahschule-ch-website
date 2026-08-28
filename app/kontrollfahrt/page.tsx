@@ -27,7 +27,7 @@ export default function Page() {
         lead={fm.hero.lead}
         crumb="Kontrollfahrt"
       />
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
             <Callout>
@@ -41,7 +41,7 @@ export default function Page() {
               ))}
             </ul>
             <p className="mt-6">
-              <Link href="/kontakt" className="btn btn-primary">
+              <Link href="/kontakt" className="btn btn-signal">
                 Jetzt für die Kontrollfahrt anmelden
               </Link>
             </p>
