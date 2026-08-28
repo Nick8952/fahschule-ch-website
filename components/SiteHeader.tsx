@@ -109,7 +109,10 @@ export default function SiteHeader() {
       </div>
 
       {/* Fixe Aktionsleiste (Mobile) */}
-      <div className="fixed inset-x-0 bottom-0 z-30 flex gap-px border-t border-steel bg-midnight sm:hidden">
+      <div
+        className="fixed inset-x-0 bottom-0 z-30 flex gap-px border-t border-steel bg-midnight sm:hidden"
+        style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
+      >
         <a
           href={`tel:${site.phone.tel}`}
           className="flex flex-1 items-center justify-center py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.08em] text-white"

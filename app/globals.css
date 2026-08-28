@@ -277,6 +277,13 @@
   }
 }
 
+/* Platz für die fixe Aktionsleiste am unteren Rand (nur Mobile) */
+@media (max-width: 639px) {
+  body {
+    padding-bottom: calc(3.25rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

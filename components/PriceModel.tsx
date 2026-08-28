@@ -24,8 +24,8 @@ export default function PriceModel() {
   const current = priceAt(n, gear);
 
   const allPrices = tiers.flatMap((t) => [t.automat, t.geschaltet]);
-  const yMin = Math.min(...allPrices) - 3;
-  const yMax = Math.max(...allPrices) + 3;
+  const yMin = Math.min(...allPrices) - 6;
+  const yMax = Math.max(...allPrices) + 5;
 
   const x = (l: number) => PAD.l + ((l - rangeMin) / (rangeMax - rangeMin)) * (W - PAD.l - PAD.r);
   const y = (p: number) => PAD.t + (1 - (p - yMin) / (yMax - yMin)) * (H - PAD.t - PAD.b);
@@ -60,29 +60,44 @@ export default function PriceModel() {
               const x0 = x(Math.max(rangeMin, t.minLessons));
               const x1 = x(i < arr.length - 1 ? arr[i + 1].minLessons : rangeMax + 0.5);
               const on = t.key === current.tier.key;
+              const labelX = Math.min(W - 4, Math.max(4, (x0 + x1) / 2));
               return (
                 <g key={t.key}>
-                  {on && <rect x={x0} y={PAD.t} width={Math.max(0, x1 - x0)} height={H - PAD.t - PAD.b} fill="#FF4D2E" opacity={0.1} />}
-                  <text x={(x0 + x1) / 2} y={H - 12} textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill={on ? "#FF7A63" : "#6B7793"} letterSpacing="1">
+                  {on && (
+                    <>
+                      <rect x={x0} y={PAD.t} width={Math.max(0, x1 - x0)} height={H - PAD.t - PAD.b} fill="#FF4D2E" opacity={0.16} />
+                      <line x1={x0} x2={x0} y1={PAD.t} y2={H - PAD.b} stroke="#FF4D2E" strokeWidth={1} opacity={0.5} />
+                    </>
+                  )}
+                  <text
+                    x={labelX}
+                    y={H - 12}
+                    textAnchor={i === 0 ? "start" : i === arr.length - 1 ? "end" : "middle"}
+                    fontFamily="var(--font-mono)"
+                    fontSize="11"
+                    fontWeight={on ? 600 : 400}
+                    fill={on ? "#FF7A63" : "#6B7793"}
+                    letterSpacing="1"
+                  >
                     {t.name.toUpperCase()}
                   </text>
                 </g>
               );
             })}
-          <motion.path d={areaPath} fill="#FF4D2E" opacity={0.08} initial={{ opacity: 0 }} whileInView={{ opacity: 0.08 }} viewport={{ once: true }} />
+          <motion.path d={areaPath} fill="#FF4D2E" initial={{ opacity: 0 }} animate={{ opacity: 0.12 }} transition={{ duration: 0.6 }} />
           <motion.path
             d={stepPath}
             fill="none"
             stroke="#FF4D2E"
-            strokeWidth={2.5}
+            strokeWidth={3}
             strokeLinejoin="round"
+            strokeLinecap="round"
             initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true }}
+            animate={{ pathLength: 1 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           />
-          <motion.line x1={dotX} x2={dotX} y1={PAD.t} y2={H - PAD.b} stroke="#FF4D2E" strokeWidth={1} strokeDasharray="3 4" opacity={0.6} animate={{ x1: dotX, x2: dotX }} transition={{ type: "spring", stiffness: 260, damping: 28 }} />
-          <motion.circle r={7} fill="#FF4D2E" stroke="#0C1220" strokeWidth={3} animate={{ cx: dotX, cy: dotY }} transition={{ type: "spring", stiffness: 260, damping: 28 }} />
+          <motion.line y1={PAD.t} y2={H - PAD.b} stroke="#FF4D2E" strokeWidth={1} strokeDasharray="3 4" opacity={0.6} initial={false} animate={{ x1: dotX, x2: dotX }} transition={{ type: "spring", stiffness: 260, damping: 28 }} />
+          <motion.circle r={7} fill="#FF4D2E" stroke="#0C1220" strokeWidth={3} initial={false} animate={{ cx: dotX, cy: dotY }} transition={{ type: "spring", stiffness: 260, damping: 28 }} />
         </svg>
 
         <div className="mt-4">
@@ -124,7 +139,7 @@ export default function PriceModel() {
         <p className="mt-6 font-mono text-[0.78rem] uppercase tracking-[0.1em] text-signal-soft">
           {current.tier.name}
         </p>
-        <p className="font-display text-step-5 font-extrabold leading-none text-white">
+        <p className="font-display text-[3rem] font-extrabold leading-none text-white sm:text-step-5">
           CHF {current.price}
         </p>
         <p className="mt-1 font-mono text-[0.76rem] text-on-dark-soft">{priceSuffix}</p>
