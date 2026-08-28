@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { getPage } from "@/lib/content";
 import { courses } from "@/lib/data";
 import PageHero from "@/components/PageHero";
@@ -15,7 +16,7 @@ type FM = {
 const { frontmatter: fm, html } = getPage<FM>("verkehrskunde-englisch");
 const v = courses.vkuEnglish;
 
-export const metadata: Metadata = { title: fm.seoTitle, description: fm.seoDescription };
+export const metadata: Metadata = pageMeta("/verkehrskunde-englisch", { title: fm.seoTitle, description: fm.seoDescription });
 
 export default function Page() {
   return (

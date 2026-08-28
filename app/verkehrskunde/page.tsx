@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { getPage } from "@/lib/content";
 import { courses } from "@/lib/data";
@@ -12,7 +13,7 @@ type FM = { seoTitle: string; seoDescription: string; hero: { eyebrow: string; t
 const { frontmatter: fm, html } = getPage<FM>("verkehrskunde");
 const v = courses.vkuDeutsch;
 
-export const metadata: Metadata = { title: fm.seoTitle, description: fm.seoDescription };
+export const metadata: Metadata = pageMeta("/verkehrskunde", { title: fm.seoTitle, description: fm.seoDescription });
 
 export default function Page() {
   return (

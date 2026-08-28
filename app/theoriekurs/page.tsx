@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { getPage } from "@/lib/content";
 import { courses } from "@/lib/data";
@@ -15,7 +16,7 @@ type FM = {
 const { frontmatter: fm, html } = getPage<FM>("theoriekurs");
 const t = courses.theoriekurs;
 
-export const metadata: Metadata = { title: fm.seoTitle, description: fm.seoDescription };
+export const metadata: Metadata = pageMeta("/theoriekurs", { title: fm.seoTitle, description: fm.seoDescription });
 
 export default function Page() {
   return (

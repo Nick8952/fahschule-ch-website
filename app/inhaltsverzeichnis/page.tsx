@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { getPage } from "@/lib/content";
 import PageHero from "@/components/PageHero";
@@ -7,7 +8,7 @@ import Reveal from "@/components/Reveal";
 type FM = { seoTitle: string; seoDescription: string; hero: { eyebrow: string; title: string; lead: string } };
 const { frontmatter: fm } = getPage<FM>("inhaltsverzeichnis");
 
-export const metadata: Metadata = { title: fm.seoTitle, description: fm.seoDescription };
+export const metadata: Metadata = pageMeta("/inhaltsverzeichnis", { title: fm.seoTitle, description: fm.seoDescription });
 
 const tree: { label: string; href: string; children?: { label: string; href: string }[] }[] = [
   { label: "Start", href: "/" },

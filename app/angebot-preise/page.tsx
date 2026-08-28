@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { getPage } from "@/lib/content";
 import { prices } from "@/lib/data";
@@ -15,7 +16,7 @@ type FM = {
 };
 const { frontmatter: fm } = getPage<FM>("angebot-preise");
 
-export const metadata: Metadata = { title: fm.seoTitle, description: fm.seoDescription };
+export const metadata: Metadata = pageMeta("/angebot-preise", { title: fm.seoTitle, description: fm.seoDescription });
 
 export default function Page() {
   return (

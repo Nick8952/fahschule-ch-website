@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMeta } from "@/lib/seo";
 import { getPage } from "@/lib/content";
 
 type FM = { seoTitle: string; seoDescription: string; hero: { eyebrow: string; title: string; lead: string } };
 const { frontmatter: fm } = getPage<FM>("danke");
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta("/danke", {
   title: fm.seoTitle,
   description: fm.seoDescription,
-  robots: { index: false, follow: true },
-};
+  noindex: true,
+});
 
 export default function Page() {
   return (

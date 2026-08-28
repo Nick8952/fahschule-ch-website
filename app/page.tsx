@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { pageMeta } from "@/lib/seo";
 import { getPage } from "@/lib/content";
 import { site, reasons, pages } from "@/lib/data";
 import { asset } from "@/lib/site";
@@ -21,15 +22,11 @@ type Home = {
 const { frontmatter: fm } = getPage<Home>("home");
 const p = pages.home;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta("/", {
   title: fm.seoTitle,
   description: fm.seoDescription,
-  openGraph: {
-    title: fm.seoTitle,
-    description: fm.seoDescription,
-    images: [fm.ogImage ?? "/img/hero-2.webp"],
-  },
-};
+  ogImage: fm.ogImage ?? "/img/hero-2.webp",
+});
 
 export default function HomePage() {
   return (

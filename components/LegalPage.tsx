@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getLegal } from "@/lib/content";
+import { pageMeta } from "@/lib/seo";
 import PageHero from "./PageHero";
 import Prose from "./Prose";
 import Reveal from "./Reveal";
@@ -13,10 +14,10 @@ type LegalFM = {
 
 export function legalMetadata(slug: string): Metadata {
   const { frontmatter } = getLegal<LegalFM>(slug);
-  return {
+  return pageMeta(`/${slug}`, {
     title: frontmatter.seoTitle ?? frontmatter.title,
     description: frontmatter.seoDescription,
-  };
+  });
 }
 
 export default function LegalPage({ slug }: { slug: string }) {

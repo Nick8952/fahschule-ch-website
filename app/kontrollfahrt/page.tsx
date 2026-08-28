@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { getPage } from "@/lib/content";
 import { pages } from "@/lib/data";
@@ -14,7 +15,7 @@ type FM = {
 const { frontmatter: fm, html } = getPage<FM>("kontrollfahrt");
 const p = pages.kontrollfahrt;
 
-export const metadata: Metadata = { title: fm.seoTitle, description: fm.seoDescription };
+export const metadata: Metadata = pageMeta("/kontrollfahrt", { title: fm.seoTitle, description: fm.seoDescription });
 
 export default function Page() {
   const [head, ...rest] = p.callout.split("! ");

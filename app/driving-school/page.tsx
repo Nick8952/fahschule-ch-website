@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { pageMeta } from "@/lib/seo";
 import { getPage } from "@/lib/content";
 import { site, pages } from "@/lib/data";
 import { asset } from "@/lib/site";
@@ -18,11 +19,12 @@ type FM = {
 const { frontmatter: fm, html } = getPage<FM>("driving-school");
 const p = pages.drivingSchool;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta("/driving-school", {
   title: fm.seoTitle,
   description: fm.seoDescription,
-  openGraph: { locale: "en_CH", title: fm.seoTitle, description: fm.seoDescription },
-};
+  ogImage: fm.ogImage ?? "/img/hero-2.webp",
+  ogLocale: "en_CH",
+});
 
 export default function Page() {
   return (

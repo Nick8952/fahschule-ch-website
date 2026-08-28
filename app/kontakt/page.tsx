@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import { getPage } from "@/lib/content";
 import { site } from "@/lib/data";
 import PageHero from "@/components/PageHero";
@@ -14,7 +15,7 @@ type FM = {
 };
 const { frontmatter: fm } = getPage<FM>("kontakt");
 
-export const metadata: Metadata = { title: fm.seoTitle, description: fm.seoDescription };
+export const metadata: Metadata = pageMeta("/kontakt", { title: fm.seoTitle, description: fm.seoDescription });
 
 export default function Page() {
   return (

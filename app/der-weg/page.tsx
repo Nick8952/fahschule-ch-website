@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { getPage } from "@/lib/content";
 import PageHero from "@/components/PageHero";
@@ -8,7 +9,7 @@ import PathSteps from "@/components/PathSteps";
 type FM = { seoTitle: string; seoDescription: string; hero: { eyebrow: string; title: string; lead: string } };
 const { frontmatter: fm } = getPage<FM>("der-weg");
 
-export const metadata: Metadata = { title: fm.seoTitle, description: fm.seoDescription };
+export const metadata: Metadata = pageMeta("/der-weg", { title: fm.seoTitle, description: fm.seoDescription });
 
 export default function Page() {
   return (
