@@ -30,7 +30,6 @@ export default function PageHero({
           )}
         </Reveal>
       </div>
-      <div className="hero-seam" aria-hidden />
     </section>
   );
 }

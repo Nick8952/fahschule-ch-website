@@ -115,36 +115,6 @@
     opacity: 0.5;
   }
 
-  /* Naht unter dem Seiten-Hero: Fahrbahnmarkierung – links satt (»hier stehst du«),
-     nach rechts als Leitlinie auslaufend (»die Strecke vor dir«). */
-  .hero-seam {
-    position: relative;
-    height: 6px;
-    background:
-      linear-gradient(var(--signal), var(--signal)) left / 40% 100% no-repeat,
-      repeating-linear-gradient(
-          to right,
-          var(--signal) 0 24px,
-          transparent 24px 44px
-        )
-        left / 100% 100%;
-  }
-  .hero-seam::after {
-    content: "";
-    position: absolute;
-    left: 40%;
-    top: 50%;
-    width: 9px;
-    height: 9px;
-    background: var(--signal);
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-  @media (min-width: 768px) {
-    .hero-seam {
-      height: 8px;
-    }
-  }
-
   /* Buttons */
   .btn {
     display: inline-flex;
