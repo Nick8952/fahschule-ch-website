@@ -1,6 +1,7 @@
 {
   "demo": true,
-  "name": "Fahrschule CH",
+  "web3formsKey": "REPLACE-WITH-WEB3FORMS-ACCESS-KEY",
+  "name": "Fahrschule CHH",
   "legalName": "FAHRSCHULE CH – COSTA CHATZIS",
   "instructor": "Costa Chatzis",
   "tagline": "Deine Fahrschule in Zürich beim Albisriederplatz",
@@ -9,10 +10,13 @@
     "street": "Badenerstrasse 333",
     "zip": "8003",
     "city": "Zürich",
-    "floorNote": "2. Stock über «Coop» beim Albisriederplatz",
-    "center": "Fahrschulcenter Albisrieden"
+    "center": "Fahrschulcenter Albisrieden",
+    "floorNote": "2. Stock über «Coop» beim Albisriederplatz"
   },
-  "phone": { "display": "078 843 91 76", "tel": "+41788439176" },
+  "phone": {
+    "display": "078 843 91 76",
+    "tel": "+41788439176"
+  },
   "email": "info@fahrschule-ch.ch",
   "social": {
     "instagram": "https://www.instagram.com/fahrschule_ch/",
@@ -21,7 +25,13 @@
   "transit": "Tram 2 & 3 · Bus 33, 72, 83",
   "membership": "Mitglied Zürcher Fahrlehrerverband",
   "mapQuery": "Badenerstrasse 333 8003 Zürich",
-  "languages": ["Hochdeutsch", "Züri-Dütsch", "Englisch", "Französisch", "Griechisch"],
+  "languages": [
+    "Hochdeutsch",
+    "Züri-Dütsch",
+    "Englisch",
+    "Französisch",
+    "Griechisch"
+  ],
   "stats": {
     "students": "600+",
     "studentsLabel": "ausgebildete Fahrschüler:innen",
@@ -30,6 +40,5 @@
     "sinceYear": "2014",
     "sinceYearLabel": "eidg. Fachausweis"
   },
-  "themeColor": "#0A1A3C",
-  "web3formsKey": "REPLACE-WITH-WEB3FORMS-ACCESS-KEY"
+  "themeColor": "#0A1A3C"
 }
