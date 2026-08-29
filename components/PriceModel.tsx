@@ -65,8 +65,8 @@ export default function PriceModel() {
                 <g key={t.key}>
                   {on && (
                     <>
-                      <rect x={x0} y={PAD.t} width={Math.max(0, x1 - x0)} height={H - PAD.t - PAD.b} fill="#FF4D2E" opacity={0.16} />
-                      <line x1={x0} x2={x0} y1={PAD.t} y2={H - PAD.b} stroke="#FF4D2E" strokeWidth={1} opacity={0.5} />
+                      <rect x={x0} y={PAD.t} width={Math.max(0, x1 - x0)} height={H - PAD.t - PAD.b} fill="#1E9E5C" opacity={0.16} />
+                      <line x1={x0} x2={x0} y1={PAD.t} y2={H - PAD.b} stroke="#1E9E5C" strokeWidth={1} opacity={0.5} />
                     </>
                   )}
                   <text
@@ -76,7 +76,7 @@ export default function PriceModel() {
                     fontFamily="var(--font-mono)"
                     fontSize="11"
                     fontWeight={on ? 600 : 400}
-                    fill={on ? "#FF7A63" : "#6B7793"}
+                    fill={on ? "#45BE83" : "#71809F"}
                     letterSpacing="1"
                   >
                     {t.name.toUpperCase()}
@@ -84,20 +84,20 @@ export default function PriceModel() {
                 </g>
               );
             })}
-          <path d={areaPath} fill="#FF4D2E" opacity={0.14} />
+          <path d={areaPath} fill="#1C50BE" opacity={0.14} />
           <path
             d={stepPath}
             fill="none"
-            stroke="#FF4D2E"
+            stroke="#1C50BE"
             strokeWidth={4}
             strokeLinejoin="round"
             strokeLinecap="round"
           />
           {Array.from({ length: rangeMax - rangeMin + 1 }, (_, i) => rangeMin + i).map((l) => (
-            <circle key={l} cx={x(l)} cy={y(priceAt(l, gear).price)} r={2.5} fill="#FF7A63" />
+            <circle key={l} cx={x(l)} cy={y(priceAt(l, gear).price)} r={2.5} fill="#6B93E6" />
           ))}
-          <motion.line y1={PAD.t} y2={H - PAD.b} stroke="#FF4D2E" strokeWidth={1} strokeDasharray="3 4" opacity={0.6} initial={false} animate={{ x1: dotX, x2: dotX }} transition={{ type: "spring", stiffness: 260, damping: 28 }} />
-          <motion.circle r={7} fill="#FF4D2E" stroke="#0C1220" strokeWidth={3} initial={false} animate={{ cx: dotX, cy: dotY }} transition={{ type: "spring", stiffness: 260, damping: 28 }} />
+          <motion.line y1={PAD.t} y2={H - PAD.b} stroke="#1E9E5C" strokeWidth={1} strokeDasharray="3 4" opacity={0.7} initial={false} animate={{ x1: dotX, x2: dotX }} transition={{ type: "spring", stiffness: 260, damping: 28 }} />
+          <motion.circle r={7} fill="#1E9E5C" stroke="#0A1A3C" strokeWidth={3} initial={false} animate={{ cx: dotX, cy: dotY }} transition={{ type: "spring", stiffness: 260, damping: 28 }} />
         </svg>
 
         <div className="mt-4">
@@ -136,7 +136,7 @@ export default function PriceModel() {
           ))}
         </div>
 
-        <p className="mt-6 font-mono text-[0.78rem] uppercase tracking-[0.1em] text-signal-soft">
+        <p className="mt-6 font-mono text-[0.78rem] uppercase tracking-[0.1em] text-go-soft">
           {current.tier.name}
         </p>
         <p className="font-display text-[3rem] font-extrabold leading-none text-white sm:text-step-5">

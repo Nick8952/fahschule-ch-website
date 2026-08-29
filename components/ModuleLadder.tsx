@@ -25,9 +25,9 @@ export default function ModuleLadder() {
       <ol className="relative border-l-2 border-steel pl-6">
         {items.map((m, i) => (
           <RevealLi key={m.range} delay={i * 70} className="relative pb-8 last:pb-0">
-            <span className="absolute -left-[calc(1.5rem+7px)] top-1.5 h-3 w-3 rounded-full border-2 border-signal bg-midnight" />
+            <span className="absolute -left-[calc(1.5rem+7px)] top-1.5 h-3 w-3 rounded-full border-2 border-go bg-midnight" />
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span className="font-mono text-[0.78rem] text-signal">Modul {m.range}</span>
+              <span className="font-mono text-[0.78rem] text-signal-soft">Modul {m.range}</span>
               <span className="border border-steel px-1.5 py-0.5 font-mono text-[0.7rem] text-on-dark-soft">
                 Stufe {m.level}
               </span>

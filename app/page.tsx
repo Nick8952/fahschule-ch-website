@@ -146,7 +146,7 @@ export default function HomePage() {
           <ul className="grid gap-x-10 gap-y-4 sm:grid-cols-2">
             {reasons.vorteile.map((v) => (
               <li key={v} className="flex gap-3 border-t border-steel pt-4">
-                <span className="font-mono text-signal">→</span>
+                <span className="font-mono text-go-soft">→</span>
                 {v}
               </li>
             ))}

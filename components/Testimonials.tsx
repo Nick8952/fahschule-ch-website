@@ -7,7 +7,7 @@ export default function Testimonials() {
       {testimonials.items.map((t, i) => (
         <Reveal key={t.name} delay={(i % 3) * 80} className="card mb-4 break-inside-avoid">
           <div className="mb-2 flex items-center justify-between">
-            <span className="tracking-[2px] text-signal">★★★★★</span>
+            <span className="tracking-[2px] text-amber">★★★★★</span>
             {t.lang === "en" && (
               <span className="font-mono text-[0.66rem] uppercase tracking-[0.1em] text-ink-soft/60">
                 EN

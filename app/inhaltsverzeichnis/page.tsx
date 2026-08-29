@@ -39,13 +39,13 @@ export default function Page() {
   return (
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Inhaltsverzeichnis" />
-      <section className="section">
+      <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
             <ul className="grid gap-2 text-step-1">
               {tree.map((t) => (
                 <li key={t.href}>
-                  <Link href={t.href} className="text-pine underline underline-offset-4 hover:text-signal">
+                  <Link href={t.href} className="text-signal underline underline-offset-4 hover:text-signal-600">
                     {t.label}
                   </Link>
                   {t.children && (
@@ -54,7 +54,7 @@ export default function Page() {
                         <li key={c.href}>
                           <Link
                             href={c.href}
-                            className="text-pine underline underline-offset-4 hover:text-signal"
+                            className="text-signal underline underline-offset-4 hover:text-signal-600"
                           >
                             {c.label}
                           </Link>

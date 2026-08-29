@@ -1,10 +1,10 @@
 import type { Config } from "tailwindcss";
 
 /* ============================================================================
-   Fahrschule CH — Design-System "Nachtfahrt"
-   Selbstbewusst & markant: alternierende Dunkel/Hell-Blöcke, tiefes Blau-Schwarz,
-   EIN leuchtender Akzent (Signal-Rot). Grosstypo Darker Grotesque + Archivo,
-   DM Mono für Zahlen/Modulcodes/Eyebrows.
+   Fahrschule CH — Design-System "Nachtfahrt / Kobalt"
+   Alternierende Dunkel/Hell-Blöcke. Markenfarbe Kobaltblau (aus dem Logo),
+   Grün als Aktions-/Bestanden-Akzent ("GO"), Bernstein nur für Bewertungen.
+   Grosstypo Darker Grotesque + Archivo, DM Mono für Zahlen/Modulcodes/Eyebrows.
    ========================================================================== */
 
 const config: Config = {
@@ -16,12 +16,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        midnight: { DEFAULT: "#0C1220", 2: "#141D33", 3: "#1D2942" },
-        steel: { DEFAULT: "#2A3856", soft: "#3C4C6E" },
-        chalk: { DEFAULT: "#F2F1EC", 2: "#E7E5DC" },
-        ink: { DEFAULT: "#12151C", soft: "#454A55" },
-        signal: { DEFAULT: "#FF4D2E", 600: "#E23B1E", soft: "#FF7A63", wash: "#FBE3DC" },
-        "on-dark": { DEFAULT: "#EDEEF2", soft: "#9AA4BC", faint: "#6B7793" },
+        midnight: { DEFAULT: "#0A1A3C", 2: "#122C57", 3: "#1E3A70" },
+        steel: { DEFAULT: "#33477A", soft: "#485E92" },
+        chalk: { DEFAULT: "#F4F6FB", 2: "#E9EDF7" },
+        ink: { DEFAULT: "#111524", soft: "#4B5568" },
+        signal: { DEFAULT: "#1C50BE", 600: "#173F97", soft: "#6B93E6", wash: "#E8EEFB" },
+        go: { DEFAULT: "#1E9E5C", 600: "#167A46", soft: "#45BE83", wash: "#E6F5EC" },
+        amber: { DEFAULT: "#F2B53C" },
+        "on-dark": { DEFAULT: "#E9ECF6", soft: "#9DA9C6", faint: "#71809F" },
       },
       fontFamily: {
         display: ["var(--font-display)", "Arial Black", "sans-serif"],

@@ -49,7 +49,7 @@ export default function SiteHeader() {
                 href={item.href}
                 hrefLang={"lang" in item ? (item as { lang: string }).lang : undefined}
                 className={`relative px-3 py-2 font-mono text-[0.76rem] uppercase tracking-[0.06em] transition-colors ${
-                  isActive(item.href) ? "text-signal" : "text-on-dark-soft hover:text-white"
+                  isActive(item.href) ? "text-signal-soft" : "text-on-dark-soft hover:text-white"
                 }`}
               >
                 {item.label}
@@ -93,11 +93,11 @@ export default function SiteHeader() {
               className="flex items-center justify-between border-b border-steel/50 py-4 font-display text-3xl font-bold text-white"
             >
               {item.label}
-              <span className="text-signal">→</span>
+              <span className="text-signal-soft">→</span>
             </Link>
           ))}
           <div className="mt-6 grid gap-2 font-mono text-[0.9rem] text-on-dark-soft">
-            <a href={`tel:${site.phone.tel}`} className="text-signal">
+            <a href={`tel:${site.phone.tel}`} className="text-signal-soft">
               {site.phone.display}
             </a>
             <a href={`mailto:${site.email}`}>{site.email}</a>

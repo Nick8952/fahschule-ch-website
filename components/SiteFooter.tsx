@@ -118,7 +118,7 @@ export default function SiteFooter() {
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.mapQuery)}`}
                   target="_blank"
                   rel="noopener"
-                  className="font-semibold text-white hover:text-signal"
+                  className="font-semibold text-white hover:text-signal-soft"
                 >
                   Route öffnen
                 </a>
