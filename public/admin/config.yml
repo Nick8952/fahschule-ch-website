@@ -6,7 +6,7 @@ backend:
   repo: Nick-tbz/fahrschule-ch-website
   branch: main
   auth_type: pkce
-  app_id: "REPLACE-WITH-GITLAB-OAUTH-APP-ID"
+  app_id: "eba34f7abf61560ecba893ef35bbc8c4e501f951276870d5732dee53d05793e8"
 
 publish_mode: simple
 site_url: https://fahrschule-ch-website-f63075.gitlab.io
