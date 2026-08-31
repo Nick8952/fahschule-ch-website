@@ -21,11 +21,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Betrieb unter der eigenen GitHub-Pages-URL (kein DNS nötig):
-      #   https://nick8952.github.io/fahschule-ch_demo/
+      #   https://nick8952.github.io/fahschule-ch-website/
       # Beim Go-Live auf eine eigene Domain: public/CNAME anlegen, Custom Domain in
       # Settings->Pages setzen, dann SITE_ORIGIN=https://<domain> und BASE_PATH="" (siehe HANDOVER.md 6).
       SITE_ORIGIN: https://nick8952.github.io
-      BASE_PATH: /fahschule-ch_demo
+      BASE_PATH: /fahschule-ch-website
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

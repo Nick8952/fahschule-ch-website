@@ -25,7 +25,7 @@ Sveltia CMS mit GitHub braucht einen kleinen OAuth-Proxy. Einmalig:
 5. In `public/admin/config.yml` bei `backend.base_url` die Worker-URL eintragen, committen/pushen.
 
 Der/die Kunde/Kundin braucht außerdem **Schreibzugriff (Write)** auf das GitHub-Repo
-`Nick8952/fahschule-ch_demo`.
+`Nick8952/fahschule-ch-website`.
 
 ### b) Web3Forms-Schlüssel für die Formulare
 
@@ -40,7 +40,7 @@ Ohne (a) kann sich niemand ins CMS einloggen; ohne (b) kommen keine Formular-Anf
 
 ## 2. Inhalte bearbeiten (für Costa / den Kunden)
 
-1. **`https://nick8952.github.io/fahschule-ch_demo/admin/`** aufrufen
+1. **`https://nick8952.github.io/fahschule-ch-website/admin/`** aufrufen
    (nach Go-Live auf eigene Domain entsprechend `https://<domain>/admin/`)
 2. **„Sign in with GitHub"** → mit dem GitHub-Konto anmelden, das Schreibzugriff aufs Repo hat
 3. Links eine Sammlung wählen, Felder ausfüllen, oben rechts **„Publish"**
@@ -100,8 +100,8 @@ kontrollieren, Callback-URL der OAuth-App = `<worker-url>/callback`. Alternativ 
 **Deploy** läuft über GitHub Actions (`.github/workflows/deploy.yml`) bei jedem Push auf `main`.
 Pages-Quelle: **Settings → Pages → Source: GitHub Actions** (einmalig, ist gesetzt).
 
-**Aktuelle URL (kein DNS nötig):** `https://nick8952.github.io/fahschule-ch_demo/`
-Workflow-Env: `SITE_ORIGIN=https://nick8952.github.io`, `BASE_PATH=/fahschule-ch_demo`.
+**Aktuelle URL (kein DNS nötig):** `https://nick8952.github.io/fahschule-ch-website/`
+Workflow-Env: `SITE_ORIGIN=https://nick8952.github.io`, `BASE_PATH=/fahschule-ch-website`.
 
 **Beim Go-Live auf eine eigene Domain** (z. B. `fahrschule-ch.ch` – Kunde/Domaininhaber muss DNS setzen):
 1. `public/CNAME` mit der Domain anlegen.

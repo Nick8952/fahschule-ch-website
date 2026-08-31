@@ -4,7 +4,7 @@
 //   - GitHub Pages (Standard): SITE_ORIGIN + BASE_PATH in .github/workflows/deploy.yml
 //   - eigene Domain (Go-Live): SITE_ORIGIN=https://fahrschule-ch.ch, BASE_PATH="" (siehe HANDOVER.md 6)
 // Lokal ohne Variablen => GitHub-Pages-Default (aktuelle Live-URL).
-const BASE_PATH = process.env.BASE_PATH ?? "/fahschule-ch_demo";
+const BASE_PATH = process.env.BASE_PATH ?? "/fahschule-ch-website";
 const SITE_ORIGIN =
   process.env.SITE_ORIGIN ?? "https://nick8952.github.io";
 

@@ -1,5 +1,5 @@
 {
-  "name": "fahrschule-ch-website",
+  "name": "fahschule-ch-website",
   "version": "2.0.0",
   "description": "Fahrschule CH – Costa Chatzis, Zürich. Next.js 15 (statischer Export) + Sveltia CMS.",
   "private": true,

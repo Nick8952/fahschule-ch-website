@@ -5,14 +5,14 @@
 
 backend:
   name: github
-  repo: Nick8952/fahschule-ch_demo
+  repo: Nick8952/fahschule-ch-website
   branch: main
   base_url: https://REPLACE-WITH-SVELTIA-AUTH-WORKER-URL
 
 publish_mode: simple
-site_url: https://nick8952.github.io/fahschule-ch_demo
-display_url: https://nick8952.github.io/fahschule-ch_demo
-logo_url: https://nick8952.github.io/fahschule-ch_demo/img/logo.png
+site_url: https://nick8952.github.io/fahschule-ch-website
+display_url: https://nick8952.github.io/fahschule-ch-website
+logo_url: https://nick8952.github.io/fahschule-ch-website/img/logo.png
 
 media_folder: "public/img/uploads"
 public_folder: "/img/uploads"
