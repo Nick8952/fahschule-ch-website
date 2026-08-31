@@ -110,7 +110,7 @@ export default function SiteHeader() {
 
       {/* Fixe Aktionsleiste (Mobile) */}
       <div
-        className="fixed inset-x-0 bottom-0 z-30 flex gap-px border-t border-steel bg-midnight sm:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 flex gap-px border-t border-steel bg-midnight [transform:translateZ(0)] sm:hidden"
         style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
       >
         <a

@@ -33,12 +33,15 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: calc(var(--header-h) + 1.5rem);
+    overflow-x: clip;
   }
   body {
     background: var(--midnight);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    /* clip statt hidden: verhindert horizontales Scrollen, ohne aus <body>
+       einen Scroll-Container zu machen (der auf iOS die fixe Leiste "entfixt"). */
+    overflow-x: clip;
   }
   h1,
   h2,
