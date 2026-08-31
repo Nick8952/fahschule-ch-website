@@ -1,8 +1,9 @@
-/* Pfad- und URL-Helfer für den Betrieb unter einem GitLab-Pages-Pfadpräfix. */
+/* Pfad- und URL-Helfer. Standard-Deploy: GitHub Pages unter /fahrschule-ch-website.
+   Die Werte kommen zur Build-Zeit aus next.config.mjs (env), gesetzt in der jeweiligen CI. */
 
-export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "/fahrschule-ch-website";
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://fahrschule-ch-website-f63075.gitlab.io";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://nick8952.github.io/fahrschule-ch-website";
 
 /** Für plain <img>/<video>/<source> und CSS-Hintergründe: stellt das Basispräfix voran.
  *  (next/link und next/image machen das automatisch – dort NICHT verwenden.) */

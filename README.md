@@ -1,18 +1,23 @@
 # Fahrschule CH – Website
 
 Website für **Fahrschule CH – Costa Chatzis**, Zürich (Albisriederplatz).
-Next.js 15 (statischer Export) + Sveltia CMS, deployed auf GitLab Pages.
+Next.js 15 (statischer Export) + Sveltia CMS, deployed auf **GitHub Pages**.
 
-**Live:** https://fahrschule-ch-website-f63075.gitlab.io/
-**Inhalte bearbeiten:** https://fahrschule-ch-website-f63075.gitlab.io/admin/ → siehe [HANDOVER.md](HANDOVER.md)
+**Live:** https://nick8952.github.io/fahrschule-ch-website/
+**Inhalte bearbeiten:** https://nick8952.github.io/fahrschule-ch-website/admin/ → siehe [HANDOVER.md](HANDOVER.md)
+
+> GitLab läuft als Spiegel parallel weiter (Demo-Link
+> `https://fahrschule-ch-website-f63075.gitlab.io/`). Primär ist GitHub.
 
 ## Technik
 
 - **Next.js 15** App Router, TypeScript, Tailwind CSS, Framer Motion – `output: "export"`
-- Läuft auf der GitLab-Pages-Unique-Domain (Root, kein Pfadpräfix). `next.config.mjs`
-  `BASE_PATH = ""`; bei eigener Domain nur `SITE_ORIGIN` anpassen (siehe HANDOVER.md).
-- **Sveltia CMS** unter `public/admin/` – Git-basiert, Login via GitLab-OAuth (PKCE),
-  CMS-Bundle vendored (`public/admin/sveltia-cms.js`, Version 0.201.1).
+- Deploy-Ziel über Env-Variablen (`SITE_ORIGIN`, `BASE_PATH`), in der jeweiligen CI gesetzt.
+  Aktuell GitHub Pages unter Pfadpräfix `/fahrschule-ch-website`. Bei eigener Domain:
+  `SITE_ORIGIN=https://fahrschule-ch.ch`, `BASE_PATH=""` (siehe HANDOVER.md 6).
+- **Sveltia CMS** unter `public/admin/` – Git-basiert (GitHub-Backend), Login über
+  `sveltia-cms-auth` (Cloudflare Worker als OAuth-Proxy), CMS-Bundle vendored
+  (`public/admin/sveltia-cms.js`, Version 0.201.1).
 - **Formulare** via Web3Forms (native POST → `/danke/`).
 - **Karte** OpenStreetMap-Embed; **VKU-Kalender** asa.ch-iframe (Consent-Load).
 - SEO: Metadata API, `sitemap.xml`, `robots.txt`, `schema.org/DrivingSchool`.
@@ -45,8 +50,11 @@ npm run build      # statischer Export nach out/
 
 ## Deployment
 
-GitLab CI (`.gitlab-ci.yml`): `npm ci && npm run build && mv out public`. Läuft bei jedem
-Push auf `main` (auch CMS-Commits) → ~1–2 Min später live.
+- **GitHub Pages (primär):** `.github/workflows/deploy.yml` – GitHub Actions bei jedem Push
+  auf `main` (auch CMS-Commits). Pages-Quelle: Settings → Pages → Source: GitHub Actions.
+- **GitLab Pages (Spiegel):** `.gitlab-ci.yml` – gleicher Build, hält den alten Demo-Link aktiv.
+- Beide Remotes pushen: `git push origin main && git push gitlab main`
+  (`origin` = GitHub, `gitlab` = GitLab).
 
 ## Bekannte inhaltliche Punkte
 

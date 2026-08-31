@@ -1,7 +1,12 @@
-# GitLab Pages – baut den Next.js-Static-Export und veröffentlicht ihn.
-# Nach jedem Push auf den Default-Branch (auch CMS-Commits) läuft dieser Job.
+# GitLab Pages – Spiegel-Deploy (primär ist GitHub Pages, siehe .github/workflows/deploy.yml).
+# Hält den bestehenden Demo-Link fahrschule-ch-website-f63075.gitlab.io am Leben.
+# Läuft nach jedem Push auf den Default-Branch (auch CMS-Commits).
 
 image: node:22-alpine
+
+variables:
+  SITE_ORIGIN: "https://fahrschule-ch-website-f63075.gitlab.io"
+  BASE_PATH: ""
 
 pages:
   stage: deploy
