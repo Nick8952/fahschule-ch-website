@@ -40,7 +40,8 @@ Ohne (a) kann sich niemand ins CMS einloggen; ohne (b) kommen keine Formular-Anf
 
 ## 2. Inhalte bearbeiten (für Costa / den Kunden)
 
-1. **`https://fahrschule-ch.ch/admin/`** aufrufen
+1. **`https://nick8952.github.io/fahrschule-ch-website/admin/`** aufrufen
+   (nach Go-Live: `https://fahrschule-ch.ch/admin/`)
 2. **„Sign in with GitHub"** → mit dem GitHub-Konto anmelden, das Schreibzugriff aufs Repo hat
 3. Links eine Sammlung wählen, Felder ausfüllen, oben rechts **„Publish"**
 4. Nach ~1–2 Minuten ist die Änderung live (GitHub Actions baut die Seite automatisch neu)
@@ -97,19 +98,21 @@ kontrollieren, Callback-URL der OAuth-App = `<worker-url>/callback`. Alternativ 
 ## 6. GitHub Pages + Domain (fahrschule-ch.ch)
 
 **Deploy** läuft über GitHub Actions (`.github/workflows/deploy.yml`) bei jedem Push auf `main`.
+Pages-Quelle: **Settings → Pages → Source: GitHub Actions** (einmalig, ist gesetzt).
 
-Einmalige Einrichtung:
-1. GitHub → Repo → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. **Settings → Pages → Custom domain:** `fahrschule-ch.ch` eintragen (legt/prüft `public/CNAME`).
-3. **DNS** beim Domain-Provider von `fahrschule-ch.ch` setzen:
+**Aktuell:** Seite läuft unter `https://nick8952.github.io/fahrschule-ch-website/`.
+Im Workflow: `SITE_ORIGIN=https://nick8952.github.io`, `BASE_PATH=/fahrschule-ch-website`.
+
+**Beim Go-Live auf die eigene Domain `fahrschule-ch.ch`** (Kunde muss DNS umstellen):
+1. Datei `public/CNAME` mit Inhalt `fahrschule-ch.ch` anlegen.
+2. Im Workflow `SITE_ORIGIN: https://fahrschule-ch.ch` und `BASE_PATH: ""` setzen.
+3. In `public/admin/config.yml` `site_url` / `display_url` / `logo_url` auf `https://fahrschule-ch.ch` ändern.
+4. GitHub → **Settings → Pages → Custom domain:** `fahrschule-ch.ch`.
+5. **DNS** beim Domain-Provider:
    - Apex `@` → **A** auf `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-     (oder **ALIAS/ANAME** auf `nick8952.github.io`)
    - `www` → **CNAME** auf `nick8952.github.io`
-4. Nach DNS-Propagation in **Settings → Pages** „Enforce HTTPS" aktivieren.
-
-Solange die DNS noch nicht steht, ist die Seite unter
-`https://nick8952.github.io/fahrschule-ch-website/` erreichbar – dann aber im Workflow
-`SITE_ORIGIN`/`BASE_PATH` auf die Unterpfad-Werte stellen (Kommentar in der Datei).
+6. Nach DNS-Propagation in **Settings → Pages** „Enforce HTTPS" aktivieren.
+7. GitHub-OAuth-App (Abschnitt 1a): Homepage-URL auf `https://fahrschule-ch.ch` anpassen.
 
 **GitLab bleibt parallel bestehen** (`.gitlab-ci.yml` + Remote `origin`) – der bestehende
 Demo-Link `https://fahrschule-ch-website-f63075.gitlab.io/` funktioniert unverändert weiter.

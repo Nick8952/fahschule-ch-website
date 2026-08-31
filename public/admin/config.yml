@@ -10,9 +10,9 @@ backend:
   base_url: https://REPLACE-WITH-SVELTIA-AUTH-WORKER-URL
 
 publish_mode: simple
-site_url: https://fahrschule-ch.ch
-display_url: https://fahrschule-ch.ch
-logo_url: https://fahrschule-ch.ch/img/logo.png
+site_url: https://nick8952.github.io/fahrschule-ch-website
+display_url: https://nick8952.github.io/fahrschule-ch-website
+logo_url: https://nick8952.github.io/fahrschule-ch-website/img/logo.png
 
 media_folder: "public/img/uploads"
 public_folder: "/img/uploads"
