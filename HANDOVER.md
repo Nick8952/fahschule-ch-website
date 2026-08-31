@@ -113,7 +113,5 @@ Workflow-Env: `SITE_ORIGIN=https://nick8952.github.io`, `BASE_PATH=/fahrschule-c
    - Apex → **A** auf `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
 6. Nach Propagation „Enforce HTTPS" aktivieren; GitHub-OAuth-App (1a) Homepage-URL anpassen.
 
-**GitLab läuft als Spiegel parallel weiter** (`.gitlab-ci.yml` + Remote `gitlab`) – der bestehende
-Demo-Link `https://fahrschule-ch-website-f63075.gitlab.io/` funktioniert unverändert weiter.
-Primär ist GitHub: `origin` = GitHub, `gitlab` = GitLab.
-Push auf beide: `git push origin main && git push gitlab main`.
+Deploy/Hosting läuft ausschliesslich über GitHub. Remote `origin` = GitHub.
+Push: `git push origin main`.

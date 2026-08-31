@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 
-// Deploy-Ziel wird über Umgebungsvariablen gesteuert (in der jeweiligen CI gesetzt):
-//   - GitHub Pages (primär):   SITE_ORIGIN + BASE_PATH in .github/workflows/deploy.yml
-//   - GitLab Pages (Spiegel):  SITE_ORIGIN + BASE_PATH in .gitlab-ci.yml
+// Deploy-Ziel wird über Umgebungsvariablen gesteuert:
+//   - GitHub Pages (Standard): SITE_ORIGIN + BASE_PATH in .github/workflows/deploy.yml
 //   - eigene Domain (Go-Live): SITE_ORIGIN=https://fahrschule-ch.ch, BASE_PATH="" (siehe HANDOVER.md 6)
 // Lokal ohne Variablen => GitHub-Pages-Default (aktuelle Live-URL).
 const BASE_PATH = process.env.BASE_PATH ?? "/fahrschule-ch-website";

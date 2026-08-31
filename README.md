@@ -6,13 +6,10 @@ Next.js 15 (statischer Export) + Sveltia CMS, deployed auf **GitHub Pages**.
 **Live:** https://nick8952.github.io/fahrschule-ch-website/
 **Inhalte bearbeiten:** https://nick8952.github.io/fahrschule-ch-website/admin/ → siehe [HANDOVER.md](HANDOVER.md)
 
-> GitLab läuft als Spiegel parallel weiter (Demo-Link
-> `https://fahrschule-ch-website-f63075.gitlab.io/`). Primär ist GitHub.
-
 ## Technik
 
 - **Next.js 15** App Router, TypeScript, Tailwind CSS, Framer Motion – `output: "export"`
-- Deploy-Ziel über Env-Variablen (`SITE_ORIGIN`, `BASE_PATH`), in der jeweiligen CI gesetzt.
+- Deploy-Ziel über Env-Variablen (`SITE_ORIGIN`, `BASE_PATH`), im GitHub-Actions-Workflow gesetzt.
   Aktuell GitHub Pages unter Pfadpräfix `/fahrschule-ch-website`. Bei eigener Domain:
   `SITE_ORIGIN=https://fahrschule-ch.ch`, `BASE_PATH=""` (siehe HANDOVER.md 6).
 - **Sveltia CMS** unter `public/admin/` – Git-basiert (GitHub-Backend), Login über
@@ -50,11 +47,9 @@ npm run build      # statischer Export nach out/
 
 ## Deployment
 
-- **GitHub Pages (primär):** `.github/workflows/deploy.yml` – GitHub Actions bei jedem Push
-  auf `main` (auch CMS-Commits). Pages-Quelle: Settings → Pages → Source: GitHub Actions.
-- **GitLab Pages (Spiegel):** `.gitlab-ci.yml` – gleicher Build, hält den alten Demo-Link aktiv.
-- Beide Remotes pushen: `git push origin main && git push gitlab main`
-  (`origin` = GitHub, `gitlab` = GitLab).
+**GitHub Pages** über GitHub Actions (`.github/workflows/deploy.yml`) bei jedem Push auf `main`
+(auch CMS-Commits). Pages-Quelle: Settings → Pages → Source: GitHub Actions.
+Push: `git push origin main` (`origin` = GitHub).
 
 ## Bekannte inhaltliche Punkte
 
