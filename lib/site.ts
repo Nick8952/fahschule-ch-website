@@ -1,9 +1,9 @@
-/* Pfad- und URL-Helfer. Standard-Deploy: GitHub Pages unter /fahrschule-ch-website.
+/* Pfad- und URL-Helfer. Standard-Deploy: GitHub Pages unter /fahschule-ch_demo.
    Die Werte kommen zur Build-Zeit aus next.config.mjs (env), gesetzt in der jeweiligen CI. */
 
-export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "/fahrschule-ch-website";
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "/fahschule-ch_demo";
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://nick8952.github.io/fahrschule-ch-website";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://nick8952.github.io/fahschule-ch_demo";
 
 /** Für plain <img>/<video>/<source> und CSS-Hintergründe: stellt das Basispräfix voran.
  *  (next/link und next/image machen das automatisch – dort NICHT verwenden.) */

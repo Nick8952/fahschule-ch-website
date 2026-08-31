@@ -3,14 +3,14 @@
 Website für **Fahrschule CH – Costa Chatzis**, Zürich (Albisriederplatz).
 Next.js 15 (statischer Export) + Sveltia CMS, deployed auf **GitHub Pages**.
 
-**Live:** https://nick8952.github.io/fahrschule-ch-website/
-**Inhalte bearbeiten:** https://nick8952.github.io/fahrschule-ch-website/admin/ → siehe [HANDOVER.md](HANDOVER.md)
+**Live:** https://nick8952.github.io/fahschule-ch_demo/
+**Inhalte bearbeiten:** https://nick8952.github.io/fahschule-ch_demo/admin/ → siehe [HANDOVER.md](HANDOVER.md)
 
 ## Technik
 
 - **Next.js 15** App Router, TypeScript, Tailwind CSS, Framer Motion – `output: "export"`
 - Deploy-Ziel über Env-Variablen (`SITE_ORIGIN`, `BASE_PATH`), im GitHub-Actions-Workflow gesetzt.
-  Aktuell GitHub Pages unter Pfadpräfix `/fahrschule-ch-website`. Bei eigener Domain:
+  Aktuell GitHub Pages unter Pfadpräfix `/fahschule-ch_demo`. Bei eigener Domain:
   `SITE_ORIGIN=https://fahrschule-ch.ch`, `BASE_PATH=""` (siehe HANDOVER.md 6).
 - **Sveltia CMS** unter `public/admin/` – Git-basiert (GitHub-Backend), Login über
   `sveltia-cms-auth` (Cloudflare Worker als OAuth-Proxy), CMS-Bundle vendored
