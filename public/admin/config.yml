@@ -1,17 +1,18 @@
 # Sveltia CMS – Konfiguration der Inhaltsbearbeitung für Fahrschule CH.
-# Nach dem Anlegen der GitLab-OAuth-App die "app_id" unten eintragen (siehe HANDOVER.md).
+# Backend: GitHub. Login läuft über einen OAuth-Proxy (Cloudflare Worker "sveltia-cms-auth").
+# Vor dem ersten Login: GitHub-OAuth-App anlegen + Worker deployen, dann base_url unten setzen
+# (siehe HANDOVER.md, Abschnitt 1a).
 
 backend:
-  name: gitlab
-  repo: Nick-tbz/fahrschule-ch-website
+  name: github
+  repo: Nick8952/fahrschule-ch-website
   branch: main
-  auth_type: pkce
-  app_id: "eba34f7abf61560ecba893ef35bbc8c4e501f951276870d5732dee53d05793e8"
+  base_url: https://REPLACE-WITH-SVELTIA-AUTH-WORKER-URL
 
 publish_mode: simple
-site_url: https://fahrschule-ch-website-f63075.gitlab.io
-display_url: https://fahrschule-ch-website-f63075.gitlab.io
-logo_url: https://fahrschule-ch-website-f63075.gitlab.io/img/logo.png
+site_url: https://fahrschule-ch.ch
+display_url: https://fahrschule-ch.ch
+logo_url: https://fahrschule-ch.ch/img/logo.png
 
 media_folder: "public/img/uploads"
 public_folder: "/img/uploads"

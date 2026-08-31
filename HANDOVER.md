@@ -1,19 +1,31 @@
-# Übergabe & Bedienung
+ccc# Übergabe & Bedienung
 
 ## 1. Einmalige Einrichtung (durch Nick, vor der Übergabe)
 
-### a) GitLab-OAuth-App für das CMS-Login
+### a) GitHub-OAuth-App + Auth-Worker für das CMS-Login
 
-Es gibt dafür keine API – einmal von Hand in GitLab:
+Sveltia CMS mit GitHub braucht einen kleinen OAuth-Proxy. Einmalig:
 
-1. `https://gitlab.com/-/user_settings/applications` öffnen → **Add new application**
-2. **Name:** `Fahrschule CH – Website CMS`
-3. **Redirect URI:** `https://fahrschule-ch-website-f63075.gitlab.io/admin/`
-   (exakt so, mit Schrägstrich am Ende)
-4. **Confidential:** Häkchen **entfernen**
-5. **Scopes:** nur **`api`**
-6. **Save application** → die **Application ID** kopieren
-7. In `public/admin/config.yml` bei `backend.app_id` einsetzen, committen/pushen.
+**1. GitHub-OAuth-App anlegen**
+1. `https://github.com/settings/developers` → **OAuth Apps** → **New OAuth App**
+2. **Application name:** `Fahrschule CH – Website CMS`
+3. **Homepage URL:** `https://fahrschule-ch.ch`
+4. **Authorization callback URL:** `https://<worker-subdomain>.workers.dev/callback`
+   (URL aus Schritt 2 – erst Worker deployen, dann hier eintragen; danach kommt eine
+   **Client ID** + man erzeugt ein **Client Secret**)
+
+**2. Auth-Worker deployen** (kostenlos, Cloudflare)
+1. `https://github.com/sveltia/sveltia-cms-auth` → Button **Deploy to Cloudflare**
+2. Nach dem Deploy die Worker-URL notieren (z. B. `https://sveltia-cms-auth.<name>.workers.dev`)
+3. Im Worker unter **Settings → Variables** setzen:
+   - `GITHUB_CLIENT_ID` = Client ID aus Schritt 1
+   - `GITHUB_CLIENT_SECRET` = Client Secret aus Schritt 1
+   - `ALLOWED_DOMAINS` = `fahrschule-ch.ch,nick8952.github.io`
+4. Callback-URL der OAuth-App auf `https://<worker-url>/callback` setzen (Schritt 1.4)
+5. In `public/admin/config.yml` bei `backend.base_url` die Worker-URL eintragen, committen/pushen.
+
+Der/die Kunde/Kundin braucht außerdem **Schreibzugriff (Write)** auf das GitHub-Repo
+`Nick8952/fahrschule-ch-website`.
 
 ### b) Web3Forms-Schlüssel für die Formulare
 
@@ -28,10 +40,10 @@ Ohne (a) kann sich niemand ins CMS einloggen; ohne (b) kommen keine Formular-Anf
 
 ## 2. Inhalte bearbeiten (für Costa / den Kunden)
 
-1. **`https://fahrschule-ch-website-f63075.gitlab.io/admin/`** aufrufen
-2. **„Sign in with GitLab"** → mit dem GitLab-Konto anmelden, das Zugriff auf das Projekt hat
+1. **`https://fahrschule-ch.ch/admin/`** aufrufen
+2. **„Sign in with GitHub"** → mit dem GitHub-Konto anmelden, das Schreibzugriff aufs Repo hat
 3. Links eine Sammlung wählen, Felder ausfüllen, oben rechts **„Publish"**
-4. Nach ~1–2 Minuten ist die Änderung live (GitLab baut die Seite automatisch neu)
+4. Nach ~1–2 Minuten ist die Änderung live (GitHub Actions baut die Seite automatisch neu)
 
 **Was wo bearbeitbar ist:**
 
@@ -54,22 +66,17 @@ Sammlung ergänzen.
 
 1. **Demo-Modus aus:** CMS → „Firmendaten & Einstellungen" → `demo` auf **AUS** → Publish.
    (Entfernt `noindex` und die `robots.txt`-Sperre.)
-2. **Eigene Domain** (`fahrschule-ch.ch`): GitLab → Projekt → **Deploy → Pages → New domain**,
-   DNS setzen (CNAME/ALIAS + Verifizierungs-TXT). Danach:
-   - `next.config.mjs`: `BASE_PATH = ""`, `SITE_ORIGIN = "https://www.fahrschule-ch.ch"`
-   - `public/admin/config.yml`: `site_url` / `display_url` / `logo_url` anpassen
-   - GitLab-OAuth-App: Redirect URI auf `https://www.fahrschule-ch.ch/admin/` ändern
-   - Web3Forms: nichts nötig (Redirect-URL wird aus `SITE_ORIGIN` gebaut).
+2. **Eigene Domain** (`fahrschule-ch.ch`) auf GitHub Pages – siehe Abschnitt 6.
 
 ---
 
 ## 4. Projekt an den Kunden übergeben (Nick raus)
 
-1. GitLab → Projekt → **Settings → General → Advanced → Transfer project** in den
-   Namespace/die Gruppe des Kunden (oder Kunde importiert das Repo).
-2. Neue **GitLab-OAuth-App** im Kundenkonto anlegen (Schritt 1a), `config.yml` `repo` + `app_id`
-   anpassen.
-3. Kunde bekommt **Maintainer**-Rechte im Projekt (für CMS-Schreibzugriff).
+1. GitHub → Repo → **Settings → General → Danger Zone → Transfer ownership** an das
+   Kundenkonto (oder Kunde forkt/importiert das Repo).
+2. Neue **GitHub-OAuth-App** im Kundenkonto anlegen (Schritt 1a), Worker-Variablen +
+   `config.yml` `repo` / `base_url` anpassen.
+3. Kunde bekommt **Write**-Rechte aufs Repo (für CMS-Schreibzugriff).
 4. **Web3Forms-Key** ist an `info@fahrschule-ch.ch` gebunden – bleibt gültig, kann im
    Web3Forms-Dashboard rotiert werden.
 5. CMS-Bundle aktualisieren: neue Datei von
@@ -80,8 +87,30 @@ Sammlung ergänzen.
 
 ## 5. Fallback, falls das CMS-Login nicht klappt
 
-Sveltia CMS nutzt den GitLab-PKCE-Flow (kein Server). Wenn GitLab das irgendwann nicht mehr
-unterstützt: auf **Decap CMS** wechseln (`config.yml` ist kompatibel) und einen
-`sveltia-cms-auth`- bzw. `netlify-cms-oauth-provider`-Worker (kostenlos, Cloudflare Workers)
-als OAuth-Proxy davorschalten. `backend` dann `name: git-gateway` bzw. `name: gitlab` mit
-`base_url: <worker-url>`.
+Sveltia CMS läuft hier über den GitHub-OAuth-Proxy (`sveltia-cms-auth`, Cloudflare Worker).
+Wenn das Login klemmt: Worker-Logs prüfen, `ALLOWED_DOMAINS` / Client-ID / Secret
+kontrollieren, Callback-URL der OAuth-App = `<worker-url>/callback`. Alternativ auf
+**Decap CMS** wechseln (`config.yml` weitgehend kompatibel, gleicher Worker als OAuth-Provider).
+
+---
+
+## 6. GitHub Pages + Domain (fahrschule-ch.ch)
+
+**Deploy** läuft über GitHub Actions (`.github/workflows/deploy.yml`) bei jedem Push auf `main`.
+
+Einmalige Einrichtung:
+1. GitHub → Repo → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. **Settings → Pages → Custom domain:** `fahrschule-ch.ch` eintragen (legt/prüft `public/CNAME`).
+3. **DNS** beim Domain-Provider von `fahrschule-ch.ch` setzen:
+   - Apex `@` → **A** auf `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+     (oder **ALIAS/ANAME** auf `nick8952.github.io`)
+   - `www` → **CNAME** auf `nick8952.github.io`
+4. Nach DNS-Propagation in **Settings → Pages** „Enforce HTTPS" aktivieren.
+
+Solange die DNS noch nicht steht, ist die Seite unter
+`https://nick8952.github.io/fahrschule-ch-website/` erreichbar – dann aber im Workflow
+`SITE_ORIGIN`/`BASE_PATH` auf die Unterpfad-Werte stellen (Kommentar in der Datei).
+
+**GitLab bleibt parallel bestehen** (`.gitlab-ci.yml` + Remote `origin`) – der bestehende
+Demo-Link `https://fahrschule-ch-website-f63075.gitlab.io/` funktioniert unverändert weiter.
+Push auf beide: `git push origin main && git push github main`.

@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
 
-// Die Seite läuft auf der GitLab-Pages-Unique-Domain (Root, kein Pfadpräfix):
-//   https://fahrschule-ch-website-f63075.gitlab.io/
-// Bei einer eigenen Domain (fahrschule-ch.ch) nur SITE_ORIGIN anpassen.
-const BASE_PATH = "";
-const SITE_ORIGIN = "https://fahrschule-ch-website-f63075.gitlab.io";
+// Deploy-Ziel wird über Umgebungsvariablen gesteuert (in der jeweiligen CI gesetzt):
+//   - GitHub Pages / eigene Domain:  SITE_ORIGIN=https://fahrschule-ch.ch          (BASE_PATH="")
+//   - GitLab-Pages-Unique-Domain:    Default unten (Root, kein Pfadpräfix)
+// Lokal ohne Variablen => GitLab-Default.
+const BASE_PATH = process.env.BASE_PATH ?? "";
+const SITE_ORIGIN =
+  process.env.SITE_ORIGIN ?? "https://fahrschule-ch-website-f63075.gitlab.io";
 
 const nextConfig = {
   output: "export",
