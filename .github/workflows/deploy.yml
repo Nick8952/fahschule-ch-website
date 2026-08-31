@@ -20,13 +20,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Aktuell: Betrieb unter dem GitHub-Pages-Unterpfad.
-      # Beim Go-Live auf eigene Domain: public/CNAME anlegen (= fahrschule-ch.ch),
-      # Custom Domain in Settings->Pages setzen, dann hier:
-      #   SITE_ORIGIN: https://fahrschule-ch.ch
-      #   BASE_PATH: ""
-      SITE_ORIGIN: https://nick8952.github.io
-      BASE_PATH: /fahrschule-ch-website
+      # Demo-Domain (Subdomain, Root-Betrieb, siehe public/CNAME).
+      # Beim Go-Live auf die Hauptdomain: SITE_ORIGIN=https://fahrschule-ch.ch, CNAME + config.yml anpassen.
+      SITE_ORIGIN: https://demo.fahrschule-ch.ch
+      BASE_PATH: ""
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
