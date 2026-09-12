@@ -7,6 +7,7 @@ import { site, reasons, pages } from "@/lib/data";
 import { asset } from "@/lib/site";
 import { DrivingSchoolJsonLd } from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
+import CountUp from "@/components/CountUp";
 import PriceModel from "@/components/PriceModel";
 import ModuleLadder from "@/components/ModuleLadder";
 import Testimonials from "@/components/Testimonials";
@@ -89,9 +90,11 @@ export default function HomePage() {
               [site.stats.firstTryPass, site.stats.firstTryPassLabel],
               ["4", "Unterrichtssprachen"],
               ...reasons.trustStrip.slice(0, 1).map((t) => ["—", t]),
-            ].map(([n, l]) => (
+            ].map(([n, l], i) => (
               <span key={String(l)} className="flex items-baseline gap-2">
-                <b className="font-display text-step-1 font-extrabold text-signal">{n}</b>
+                <b className="font-display text-step-1 font-extrabold tabular-nums text-signal">
+                  <CountUp value={n} delay={i * 0.12} />
+                </b>
                 {l}
               </span>
             ))}
