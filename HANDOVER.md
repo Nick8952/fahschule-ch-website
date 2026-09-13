@@ -1,117 +1,181 @@
-# Übergabe & Bedienung
+# Übergabe – Website Fahrschule CH (Costa Chatzis)
 
-## 1. Einmalige Einrichtung (durch Nick, vor der Übergabe)
+Diese Anleitung richtet sich an zwei Personen:
 
-### a) GitHub-OAuth-App + Auth-Worker für das CMS-Login
-
-Sveltia CMS mit GitHub braucht einen kleinen OAuth-Proxy. Einmalig:
-
-**1. GitHub-OAuth-App anlegen**
-1. `https://github.com/settings/developers` → **OAuth Apps** → **New OAuth App**
-2. **Application name:** `Fahrschule CH – Website CMS`
-3. **Homepage URL:** `https://fahrschule-ch.ch`
-4. **Authorization callback URL:** `https://<worker-subdomain>.workers.dev/callback`
-   (URL aus Schritt 2 – erst Worker deployen, dann hier eintragen; danach kommt eine
-   **Client ID** + man erzeugt ein **Client Secret**)
-
-**2. Auth-Worker deployen** (kostenlos, Cloudflare)
-1. `https://github.com/sveltia/sveltia-cms-auth` → Button **Deploy to Cloudflare**
-2. Nach dem Deploy die Worker-URL notieren (z. B. `https://sveltia-cms-auth.<name>.workers.dev`)
-3. Im Worker unter **Settings → Variables** setzen:
-   - `GITHUB_CLIENT_ID` = Client ID aus Schritt 1
-   - `GITHUB_CLIENT_SECRET` = Client Secret aus Schritt 1
-   - `ALLOWED_DOMAINS` = `fahrschule-ch.ch,nick8952.github.io`
-4. Callback-URL der OAuth-App auf `https://<worker-url>/callback` setzen (Schritt 1.4)
-5. In `public/admin/config.yml` bei `backend.base_url` die Worker-URL eintragen, committen/pushen.
-
-Der/die Kunde/Kundin braucht außerdem **Schreibzugriff (Write)** auf das GitHub-Repo
-`Nick8952/fahschule-ch-website`.
-
-### b) Web3Forms-Schlüssel für die Formulare
-
-1. `https://web3forms.com` → E-Mail `info@fahrschule-ch.ch` eingeben → **Create Access Key**
-2. Den Schlüssel aus der Bestätigungsmail kopieren
-3. In `data/site.json` bei `web3formsKey` einsetzen (oder später im CMS unter
-   „Firmendaten & Einstellungen") → committen/pushen.
-
-Ohne (a) kann sich niemand ins CMS einloggen; ohne (b) kommen keine Formular-Anfragen an.
+- **Abschnitt 1–3** an denjenigen, der die Website technisch einrichtet (einmalig).
+- **Abschnitt 4–6** an Costa Chatzis, der die Inhalte danach selbst pflegt.
 
 ---
 
-## 2. Inhalte bearbeiten (für Costa / den Kunden)
+## Worauf die Website läuft
 
-1. **`https://nick8952.github.io/fahschule-ch-website/admin/`** aufrufen
-   (nach Go-Live auf eigene Domain entsprechend `https://<domain>/admin/`)
-2. **„Sign in with GitHub"** → mit dem GitHub-Konto anmelden, das Schreibzugriff aufs Repo hat
-3. Links eine Sammlung wählen, Felder ausfüllen, oben rechts **„Publish"**
-4. Nach ~1–2 Minuten ist die Änderung live (GitHub Actions baut die Seite automatisch neu)
+| Teil | Dienst | Wofür |
+|---|---|---|
+| Website | **Vercel** | Liefert die Seiten aus, weltweit und verschlüsselt |
+| Programmcode | **GitHub** | Speichert den Bauplan der Website |
+| Inhalte | **Sanity** | Texte, Preise, Kurse, VKU-Termine – das, was bearbeitet wird |
+| Kontaktformular | **Web3Forms** | Leitet Anfragen an die E-Mail-Adresse weiter |
 
-**Was wo bearbeitbar ist:**
+Es gibt **keinen eigenen Server und keine Datenbank**, die gewartet werden müssten.
 
-| Im CMS unter … | ändert … |
+---
+
+## Auf wessen Konten? (bitte zuerst lesen)
+
+Die Konten wandern **erst nach der Zusage** zu Costa. Vorher läuft alles auf den
+Konten des Erstellers.
+
+| | Vor der Zusage (Demo) | Nach der Zusage |
+|---|---|---|
+| GitHub | Ersteller | auf Costas Konto übertragen |
+| Vercel | Ersteller | auf Costas Konto übertragen |
+| Sanity | Ersteller | Costa als Administrator einladen, dann Projekt übertragen |
+| Web3Forms | **eigene** E-Mail, damit das Formular vorführbar ist | Costa holt den Schlüssel auf `info@fahrschule-ch.ch` |
+
+Bei Sanity gilt: **Anmeldung ist nicht dasselbe wie Inhaberschaft.** Costa kann
+längst mit seiner E-Mail Inhalte bearbeiten, während das Projekt noch dem
+Ersteller gehört. Die Übertragung ist der letzte Schritt, nicht der erste.
+
+---
+
+## 1. Sanity-Projekt
+
+**Bereits angelegt:** Projekt-ID `9py9mmpz`, Dataset `production`, Sichtbarkeit
+**Public** (die Website braucht dadurch kein Lese-Token).
+
+Falls neu aufgesetzt werden muss (z. B. eigenes Projekt für einen anderen Kunden):
+
+1. Auf <https://sanity.io> anmelden — vor der Zusage mit der **eigenen**
+   E-Mail-Adresse, nicht mit der des Kunden.
+2. **Create new project** → Dataset `production`, Sichtbarkeit **Public**.
+3. Unter **API → Tokens** einen Token mit der Rolle **Editor** erstellen (nur
+   für `npm run seed`, nur einmal sichtbar — sofort kopieren).
+4. Unter **API → CORS origins** eintragen (jeweils mit *Allow credentials*):
+   - `http://localhost:3000`
+   - die Vercel-Adresse, z. B. `https://fahschule-ch-website.vercel.app`
+   - `https://fahrschule-ch.ch`, sobald die Domain verbunden ist
+
+**Für das bestehende Projekt `9py9mmpz` noch zu erledigen:** CORS-Eintrag für die
+tatsächliche Vercel-Adresse ergänzen, sobald das Projekt in Vercel importiert ist
+(Schritt 3).
+
+## 2. Inhalte einspielen
+
+Die Inhalte liegen bereits in Sanity (heute per `npm run seed` eingespielt). Bei
+Bedarf erneut möglich — das Skript überschreibt anhand fester Dokument-Namen,
+statt zu duplizieren:
+
+```bash
+cp .env.example .env.local   # Werte eintragen, siehe unten
+npm run seed -- --dry-run    # zeigt nur an, was passieren würde
+npm run seed                 # schreibt/überschreibt die Dokumente
+npm run dev                  # localhost:3000/studio zum Prüfen
+```
+
+Für `npm run seed` wird zusätzlich `SANITY_API_WRITE_TOKEN` gebraucht (Editor-Rolle,
+siehe Schritt 1.3) — nur lokal, nie in Vercel eintragen.
+
+## 3. Vercel verbinden
+
+1. Auf <https://vercel.com> mit dem GitHub-Konto anmelden.
+2. **Add New → Project** → `Nick8952/fahschule-ch-website` importieren.
+3. Unter **Settings → Environment Variables** eintragen:
+
+   | Name | Wert |
+   |---|---|
+   | `NEXT_PUBLIC_SANITY_PROJECT_ID` | `9py9mmpz` |
+   | `NEXT_PUBLIC_SANITY_DATASET` | `production` |
+   | `NEXT_PUBLIC_SANITY_API_VERSION` | `2024-10-01` |
+   | `NEXT_PUBLIC_SITE_URL` | die endgültige Adresse, z. B. `https://fahrschule-ch.ch` |
+   | `SANITY_REVALIDATE_SECRET` | ein selbst ausgedachtes Passwort |
+
+   Den **Schreib**-Token (`SANITY_API_WRITE_TOKEN`) hier **nicht** eintragen.
+
+4. **Deploy** drücken. Ab jetzt baut Vercel bei jeder Code-Änderung automatisch neu.
+5. In Sanity unter **API → Webhooks** einen Webhook anlegen:
+
+   | Feld | Wert |
+   |---|---|
+   | URL | `https://<deine-adresse>/api/revalidate` |
+   | Dataset | `production` |
+   | Trigger on | Create, Update, Delete |
+   | Secret | derselbe Wert wie `SANITY_REVALIDATE_SECRET` |
+
+   Ohne diesen Webhook dauert es bis zu einer Minute, bis eine Änderung sichtbar
+   wird (ISR-Intervall). Mit ihm sind es wenige Sekunden.
+
+---
+
+## 4. Inhalte bearbeiten (für Costa)
+
+**Adresse:** `https://<deine-website>/studio`
+**Anmeldung:** mit der E-Mail-Adresse, an die die Einladung ging. Kein
+zusätzliches Passwort, keine Software zum Installieren. Geht auch am Handy.
+
+Links in der Leiste stehen die Bereiche, oben nach Häufigkeit sortiert:
+
+| Bereich | Was drin steht |
 |---|---|
-| Firmendaten & Einstellungen | Adresse, Telefon, E-Mail, Social, Kennzahlen, **Demo-Modus**, **Web3Forms-Key** |
-| Preise | Preistabelle, Pakete/Rechner, Angebotstext |
-| Kurse | Theoriekurs, VKU DE/EN, **VKU-Termine** (buchbare Termine landen im Anmeldeformular) |
-| Weitere Inhalte | Bewertungen, „Der Weg", Lernmodule, „Warum/Vorteile", Menü |
-| Seiten-Texte | SEO-Titel/-Beschreibung, Hero-Texte, Freitextblöcke je Seite |
-| Rechtstexte | AGB, Impressum, Datenschutz |
+| **Preise** | Preistabelle, Pakete/Rechner-Werte, Angebotstext |
+| **Kurse & VKU-Termine** | Theoriekurs, Nothelferkurs, VKU Deutsch/Englisch, buchbare Termine |
+| **Der Weg** | Die Schritte zum Führerschein |
+| **Lernmodule** | Die Kompetenzleiter |
+| **Bewertungen** | Kundenstimmen |
+| **Gründe & Vorteile** | „Warum Fahrschule CH", Vorteile-Liste |
+| **Seitentexte** | Überschriften/Einleitungen je Seite, SEO-Texte |
+| **Seiten-Kacheln & Listen** | Karten/Listen auf den Unterseiten |
+| **Grundeinstellungen** | Adresse, Telefon, E-Mail, Kennzahlen, Web3Forms-Schlüssel, Demo-Modus |
+| **Navigation** | Menüpunkte oben und in der Fusszeile |
+| **Rechtstexte** | AGB, Impressum, Datenschutz |
 
-**Bilder tauschen:** im jeweiligen Feld „Vorschaubild" hochladen. Hero-/Sektionsfotos liegen
-in `data/pages.json` bzw. den Seiten – falls diese im CMS gebraucht werden, eine weitere
-Sammlung ergänzen.
+**So läuft eine Änderung ab:**
+
+1. Bereich anklicken, Feld ändern.
+2. Unten rechts auf **Publish** tippen.
+3. Nach ein paar Sekunden neu laden — fertig.
+
+Solange nicht auf *Publish* getippt wurde, ändert sich auf der Website nichts.
+
+**Etwas kaputt gemacht?** Oben rechts im Studio gibt es eine Versionsgeschichte.
+Jeder frühere Stand lässt sich zurückholen.
+
+## 5. Kontaktformular scharfschalten
+
+**Für die Demo** trägt der Ersteller vorübergehend seine eigene Adresse ein.
+
+**Für den Betrieb** muss Costa es selbst machen (Zugriff auf `info@fahrschule-ch.ch`):
+
+1. Auf <https://web3forms.com> die E-Mail-Adresse eintragen.
+2. Den zugeschickten Access Key kopieren.
+3. Im Studio unter **Grundeinstellungen → Web3Forms Zugriffs-Schlüssel** einfügen,
+   **Publish** drücken.
+4. Testanfrage senden und prüfen, ob sie ankommt.
+
+## 6. Vor dem echten Start
+
+- [ ] **Demo-Modus ausschalten** (Grundeinstellungen → `demo` auf AUS). Solange er
+      an ist, wird die Seite bei Google nicht gefunden.
+- [ ] **Web3Forms-Schlüssel auf Costas Adresse umgestellt?**
+- [ ] **Eigene Domain** `fahrschule-ch.ch` in Vercel verbinden, DNS beim aktuellen
+      Provider umstellen, `NEXT_PUBLIC_SITE_URL` in Vercel anpassen.
+- [ ] Sanity-**CORS** um die finale Domain ergänzen.
+- [ ] Auf dem Handy durchklicken: Anrufen, Route öffnen, Formular abschicken.
 
 ---
 
-## 3. Go-Live (wenn der Kunde zusagt)
+## Wenn etwas nicht funktioniert
 
-1. **Demo-Modus aus:** CMS → „Firmendaten & Einstellungen" → `demo` auf **AUS** → Publish.
-   (Entfernt `noindex` und die `robots.txt`-Sperre.)
-2. **Eigene Domain** (`fahrschule-ch.ch`) auf GitHub Pages – siehe Abschnitt 6.
+**Das Studio zeigt «Noch kein Sanity-Projekt verbunden»**
+Die Umgebungsvariablen in Vercel fehlen oder sind falsch geschrieben. Nach dem
+Eintragen muss einmal neu deployt werden.
 
----
+**Anmeldung im Studio schlägt fehl / weisse Seite**
+Die Adresse der Website fehlt in Sanity unter *API → CORS origins*. Dort mit
+*Allow credentials* eintragen.
 
-## 4. Projekt an den Kunden übergeben (Nick raus)
+**Änderung ist nach dem Publish nicht sichtbar**
+Bis zu einer Minute warten und neu laden. Bleibt es dabei, stimmt der Webhook
+nicht (Abschnitt 3, Schritt 5) oder das Secret weicht ab.
 
-1. GitHub → Repo → **Settings → General → Danger Zone → Transfer ownership** an das
-   Kundenkonto (oder Kunde forkt/importiert das Repo).
-2. Neue **GitHub-OAuth-App** im Kundenkonto anlegen (Schritt 1a), Worker-Variablen +
-   `config.yml` `repo` / `base_url` anpassen.
-3. Kunde bekommt **Write**-Rechte aufs Repo (für CMS-Schreibzugriff).
-4. **Web3Forms-Key** ist an `info@fahrschule-ch.ch` gebunden – bleibt gültig, kann im
-   Web3Forms-Dashboard rotiert werden.
-5. CMS-Bundle aktualisieren: neue Datei von
-   `https://unpkg.com/@sveltia/cms@<version>/dist/sveltia-cms.js` nach
-   `public/admin/sveltia-cms.js` legen + committen.
-
----
-
-## 5. Fallback, falls das CMS-Login nicht klappt
-
-Sveltia CMS läuft hier über den GitHub-OAuth-Proxy (`sveltia-cms-auth`, Cloudflare Worker).
-Wenn das Login klemmt: Worker-Logs prüfen, `ALLOWED_DOMAINS` / Client-ID / Secret
-kontrollieren, Callback-URL der OAuth-App = `<worker-url>/callback`. Alternativ auf
-**Decap CMS** wechseln (`config.yml` weitgehend kompatibel, gleicher Worker als OAuth-Provider).
-
----
-
-## 6. GitHub Pages + Domain
-
-**Deploy** läuft über GitHub Actions (`.github/workflows/deploy.yml`) bei jedem Push auf `main`.
-Pages-Quelle: **Settings → Pages → Source: GitHub Actions** (einmalig, ist gesetzt).
-
-**Aktuelle URL (kein DNS nötig):** `https://nick8952.github.io/fahschule-ch-website/`
-Workflow-Env: `SITE_ORIGIN=https://nick8952.github.io`, `BASE_PATH=/fahschule-ch-website`.
-
-**Beim Go-Live auf eine eigene Domain** (z. B. `fahrschule-ch.ch` – Kunde/Domaininhaber muss DNS setzen):
-1. `public/CNAME` mit der Domain anlegen.
-2. Workflow: `SITE_ORIGIN: https://<domain>`, `BASE_PATH: ""`.
-3. `public/admin/config.yml` `site_url` / `display_url` / `logo_url` auf `https://<domain>`.
-4. GitHub → **Settings → Pages → Custom domain** eintragen.
-5. **DNS** beim Provider:
-   - Subdomain (z. B. `demo`) → **CNAME** auf `nick8952.github.io`
-   - Apex → **A** auf `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-6. Nach Propagation „Enforce HTTPS" aktivieren; GitHub-OAuth-App (1a) Homepage-URL anpassen.
-
-Deploy/Hosting läuft ausschliesslich über GitHub. Remote `origin` = GitHub.
-Push: `git push origin main`.
+**Anfragen kommen nicht an**
+Web3Forms-Schlüssel prüfen (Abschnitt 5). Auch in den Spam-Ordner schauen.
