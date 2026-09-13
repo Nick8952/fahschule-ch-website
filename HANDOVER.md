@@ -77,6 +77,10 @@ siehe Schritt 1.3) — nur lokal, nie in Vercel eintragen.
 
 ## 3. Vercel verbinden
 
+**✅ Erledigt (13.09.2026)** — Website läuft, Studio registriert, Webhook bestätigt
+funktionsfähig. Die Schritte unten stehen als Referenz, falls das Projekt je neu
+aufgesetzt werden muss.
+
 1. Auf <https://vercel.com> mit dem GitHub-Konto anmelden.
 2. **Add New → Project** → `Nick8952/fahschule-ch-website` importieren.
 3. Unter **Settings → Environment Variables** eintragen:
@@ -91,18 +95,38 @@ siehe Schritt 1.3) — nur lokal, nie in Vercel eintragen.
 
    Den **Schreib**-Token (`SANITY_API_WRITE_TOKEN`) hier **nicht** eintragen.
 
+   ⚠️ **Type „Secret" bei `SANITY_REVALIDATE_SECRET` vermeiden** — Vercel zeigt
+   Werte dieses Typs danach nie wieder an, auch dir nicht. Ein Tippfehler bleibt
+   dann unauffindbar. **Type „Config"** wählen: bleibt einsehbar, ist trotzdem
+   nicht im öffentlichen Client-Bundle (kein `NEXT_PUBLIC_`-Präfix).
+
 4. **Deploy** drücken. Ab jetzt baut Vercel bei jeder Code-Änderung automatisch neu.
 5. In Sanity unter **API → Webhooks** einen Webhook anlegen:
 
    | Feld | Wert |
    |---|---|
-   | URL | `https://<deine-adresse>/api/revalidate` |
+   | URL | `https://<deine-adresse>/api/revalidate/?secret=<derselbe Wert wie SANITY_REVALIDATE_SECRET>` |
    | Dataset | `production` |
    | Trigger on | Create, Update, Delete |
-   | Secret | derselbe Wert wie `SANITY_REVALIDATE_SECRET` |
+   | Secret (Formularfeld) | **leer lassen** |
+
+   Zwei Stolpersteine dabei: Das **Secret-Feld im Sanity-Formular ist nicht
+   dasselbe** wie `SANITY_REVALIDATE_SECRET` — dieses Feld signiert die Anfrage
+   (HMAC), der Code prüft aber nur `?secret=` in der URL oder den Header
+   `sanity-webhook-secret`. Der Wert gehört deshalb **in die URL**, nicht ins
+   Formularfeld. Ausserdem braucht die URL den **Schrägstrich vor dem
+   Fragezeichen** (`/api/revalidate/?secret=...`) — sonst leitet
+   `trailingSlash: true` per 308 auf die Slash-Version um, was manche
+   Webhook-Sender nicht mitmachen.
 
    Ohne diesen Webhook dauert es bis zu einer Minute, bis eine Änderung sichtbar
    wird (ISR-Intervall). Mit ihm sind es wenige Sekunden.
+
+   **Registrierung des Studios:** Beim ersten Aufruf von `/studio` auf der
+   Vercel-Adresse fragt Sanity, ob die URL registriert werden soll — **„Register
+   studio"** wählen (nicht „Add development host", das ist nur für localhost/
+   Vorschau-Links und synct kein Schema). Bei einer späteren eigenen Domain diese
+   zusätzlich registrieren.
 
 ---
 
