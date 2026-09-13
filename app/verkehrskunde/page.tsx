@@ -2,20 +2,24 @@ import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { getPage } from "@/lib/content";
-import { courses } from "@/lib/data";
+import { getCourses } from "@/lib/data";
 import PageHero from "@/components/PageHero";
 import Prose from "@/components/Prose";
 import Reveal from "@/components/Reveal";
 import VkuCalendar from "@/components/VkuCalendar";
 import { InfoCard } from "@/components/ui";
 
-type FM = { seoTitle: string; seoDescription: string; hero: { eyebrow: string; title: string; lead: string } };
-const { frontmatter: fm, html } = getPage<FM>("verkehrskunde");
-const v = courses.vkuDeutsch;
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("verkehrskunde");
+  return pageMeta("/verkehrskunde", { title: fm.seoTitle, description: fm.seoDescription });
+}
 
-export const metadata: Metadata = pageMeta("/verkehrskunde", { title: fm.seoTitle, description: fm.seoDescription });
-
-export default function Page() {
+export default async function Page() {
+  const [{ frontmatter: fm, body }, courses] = await Promise.all([
+    getPage("verkehrskunde"),
+    getCourses(),
+  ]);
+  const v = courses.vkuDeutsch;
   return (
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Verkehrskunde Deutsch" />
@@ -34,11 +38,11 @@ export default function Page() {
             <p className="prose mt-2">{v.location}</p>
             <h2 className="mt-8 font-display text-step-2">Buche deinen VKU-Kurs</h2>
             <div className="prose mt-2">
-              <Prose html={html} />
+              <Prose body={body} />
             </div>
           </Reveal>
           <Reveal className="mt-6">
-            <VkuCalendar />
+            <VkuCalendar src={v.iframeUrl} />
             <p className="mt-4">
               <Link href="/kontakt" className="btn btn-ghost">
                 Oder frag mich direkt

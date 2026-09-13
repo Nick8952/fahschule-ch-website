@@ -2,23 +2,20 @@ import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { getPage } from "@/lib/content";
-import { prices } from "@/lib/data";
+import { getPrices } from "@/lib/data";
 import PageHero from "@/components/PageHero";
 import PriceModel from "@/components/PriceModel";
 import PriceTable from "@/components/PriceTable";
 import Reveal from "@/components/Reveal";
 import { SectionHead, InfoCard } from "@/components/ui";
 
-type FM = {
-  seoTitle: string;
-  seoDescription: string;
-  hero: { eyebrow: string; title: string; lead: string };
-};
-const { frontmatter: fm } = getPage<FM>("angebot-preise");
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("angebot-preise");
+  return pageMeta("/angebot-preise", { title: fm.seoTitle, description: fm.seoDescription });
+}
 
-export const metadata: Metadata = pageMeta("/angebot-preise", { title: fm.seoTitle, description: fm.seoDescription });
-
-export default function Page() {
+export default async function Page() {
+  const [{ frontmatter: fm }, prices] = await Promise.all([getPage("angebot-preise"), getPrices()]);
   return (
     <>
       <PageHero
@@ -55,7 +52,7 @@ export default function Page() {
 
       <section className="section block-dark">
         <div className="wrap">
-          <PriceModel />
+          <PriceModel prices={prices} />
         </div>
       </section>
 

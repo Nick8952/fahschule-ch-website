@@ -1,24 +1,25 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
 import { getPage } from "@/lib/content";
-import { courses } from "@/lib/data";
+import { getCourses } from "@/lib/data";
 import PageHero from "@/components/PageHero";
+import Prose from "@/components/Prose";
 import Reveal from "@/components/Reveal";
 import CourseDates from "@/components/CourseDates";
 import VkuRegistrationForm from "@/components/VkuRegistrationForm";
 import { InfoCard } from "@/components/ui";
 
-type FM = {
-  seoTitle: string;
-  seoDescription: string;
-  hero: { eyebrow: string; title: string; lead: string };
-};
-const { frontmatter: fm, html } = getPage<FM>("verkehrskunde-englisch");
-const v = courses.vkuEnglish;
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("verkehrskunde-englisch");
+  return pageMeta("/verkehrskunde-englisch", { title: fm.seoTitle, description: fm.seoDescription });
+}
 
-export const metadata: Metadata = pageMeta("/verkehrskunde-englisch", { title: fm.seoTitle, description: fm.seoDescription });
-
-export default function Page() {
+export default async function Page() {
+  const [{ frontmatter: fm, body }, courses] = await Promise.all([
+    getPage("verkehrskunde-englisch"),
+    getCourses(),
+  ]);
+  const v = courses.vkuEnglish;
   return (
     <>
       <PageHero
@@ -30,7 +31,7 @@ export default function Page() {
       <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
-            <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />
+            <Prose body={body} />
             <div className="my-8 grid gap-4 sm:grid-cols-3">
               <InfoCard big={v.fee} title="Course fee (cash)">
                 {v.feeNote}

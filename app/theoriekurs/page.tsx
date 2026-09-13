@@ -2,30 +2,30 @@ import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { getPage } from "@/lib/content";
-import { courses } from "@/lib/data";
+import { getCourses } from "@/lib/data";
 import PageHero from "@/components/PageHero";
 import Prose from "@/components/Prose";
 import Reveal from "@/components/Reveal";
 import { InfoCard, Callout } from "@/components/ui";
 
-type FM = {
-  seoTitle: string;
-  seoDescription: string;
-  hero: { eyebrow: string; title: string; lead: string };
-};
-const { frontmatter: fm, html } = getPage<FM>("theoriekurs");
-const t = courses.theoriekurs;
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("theoriekurs");
+  return pageMeta("/theoriekurs", { title: fm.seoTitle, description: fm.seoDescription });
+}
 
-export const metadata: Metadata = pageMeta("/theoriekurs", { title: fm.seoTitle, description: fm.seoDescription });
-
-export default function Page() {
+export default async function Page() {
+  const [{ frontmatter: fm, body }, courses] = await Promise.all([
+    getPage("theoriekurs"),
+    getCourses(),
+  ]);
+  const t = courses.theoriekurs;
   return (
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Theoriekurs" />
       <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
-            <Prose html={html} />
+            <Prose body={body} />
             <div className="my-8 grid gap-4 sm:grid-cols-3">
               <InfoCard big={t.fee} title="Kursgebühr">
                 {t.voucher}

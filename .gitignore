@@ -8,3 +8,5 @@ _originals/
 .DS_Store
 Thumbs.db
 next-env.d.ts
+.env.local
+.env*.local

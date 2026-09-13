@@ -1,6 +1,7 @@
-import { courses } from "@/lib/data";
+import { getCourses } from "@/lib/data";
 
-export default function CourseDates() {
+export default async function CourseDates() {
+  const courses = await getCourses();
   const { dates, datesNote } = courses.vkuEnglish;
   return (
     <div>

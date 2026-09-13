@@ -2,22 +2,23 @@ import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import { getPage } from "@/lib/content";
-import { pages } from "@/lib/data";
+import { getPageContent } from "@/lib/data";
 import PageHero from "@/components/PageHero";
+import Prose from "@/components/Prose";
 import Reveal from "@/components/Reveal";
 import { Callout } from "@/components/ui";
 
-type FM = {
-  seoTitle: string;
-  seoDescription: string;
-  hero: { eyebrow: string; title: string; lead: string };
-};
-const { frontmatter: fm, html } = getPage<FM>("kontrollfahrt");
-const p = pages.kontrollfahrt;
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("kontrollfahrt");
+  return pageMeta("/kontrollfahrt", { title: fm.seoTitle, description: fm.seoDescription });
+}
 
-export const metadata: Metadata = pageMeta("/kontrollfahrt", { title: fm.seoTitle, description: fm.seoDescription });
-
-export default function Page() {
+export default async function Page() {
+  const [{ frontmatter: fm, body }, pages] = await Promise.all([
+    getPage("kontrollfahrt"),
+    getPageContent(),
+  ]);
+  const p = pages.kontrollfahrt;
   const [head, ...rest] = p.callout.split("! ");
   return (
     <>
@@ -33,7 +34,9 @@ export default function Page() {
             <Callout>
               <strong>{head}!</strong> {rest.join("! ")}
             </Callout>
-            <div className="prose mt-6" dangerouslySetInnerHTML={{ __html: html }} />
+            <div className="mt-6">
+              <Prose body={body} />
+            </div>
             <h2 className="mt-8 font-display text-step-2">Gut zu wissen</h2>
             <ul className="prose mt-3">
               {p.gutZuWissen.map((g) => (

@@ -1,4 +1,4 @@
-import { site } from "@/lib/data";
+import { getSite } from "@/lib/data";
 import { absUrl } from "@/lib/site";
 import type { ReactNode } from "react";
 
@@ -25,7 +25,8 @@ export function Field({
   );
 }
 
-export function Web3FormsHidden({ subject }: { subject: string }) {
+export async function Web3FormsHidden({ subject }: { subject: string }) {
+  const site = await getSite();
   return (
     <>
       <input type="hidden" name="access_key" value={site.web3formsKey} />

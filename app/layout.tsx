@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Darker_Grotesque, Archivo, DM_Mono } from "next/font/google";
-import { site } from "@/lib/data";
+import { getNav, getSite } from "@/lib/data";
 import { absUrl } from "@/lib/site";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -24,27 +24,31 @@ const mono = DM_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(absUrl("/")),
-  title: {
-    default: `${site.name} Zürich – ${site.instructor}`,
-    template: `%s`,
-  },
-  description: site.blurb,
-  applicationName: site.name,
-  authors: [{ name: `${site.name} – ${site.instructor}` }],
-  robots: site.demo
-    ? { index: false, follow: false, nocache: true }
-    : { index: true, follow: true },
-  openGraph: {
-    type: "website",
-    locale: "de_CH",
-    siteName: site.name,
-  },
-  other: { "theme-color": site.themeColor },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await getSite();
+  return {
+    metadataBase: new URL(absUrl("/")),
+    title: {
+      default: `${site.name} Zürich – ${site.instructor}`,
+      template: `%s`,
+    },
+    description: site.blurb,
+    applicationName: site.name,
+    authors: [{ name: `${site.name} – ${site.instructor}` }],
+    robots: site.demo
+      ? { index: false, follow: false, nocache: true }
+      : { index: true, follow: true },
+    openGraph: {
+      type: "website",
+      locale: "de_CH",
+      siteName: site.name,
+    },
+    other: { "theme-color": site.themeColor },
+  };
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const [site, nav] = await Promise.all([getSite(), getNav()]);
   return (
     <html lang="de" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body className="font-body text-step-0">
@@ -54,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Zum Inhalt springen
         </a>
-        <SiteHeader />
+        <SiteHeader site={site} nav={nav} />
         <main id="inhalt">{children}</main>
         <SiteFooter />
       </body>

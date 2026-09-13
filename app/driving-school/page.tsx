@@ -3,30 +3,30 @@ import Link from "next/link";
 import Image from "next/image";
 import { pageMeta } from "@/lib/seo";
 import { getPage } from "@/lib/content";
-import { site, pages } from "@/lib/data";
+import { getPageContent, getSite } from "@/lib/data";
 import { asset } from "@/lib/site";
 import PageHero from "@/components/PageHero";
 import Prose from "@/components/Prose";
 import Reveal from "@/components/Reveal";
 import { SectionHead, ReasonGrid } from "@/components/ui";
 
-type FM = {
-  seoTitle: string;
-  seoDescription: string;
-  ogImage?: string;
-  hero: { eyebrow: string; title: string; lead: string };
-};
-const { frontmatter: fm, html } = getPage<FM>("driving-school");
-const p = pages.drivingSchool;
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("driving-school");
+  return pageMeta("/driving-school", {
+    title: fm.seoTitle,
+    description: fm.seoDescription,
+    ogImage: fm.ogImage ?? "/img/hero-2.webp",
+    ogLocale: "en_CH",
+  });
+}
 
-export const metadata: Metadata = pageMeta("/driving-school", {
-  title: fm.seoTitle,
-  description: fm.seoDescription,
-  ogImage: fm.ogImage ?? "/img/hero-2.webp",
-  ogLocale: "en_CH",
-});
-
-export default function Page() {
+export default async function Page() {
+  const [{ frontmatter: fm, body }, site, pages] = await Promise.all([
+    getPage("driving-school"),
+    getSite(),
+    getPageContent(),
+  ]);
+  const p = pages.drivingSchool;
   return (
     <div lang="en">
       <div className="bg-signal/10">
@@ -69,7 +69,7 @@ export default function Page() {
       <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
-            <Prose html={html} />
+            <Prose body={body} />
             <p className="mt-6 flex flex-wrap gap-3">
               <Link href="/kontakt" className="btn btn-signal">
                 Book a trial lesson

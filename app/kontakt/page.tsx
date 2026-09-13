@@ -1,23 +1,20 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
 import { getPage } from "@/lib/content";
-import { site } from "@/lib/data";
+import { getSite } from "@/lib/data";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import MapEmbed from "@/components/MapEmbed";
 import { InfoCard } from "@/components/ui";
 
-type FM = {
-  seoTitle: string;
-  seoDescription: string;
-  hero: { eyebrow: string; title: string; lead: string };
-};
-const { frontmatter: fm } = getPage<FM>("kontakt");
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("kontakt");
+  return pageMeta("/kontakt", { title: fm.seoTitle, description: fm.seoDescription });
+}
 
-export const metadata: Metadata = pageMeta("/kontakt", { title: fm.seoTitle, description: fm.seoDescription });
-
-export default function Page() {
+export default async function Page() {
+  const [{ frontmatter: fm }, site] = await Promise.all([getPage("kontakt"), getSite()]);
   return (
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Kontakt" />

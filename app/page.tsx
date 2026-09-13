@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { pageMeta } from "@/lib/seo";
 import { getPage } from "@/lib/content";
-import { site, reasons, pages } from "@/lib/data";
+import { getPageContent, getPrices, getReasons, getSite } from "@/lib/data";
 import { asset } from "@/lib/site";
 import { DrivingSchoolJsonLd } from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
@@ -13,23 +13,25 @@ import ModuleLadder from "@/components/ModuleLadder";
 import Testimonials from "@/components/Testimonials";
 import { SectionHead, ReasonGrid, ServiceRow } from "@/components/ui";
 
-type Home = {
-  seoTitle: string;
-  seoDescription: string;
-  ogImage?: string;
-  hero: { eyebrow: string; title: string; lead: string; badge: string };
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("home");
+  return pageMeta("/", {
+    title: fm.seoTitle,
+    description: fm.seoDescription,
+    ogImage: fm.ogImage ?? "/img/hero-2.webp",
+  });
+}
 
-const { frontmatter: fm } = getPage<Home>("home");
-const p = pages.home;
+export default async function HomePage() {
+  const [{ frontmatter: fm }, site, reasons, pages, prices] = await Promise.all([
+    getPage("home"),
+    getSite(),
+    getReasons(),
+    getPageContent(),
+    getPrices(),
+  ]);
+  const p = pages.home;
 
-export const metadata: Metadata = pageMeta("/", {
-  title: fm.seoTitle,
-  description: fm.seoDescription,
-  ogImage: fm.ogImage ?? "/img/hero-2.webp",
-});
-
-export default function HomePage() {
   return (
     <>
       <DrivingSchoolJsonLd />
@@ -105,7 +107,7 @@ export default function HomePage() {
       {/* SIGNATURE — Preismodell auf Dunkel */}
       <section className="section block-dark">
         <div className="wrap">
-          <PriceModel />
+          <PriceModel prices={prices} />
         </div>
       </section>
 

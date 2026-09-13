@@ -1,22 +1,20 @@
 import type { Metadata } from "next";
 import { pageMeta } from "@/lib/seo";
 import { getPage } from "@/lib/content";
-import { pages } from "@/lib/data";
+import { getPageContent } from "@/lib/data";
 import PageHero from "@/components/PageHero";
 import Prose from "@/components/Prose";
 import Reveal from "@/components/Reveal";
 import { SectionHead, ServiceRow } from "@/components/ui";
 
-type FM = {
-  seoTitle: string;
-  seoDescription: string;
-  hero: { eyebrow: string; title: string; lead: string };
-};
-const { frontmatter: fm, html } = getPage<FM>("kurse");
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("kurse");
+  return pageMeta("/kurse", { title: fm.seoTitle, description: fm.seoDescription });
+}
 
-export const metadata: Metadata = pageMeta("/kurse", { title: fm.seoTitle, description: fm.seoDescription });
+export default async function Page() {
+  const [{ frontmatter: fm, body }, pages] = await Promise.all([getPage("kurse"), getPageContent()]);
 
-export default function Page() {
   return (
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Kurse" />
@@ -36,7 +34,7 @@ export default function Page() {
                   image={c.image}
                   flip={i % 2 === 1}
                 />
-                {c.points && (
+                {c.points && c.points.length > 0 && (
                   <ul className="mt-4 grid gap-1.5 pl-1 text-[0.92rem] text-ink-soft lg:pl-[calc(50%+2.5rem)]">
                     {c.points.map((pt) => (
                       <li key={pt} className="flex gap-2">
@@ -55,7 +53,7 @@ export default function Page() {
       <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
-            <Prose html={html} />
+            <Prose body={body} />
           </Reveal>
         </div>
       </section>

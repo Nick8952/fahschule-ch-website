@@ -3,16 +3,17 @@ import Link from "next/link";
 import { pageMeta } from "@/lib/seo";
 import { getPage } from "@/lib/content";
 
-type FM = { seoTitle: string; seoDescription: string; hero: { eyebrow: string; title: string; lead: string } };
-const { frontmatter: fm } = getPage<FM>("danke");
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("danke");
+  return pageMeta("/danke", {
+    title: fm.seoTitle,
+    description: fm.seoDescription,
+    noindex: true,
+  });
+}
 
-export const metadata: Metadata = pageMeta("/danke", {
-  title: fm.seoTitle,
-  description: fm.seoDescription,
-  noindex: true,
-});
-
-export default function Page() {
+export default async function Page() {
+  const { frontmatter: fm } = await getPage("danke");
   return (
     <section className="section block-light">
       <div className="wrap-eng text-center">

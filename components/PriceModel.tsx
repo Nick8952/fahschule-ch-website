@@ -2,14 +2,14 @@
 
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { prices, type Gear, type PriceTier } from "@/lib/data";
+import type { getPrices, Gear, PriceTier } from "@/lib/data";
 
 const W = 640;
 const H = 240;
 const PAD = { l: 16, r: 16, t: 22, b: 34 };
 
 /* SIGNATURE — das degressive Preismodell auf Dunkel inszeniert. */
-export default function PriceModel() {
+export default function PriceModel({ prices }: { prices: Awaited<ReturnType<typeof getPrices>> }) {
   const tiers = prices.tiers as PriceTier[];
   const { rangeMin, rangeMax, default: def, priceSuffix, heading, intro } = prices.calc;
 

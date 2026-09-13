@@ -187,6 +187,11 @@
   .prose > * + * {
     margin-top: 1.05rem;
   }
+  /* Einzelne Zeilenumbrueche aus dem Markdown/Portable-Text bleiben erhalten
+     (Adressbloecke im Impressum), ohne dass jemand dafuer etwas wissen muss. */
+  .prose p {
+    white-space: pre-line;
+  }
   .prose h2 {
     font-family: theme("fontFamily.display");
     font-size: clamp(1.6rem, 3.5vw, 2.3rem);

@@ -1,8 +1,9 @@
-import { modules } from "@/lib/data";
+import { getModules } from "@/lib/data";
 import { RevealLi } from "./Reveal";
 
 /* 2. Signature: die 8-Modul-Kompetenzleiter mit Taxonomiestufen. */
-export default function ModuleLadder() {
+export default async function ModuleLadder() {
+  const modules = await getModules();
   const items = modules.items;
   return (
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">

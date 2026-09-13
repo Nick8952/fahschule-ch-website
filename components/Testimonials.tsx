@@ -1,7 +1,8 @@
-import { testimonials } from "@/lib/data";
+import { getTestimonials } from "@/lib/data";
 import Reveal from "./Reveal";
 
-export default function Testimonials() {
+export default async function Testimonials() {
+  const testimonials = await getTestimonials();
   return (
     <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
       {testimonials.items.map((t, i) => (

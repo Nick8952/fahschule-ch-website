@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { steps } from "@/lib/data";
+import type { getSteps } from "@/lib/data";
 
-export default function PathSteps() {
+export default function PathSteps({ steps }: { steps: Awaited<ReturnType<typeof getSteps>> }) {
   const items = steps.items;
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLElement | null)[]>([]);

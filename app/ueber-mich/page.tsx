@@ -3,24 +3,26 @@ import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import Image from "next/image";
 import { getPage } from "@/lib/content";
-import { site, pages } from "@/lib/data";
+import { getPageContent, getSite } from "@/lib/data";
 import { asset } from "@/lib/site";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ModuleLadder from "@/components/ModuleLadder";
 import { SectionHead, ReasonGrid, InfoCard } from "@/components/ui";
 
-type FM = {
-  seoTitle: string;
-  seoDescription: string;
-  hero: { eyebrow: string; title: string; lead: string };
-};
-const { frontmatter: fm } = getPage<FM>("ueber-mich");
-const p = pages.ueberMich;
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("ueber-mich");
+  return pageMeta("/ueber-mich", { title: fm.seoTitle, description: fm.seoDescription });
+}
 
-export const metadata: Metadata = pageMeta("/ueber-mich", { title: fm.seoTitle, description: fm.seoDescription });
+export default async function Page() {
+  const [{ frontmatter: fm }, site, pages] = await Promise.all([
+    getPage("ueber-mich"),
+    getSite(),
+    getPageContent(),
+  ]);
+  const p = pages.ueberMich;
 
-export default function Page() {
   return (
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Über mich" />

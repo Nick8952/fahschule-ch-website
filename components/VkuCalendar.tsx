@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { courses } from "@/lib/data";
 
-export default function VkuCalendar() {
+export default function VkuCalendar({ src }: { src: string }) {
   const [loaded, setLoaded] = useState(false);
-  const src = courses.vkuDeutsch.iframeUrl;
 
   return (
     <div className="card !p-6 text-center sm:!p-8">

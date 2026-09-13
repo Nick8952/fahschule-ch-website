@@ -1,6 +1,7 @@
-import { site } from "@/lib/data";
+import { getSite } from "@/lib/data";
 
-export default function MapEmbed() {
+export default async function MapEmbed() {
+  const site = await getSite();
   return (
     <div className="overflow-hidden border border-ink/15">
       <iframe

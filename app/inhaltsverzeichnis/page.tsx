@@ -5,10 +5,10 @@ import { getPage } from "@/lib/content";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 
-type FM = { seoTitle: string; seoDescription: string; hero: { eyebrow: string; title: string; lead: string } };
-const { frontmatter: fm } = getPage<FM>("inhaltsverzeichnis");
-
-export const metadata: Metadata = pageMeta("/inhaltsverzeichnis", { title: fm.seoTitle, description: fm.seoDescription });
+export async function generateMetadata(): Promise<Metadata> {
+  const { frontmatter: fm } = await getPage("inhaltsverzeichnis");
+  return pageMeta("/inhaltsverzeichnis", { title: fm.seoTitle, description: fm.seoDescription });
+}
 
 const tree: { label: string; href: string; children?: { label: string; href: string }[] }[] = [
   { label: "Start", href: "/" },
@@ -35,7 +35,8 @@ const tree: { label: string; href: string; children?: { label: string; href: str
   { label: "Datenschutz", href: "/datenschutz" },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const { frontmatter: fm } = await getPage("inhaltsverzeichnis");
   return (
     <>
       <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Inhaltsverzeichnis" />

@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { bookableVkuDates } from "@/lib/data";
+import { bookableVkuDates, getCourses } from "@/lib/data";
 import { Field, Web3FormsHidden, inputClass } from "./FormBits";
 
-export default function VkuRegistrationForm() {
+export default async function VkuRegistrationForm() {
+  const courses = await getCourses();
+  const dates = bookableVkuDates(courses);
   return (
     <form
       action="https://api.web3forms.com/submit"
@@ -16,7 +18,7 @@ export default function VkuRegistrationForm() {
           <option value="" disabled>
             – please select –
           </option>
-          {bookableVkuDates.map((d) => (
+          {dates.map((d) => (
             <option key={d.value} value={d.value}>
               {d.value}
             </option>

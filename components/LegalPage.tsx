@@ -5,30 +5,23 @@ import PageHero from "./PageHero";
 import Prose from "./Prose";
 import Reveal from "./Reveal";
 
-type LegalFM = {
-  title: string;
-  subtitle?: string;
-  seoTitle?: string;
-  seoDescription?: string;
-};
-
-export function legalMetadata(slug: string): Metadata {
-  const { frontmatter } = getLegal<LegalFM>(slug);
+export async function legalMetadata(slug: string): Promise<Metadata> {
+  const { frontmatter } = await getLegal(slug);
   return pageMeta(`/${slug}`, {
     title: frontmatter.seoTitle ?? frontmatter.title,
     description: frontmatter.seoDescription,
   });
 }
 
-export default function LegalPage({ slug }: { slug: string }) {
-  const { frontmatter, html } = getLegal<LegalFM>(slug);
+export default async function LegalPage({ slug }: { slug: string }) {
+  const { frontmatter, body } = await getLegal(slug);
   return (
     <>
       <PageHero title={frontmatter.title} lead={frontmatter.subtitle} crumb={frontmatter.title} />
       <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
-            <Prose html={html} />
+            <Prose body={body} />
           </Reveal>
         </div>
       </section>

@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { site, nav } from "@/lib/data";
+import type { getNav, getSite } from "@/lib/data";
 import { asset } from "@/lib/site";
 
-export default function SiteHeader() {
+type Props = {
+  site: Awaited<ReturnType<typeof getSite>>;
+  nav: Awaited<ReturnType<typeof getNav>>;
+};
+
+export default function SiteHeader({ site, nav }: Props) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 

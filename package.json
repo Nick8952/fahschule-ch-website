@@ -8,15 +8,23 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "images": "node scripts/images.mjs"
+    "images": "node scripts/images.mjs",
+    "seed": "node scripts/seed.ts"
   },
   "dependencies": {
-    "next": "^15.1.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "@portabletext/react": "^3.2.4",
+    "@sanity/client": "^7.27.0",
+    "@sanity/icons": "^3.8.0",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^4.22.1",
     "framer-motion": "^11.15.0",
     "gray-matter": "^4.0.3",
-    "marked": "^15.0.6"
+    "marked": "^15.0.6",
+    "next": "^15.1.6",
+    "next-sanity": "^11.6.13",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sanity": "^4.22.1"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",

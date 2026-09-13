@@ -1,7 +1,8 @@
-import { priceTableRows, prices } from "@/lib/data";
+import { getPrices, priceTableRows } from "@/lib/data";
 
-export default function PriceTable() {
-  const rows = priceTableRows();
+export default async function PriceTable() {
+  const prices = await getPrices();
+  const rows = priceTableRows(prices);
   return (
     <div>
       <div className="overflow-x-auto rounded-lg border border-ink/10">
