@@ -3,6 +3,8 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import type { getPrices, Gear, PriceTier } from "@/lib/data";
+import { useT } from "@/lib/i18n/LanguageContext";
+import { fmt } from "@/lib/i18n/format";
 
 const W = 640;
 const H = 240;
@@ -15,6 +17,7 @@ export default function PriceModel({ prices }: { prices: Awaited<ReturnType<type
 
   const [gear, setGear] = useState<Gear>("automat");
   const [n, setN] = useState(def);
+  const t = useT();
 
   const priceAt = (lessons: number, g: Gear) => {
     const sorted = [...tiers].sort((a, b) => b.minLessons - a.minLessons);
@@ -43,15 +46,15 @@ export default function PriceModel({ prices }: { prices: Awaited<ReturnType<type
   return (
     <div className="grid gap-10 lg:grid-cols-[1fr_minmax(300px,360px)]">
       <div>
-        <p className="eyebrow mb-4">Dein Monat</p>
-        <h2 className="max-w-[16ch] text-step-3 font-extrabold text-white">{heading}</h2>
-        <p className="mt-3 max-w-[46ch]">{intro}</p>
+        <p className="eyebrow mb-4">{t(["copy", "Dein Monat"], "Dein Monat")}</p>
+        <h2 className="max-w-[16ch] text-step-3 font-extrabold text-white">{t(["copy", heading], heading)}</h2>
+        <p className="mt-3 max-w-[46ch]">{t(["copy", intro], intro)}</p>
 
         <svg
           viewBox={`0 0 ${W} ${H}`}
           className="mt-7 w-full"
           role="img"
-          aria-label={`Preiskurve: bei ${n} Fahrstunden pro Monat kostet die Doppellektion CHF ${current.price}.`}
+          aria-label={fmt(t("ui.priceCurve", "Preiskurve: bei {n} Fahrstunden pro Monat kostet die Doppellektion CHF {price}."), { n, price: current.price })}
         >
           {tiers
             .slice()
@@ -102,7 +105,7 @@ export default function PriceModel({ prices }: { prices: Awaited<ReturnType<type
 
         <div className="mt-4">
           <label className="mb-2 flex items-center justify-between font-mono text-[0.76rem] uppercase tracking-[0.08em] text-on-dark-soft">
-            <span>Fahrstunden pro Monat</span>
+            <span>{t(["copy", "Fahrstunden pro Monat"], "Fahrstunden pro Monat")}</span>
             <span className="font-display text-step-1 font-bold text-white">
               {n >= rangeMax ? `${rangeMax}+` : n}
             </span>
@@ -113,7 +116,7 @@ export default function PriceModel({ prices }: { prices: Awaited<ReturnType<type
             max={rangeMax}
             value={n}
             onChange={(e) => setN(Number(e.target.value))}
-            aria-label="Fahrstunden pro Monat"
+            aria-label={t(["copy", "Fahrstunden pro Monat"], "Fahrstunden pro Monat")}
             className="h-2 w-full cursor-pointer appearance-none rounded-pill bg-midnight-3 accent-signal"
           />
         </div>
@@ -121,17 +124,19 @@ export default function PriceModel({ prices }: { prices: Awaited<ReturnType<type
 
       {/* Ergebnis */}
       <div className="flex flex-col justify-center border border-steel bg-midnight-2 p-6">
-        <div className="inline-flex self-start border border-steel">
+        <div className="grid w-[13rem] grid-cols-2 self-start border border-steel">
           {(["automat", "geschaltet"] as Gear[]).map((g) => (
             <button
               key={g}
               type="button"
               onClick={() => setGear(g)}
-              className={`px-3.5 py-2 font-mono text-[0.72rem] uppercase tracking-[0.06em] transition-colors ${
+              className={`w-full px-2 py-2 font-mono text-[0.72rem] uppercase tracking-[0.04em] transition-colors ${
                 gear === g ? "bg-signal text-white" : "text-on-dark-soft"
               }`}
             >
-              {g === "automat" ? "Automat" : "Geschaltet"}
+              {g === "automat"
+                ? t(["copy", "Automat"], "Automat")
+                : t(["copy", "Geschaltet"], "Geschaltet")}
             </button>
           ))}
         </div>
@@ -142,14 +147,13 @@ export default function PriceModel({ prices }: { prices: Awaited<ReturnType<type
         <p className="font-display text-[3rem] font-extrabold leading-none text-white sm:text-step-5">
           CHF {current.price}
         </p>
-        <p className="mt-1 font-mono text-[0.76rem] text-on-dark-soft">{priceSuffix}</p>
+        <p className="mt-1 font-mono text-[0.76rem] text-on-dark-soft">{t(["copy", priceSuffix], priceSuffix)}</p>
         <p className="mt-4 text-[0.9rem] text-on-dark-soft">
-          {current.tier.cond} ·{" "}
-          {gear === "automat" ? prices.vehicles.automat : prices.vehicles.geschaltet}
+          {t(["copy", current.tier.cond], current.tier.cond)} ·{" "}
+          {t(["copy", gear === "automat" ? prices.vehicles.automat : prices.vehicles.geschaltet], gear === "automat" ? prices.vehicles.automat : prices.vehicles.geschaltet)}
         </p>
         <p className="mt-5 border-t border-steel pt-4 font-mono text-[0.74rem] leading-relaxed text-on-dark-faint">
-          Richtwert auf Basis der Preisliste. Probelektion immer CHF 50. Keine Vorauszahlung –
-          Abrechnung Ende Monat.
+          {t(["copy", "Richtwert auf Basis der Preisliste. Probelektion immer CHF 50. Keine Vorauszahlung – Abrechnung Ende Monat."], "Richtwert auf Basis der Preisliste. Probelektion immer CHF 50. Keine Vorauszahlung – Abrechnung Ende Monat.")}
         </p>
       </div>
     </div>

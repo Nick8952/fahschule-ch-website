@@ -6,6 +6,7 @@ import { getSteps } from "@/lib/data";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import PathSteps from "@/components/PathSteps";
+import TranslatedText from "@/components/TranslatedText";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter: fm } = await getPage("der-weg");
@@ -16,13 +17,13 @@ export default async function Page() {
   const [{ frontmatter: fm }, steps] = await Promise.all([getPage("der-weg"), getSteps()]);
   return (
     <>
-      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Der Weg" />
+      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Der Weg" i18nKey="path" />
       <section className="section block-light">
         <div className="wrap">
           <PathSteps steps={steps} />
           <Reveal className="mt-10">
-            <Link href="/kontakt" className="btn btn-signal">
-              Fragen? Jetzt Kontakt aufnehmen
+            <Link href="/kontakt" className="btn btn-signal w-full sm:w-[21rem]">
+              <TranslatedText de="Fragen? Jetzt Kontakt aufnehmen" />
             </Link>
           </Reveal>
         </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getPage } from "@/lib/content";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
+import TranslatedText from "@/components/TranslatedText";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter: fm } = await getPage("inhaltsverzeichnis");
@@ -39,7 +40,7 @@ export default async function Page() {
   const { frontmatter: fm } = await getPage("inhaltsverzeichnis");
   return (
     <>
-      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Inhaltsverzeichnis" />
+      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Inhaltsverzeichnis" i18nKey="sitemap" />
       <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
@@ -47,7 +48,7 @@ export default async function Page() {
               {tree.map((t) => (
                 <li key={t.href}>
                   <Link href={t.href} className="text-signal underline underline-offset-4 hover:text-signal-600">
-                    {t.label}
+                    <TranslatedText path={["nav", t.label]} de={t.label} />
                   </Link>
                   {t.children && (
                     <ul className="ml-5 mt-2 grid gap-2 text-step-0">
@@ -57,7 +58,7 @@ export default async function Page() {
                             href={c.href}
                             className="text-signal underline underline-offset-4 hover:text-signal-600"
                           >
-                            {c.label}
+                            <TranslatedText path={["nav", c.label]} de={c.label} />
                           </Link>
                         </li>
                       ))}

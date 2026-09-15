@@ -17,7 +17,7 @@ export default async function LegalPage({ slug }: { slug: string }) {
   const { frontmatter, body } = await getLegal(slug);
   return (
     <>
-      <PageHero title={frontmatter.title} lead={frontmatter.subtitle} crumb={frontmatter.title} />
+      <PageHero title={frontmatter.title} lead={frontmatter.subtitle} crumb={frontmatter.title} i18nKey={slug === "agb" ? "agb" : slug} />
       <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>

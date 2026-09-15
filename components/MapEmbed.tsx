@@ -1,4 +1,5 @@
 import { getSite } from "@/lib/data";
+import TranslatedText from "./TranslatedText";
 
 export default async function MapEmbed() {
   const site = await getSite();
@@ -21,7 +22,7 @@ export default async function MapEmbed() {
           rel="noopener"
           className="font-mono text-[0.8rem] uppercase tracking-[0.06em] text-signal hover:text-signal-600"
         >
-          Route öffnen →
+          <TranslatedText de="Route öffnen" /> →
         </a>
       </div>
     </div>

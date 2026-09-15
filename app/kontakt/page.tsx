@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import MapEmbed from "@/components/MapEmbed";
 import { InfoCard } from "@/components/ui";
+import TranslatedText from "@/components/TranslatedText";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter: fm } = await getPage("kontakt");
@@ -17,7 +18,7 @@ export default async function Page() {
   const [{ frontmatter: fm }, site] = await Promise.all([getPage("kontakt"), getSite()]);
   return (
     <>
-      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Kontakt" />
+      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Kontakt" i18nKey="contact" />
       <section className="section block-light">
         <div className="wrap grid items-start gap-8 lg:grid-cols-2">
           <Reveal>
@@ -33,18 +34,18 @@ export default async function Page() {
               <br />
               {site.address.street}, {site.address.zip} {site.address.city}
               <br />
-              Tel.:{" "}
+              <TranslatedText path="ui.phone" de="Tel." />:{" "}
               <a href={`tel:${site.phone.tel}`} className="text-signal">
                 +41 78 843 91 76
               </a>
               <br />
-              E-Mail:{" "}
+              <TranslatedText path="ui.email" de="E-Mail" />:{" "}
               <a href={`mailto:${site.email}`} className="text-signal">
                 {site.email}
               </a>
             </InfoCard>
             <InfoCard title="Wie erreichst du uns?">
-              Tram oder Bus bis Haltestelle Albisriederplatz:
+              <TranslatedText de="Tram oder Bus bis Haltestelle Albisriederplatz:" />
               <br />
               {site.transit}
             </InfoCard>

@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import type { getNav, getSite } from "@/lib/data";
 import { asset } from "@/lib/site";
+import LanguageToggle from "./LanguageToggle";
+import { useT } from "@/lib/i18n/LanguageContext";
 
 type Props = {
   site: Awaited<ReturnType<typeof getSite>>;
@@ -15,6 +17,8 @@ type Props = {
 export default function SiteHeader({ site, nav }: Props) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const t = useT();
 
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
@@ -23,18 +27,24 @@ export default function SiteHeader({ site, nav }: Props) {
       document.body.style.overflow = "";
     };
   }, [open]);
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 12);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 bg-midnight/95 backdrop-blur">
+      <header className={`header-shell fixed inset-x-0 top-0 z-50 ${scrolled ? "is-scrolled" : ""}`}>
         <div className="wrap flex h-[var(--header-h)] items-center justify-between gap-4">
           <Link
             href="/"
             className="flex items-center rounded-sm bg-white px-2 py-1.5"
-            aria-label={`${site.name} – Start`}
+            aria-label={`${site.name} – ${t("ui.home", "Start")}`}
           >
             <Image
               src={asset("/img/logo.png")}
@@ -47,34 +57,35 @@ export default function SiteHeader({ site, nav }: Props) {
             />
           </Link>
 
-          <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Hauptnavigation">
-            {nav.primary.map((item) => (
+          <nav className="hidden items-center xl:flex" aria-label={t("ui.mainNav", "Hauptnavigation")}>
+            {nav.primary.filter((item) => item.href !== "/driving-school").map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 hrefLang={"lang" in item ? (item as { lang: string }).lang : undefined}
-                className={`relative px-3 py-2 font-mono text-[0.82rem] font-medium tracking-[0.01em] transition-colors ${
+                className={`relative inline-flex h-10 w-[6.6rem] items-center justify-center whitespace-nowrap px-2 py-2 text-center font-mono text-[0.78rem] font-medium tracking-[0.01em] transition-colors first:w-[8.8rem] ${
                   isActive(item.href) ? "text-signal-soft" : "text-on-dark-soft hover:text-white"
                 }`}
               >
-                {item.label}
+                {t(["nav", item.label], item.label)}
               </Link>
             ))}
           </nav>
 
           <div className="flex items-center gap-2">
+            <LanguageToggle className="hidden xl:grid" />
             <Link
               href={nav.ctaHref}
-              className="btn btn-signal hidden !min-h-0 !py-2.5 sm:inline-flex"
+              className="btn btn-signal hidden w-[11rem] !min-h-0 !px-3 !py-2.5 sm:inline-flex"
             >
-              {nav.ctaLabel} · CHF 50
+              {t(["copy", "Probelektion"], nav.ctaLabel)} · CHF 50
             </Link>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              aria-label={open ? "Menü schliessen" : "Menü öffnen"}
+              aria-label={open ? t("ui.menuClose", "Menü schliessen") : t("ui.menuOpen", "Menü öffnen")}
               aria-expanded={open}
-              className="grid h-11 w-11 place-items-center border border-steel text-white lg:hidden"
+              className="grid h-11 w-11 place-items-center border border-steel text-white xl:hidden"
             >
               <span className="relative block h-[2px] w-5 bg-current before:absolute before:-top-1.5 before:left-0 before:h-[2px] before:w-5 before:bg-current after:absolute after:top-1.5 after:left-0 after:h-[2px] after:w-5 after:bg-current" />
             </button>
@@ -84,20 +95,21 @@ export default function SiteHeader({ site, nav }: Props) {
 
       {/* Mobiles Voll-Sheet */}
       <div
-        className={`fixed inset-0 z-40 bg-midnight transition-transform duration-300 lg:hidden ${
+        className={`fixed inset-0 z-40 bg-midnight transition-transform duration-300 xl:hidden ${
           open ? "translate-y-0" : "-translate-y-full"
         }`}
         style={{ paddingTop: "calc(var(--header-h) + 1rem)" }}
         aria-hidden={!open}
       >
-        <nav className="wrap flex h-full flex-col overflow-y-auto pb-24">
+        <nav className="wrap flex h-full flex-col overflow-y-auto pb-24" aria-label={t("ui.mobileNav", "Mobile Navigation")}>
+          <LanguageToggle className="mb-4" />
           {[{ label: "Start", href: "/" }, ...nav.primary, ...nav.mobileExtra].map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className="flex items-center justify-between border-b border-steel/50 py-4 font-display text-3xl font-bold text-white"
             >
-              {item.label}
+              {t(["nav", item.label], item.label)}
               <span className="text-signal-soft">→</span>
             </Link>
           ))}
@@ -122,13 +134,13 @@ export default function SiteHeader({ site, nav }: Props) {
           href={`tel:${site.phone.tel}`}
           className="flex flex-1 items-center justify-center py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.08em] text-white"
         >
-          Anrufen
+          {t("ui.call", "Anrufen")}
         </a>
         <Link
           href={nav.ctaHref}
           className="flex flex-1 items-center justify-center bg-signal py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.08em] text-white"
         >
-          Probelektion
+          {t("ui.trial", "Probelektion")}
         </Link>
       </div>
 

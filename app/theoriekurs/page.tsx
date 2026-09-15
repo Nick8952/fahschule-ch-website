@@ -7,6 +7,7 @@ import PageHero from "@/components/PageHero";
 import Prose from "@/components/Prose";
 import Reveal from "@/components/Reveal";
 import { InfoCard, Callout } from "@/components/ui";
+import TranslatedText from "@/components/TranslatedText";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter: fm } = await getPage("theoriekurs");
@@ -21,30 +22,30 @@ export default async function Page() {
   const t = courses.theoriekurs;
   return (
     <>
-      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Theoriekurs" />
+      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Theoriekurs" i18nKey="theory" />
       <section className="section block-light">
         <div className="wrap-eng">
           <Reveal>
             <Prose body={body} />
             <div className="my-8 grid gap-4 sm:grid-cols-3">
               <InfoCard big={t.fee} title="Kursgebühr">
-                {t.voucher}
+                <TranslatedText de={t.voucher} />
               </InfoCard>
               <InfoCard title="Wann?">
                 {t.times.map((x) => (
                   <span key={x} className="block">
-                    {x}
+                    <TranslatedText de={x} />
                   </span>
                 ))}
               </InfoCard>
-              <InfoCard title="Wo?">{t.location}</InfoCard>
+              <InfoCard title="Wo?"><TranslatedText de={t.location} /></InfoCard>
             </div>
             <Callout>
-              <strong>Gut zu wissen:</strong> {t.note}
+              <strong><TranslatedText de="Gut zu wissen:" /></strong> <TranslatedText de={t.note} />
             </Callout>
             <p className="mt-6">
-              <Link href="/kontakt" className="btn btn-signal">
-                Zur Anmeldung
+              <Link href="/kontakt" className="btn btn-signal w-full sm:w-[12rem]">
+                <TranslatedText de="Zur Anmeldung" />
               </Link>
             </p>
           </Reveal>

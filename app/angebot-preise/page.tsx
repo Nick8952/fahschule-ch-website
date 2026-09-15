@@ -8,6 +8,7 @@ import PriceModel from "@/components/PriceModel";
 import PriceTable from "@/components/PriceTable";
 import Reveal from "@/components/Reveal";
 import { SectionHead, InfoCard } from "@/components/ui";
+import TranslatedText from "@/components/TranslatedText";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter: fm } = await getPage("angebot-preise");
@@ -23,6 +24,7 @@ export default async function Page() {
         title={fm.hero.title}
         lead={fm.hero.lead}
         crumb="Angebote & Preise"
+        i18nKey="prices"
       />
 
       <section className="section block-light">
@@ -34,10 +36,10 @@ export default async function Page() {
           />
           <div className="grid gap-4 sm:grid-cols-3">
             <InfoCard big="CHF 50" title="Probelektion">
-              Unverbindlich kennenlernen – Automat oder geschaltet.
+              <TranslatedText de="Unverbindlich kennenlernen – Automat oder geschaltet." />
             </InfoCard>
             <InfoCard big="Gratis" title="1 Fahrstunde nach VKU">
-              Bei Besuch des VKU bei Fahrschule CH.
+              <TranslatedText de="Bei Besuch des VKU bei Fahrschule CH." />
             </InfoCard>
             <InfoCard title="Lektionslängen">
               {prices.lessonLengths.single}
@@ -65,16 +67,18 @@ export default async function Page() {
           />
           <div className="grid gap-4 sm:grid-cols-3">
             {prices.tiers.map((t) => (
-              <Reveal key={t.key} className="card !p-6">
+              <Reveal key={t.key} className="card flex h-full flex-col !p-6">
                 <span className="font-display text-step-3 text-signal">CHF {t.automat}</span>
                 <h3 className="mt-1 font-display text-step-1">«{t.name}»</h3>
                 <p className="mt-1 text-[0.92rem] text-ink-soft">
-                  {t.cond}.<br />
-                  Geschaltet: CHF {t.geschaltet}.
+                  <TranslatedText de={t.cond} />.<br />
+                  <TranslatedText de="Geschaltet" />: CHF {t.geschaltet}.
                 </p>
-                <Link href="/kontakt" className="btn btn-signal mt-4 w-full">
-                  Anmelden
-                </Link>
+                <div className="mt-auto pt-4">
+                  <Link href="/kontakt" className="btn btn-signal w-full">
+                    <TranslatedText de="Anmelden" />
+                  </Link>
+                </div>
               </Reveal>
             ))}
           </div>

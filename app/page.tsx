@@ -12,6 +12,7 @@ import PriceModel from "@/components/PriceModel";
 import ModuleLadder from "@/components/ModuleLadder";
 import Testimonials from "@/components/Testimonials";
 import { SectionHead, ReasonGrid, ServiceRow } from "@/components/ui";
+import TranslatedText from "@/components/TranslatedText";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter: fm } = await getPage("home");
@@ -40,29 +41,29 @@ export default async function HomePage() {
       <section className="block-light">
         <div className="wrap grid items-end gap-8 py-14 sm:py-20 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <p className="eyebrow mb-5">{fm.hero.eyebrow}</p>
-            <h1 className="text-step-5 font-extrabold uppercase tracking-tightest">
+            <p className="eyebrow mb-5"><TranslatedText path="pages.home.eyebrow" de={fm.hero.eyebrow} /></p>
+            <h1 className="min-h-[4em] text-step-5 font-extrabold uppercase tracking-tightest sm:min-h-[3em] lg:min-h-[4em]">
               <span className="line-mask">
-                <span style={{ animationDelay: "0.05s" }}>Ruhig ans</span>
+                <span style={{ animationDelay: "0.05s" }}><TranslatedText de="Ruhig ans" /></span>
               </span>
               <span className="line-mask">
-                <span style={{ animationDelay: "0.15s" }}>Steuer.</span>
+                <span style={{ animationDelay: "0.15s" }}><TranslatedText de="Steuer." /></span>
               </span>
               <span className="line-mask text-signal">
-                <span style={{ animationDelay: "0.25s" }}>Sicher zur</span>
+                <span style={{ animationDelay: "0.25s" }}><TranslatedText de="Sicher zur" /></span>
               </span>
               <span className="line-mask text-signal">
-                <span style={{ animationDelay: "0.35s" }}>Prüfung.</span>
+                <span style={{ animationDelay: "0.35s" }}><TranslatedText de="Prüfung." /></span>
               </span>
             </h1>
             <Reveal delay={200}>
-              <p className="mt-6 max-w-[50ch] text-step-1 text-ink-soft">{fm.hero.lead}</p>
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                <Link href="/kontakt" className="btn btn-signal">
-                  Probelektion buchen · CHF 50
+              <p className="mt-6 min-h-[7.5rem] max-w-[50ch] text-step-1 text-ink-soft sm:min-h-[6rem] lg:min-h-[7.5rem]"><TranslatedText path="pages.home.lead" de={fm.hero.lead} /></p>
+              <div className="mt-7 grid items-center gap-3 sm:flex sm:flex-wrap">
+                <Link href="/kontakt" className="btn btn-signal w-full sm:w-[18rem]">
+                  <TranslatedText de="Probelektion buchen · CHF 50" />
                 </Link>
-                <Link href="/angebot-preise" className="btn btn-ghost">
-                  Preise
+                <Link href="/angebot-preise" className="btn btn-ghost w-full sm:w-[8rem]">
+                  <TranslatedText de="Preise" />
                 </Link>
               </div>
             </Reveal>
@@ -85,7 +86,7 @@ export default async function HomePage() {
         </div>
 
         {/* Kennzahlen-Zeile */}
-        <div className="border-y-2 border-signal">
+        <div className="stat-strip border-y-2 border-signal">
           <div className="wrap flex flex-wrap items-center gap-x-10 gap-y-2 py-4 font-mono text-[0.8rem] uppercase tracking-[0.06em] text-ink-soft">
             {[
               [site.stats.students, site.stats.studentsLabel],
@@ -97,7 +98,7 @@ export default async function HomePage() {
                 <b className="font-display text-step-1 font-extrabold tabular-nums text-signal">
                   <CountUp value={n} delay={i * 0.12} />
                 </b>
-                {l}
+                <TranslatedText de={String(l)} />
               </span>
             ))}
           </div>
@@ -143,25 +144,25 @@ export default async function HomePage() {
         <div className="wrap">
           <Reveal className="mb-10 max-w-[52ch]">
             <div className="flex items-baseline justify-between gap-4">
-              <p className="eyebrow">Deine Vorteile</p>
+              <p className="eyebrow"><TranslatedText de="Deine Vorteile" /></p>
               <span className="seam-num">03 / 04</span>
             </div>
-            <h2 className="mt-4 text-step-3 font-extrabold text-white">{p.sections.vorteile}</h2>
+            <h2 className="mt-4 text-step-3 font-extrabold text-white"><TranslatedText de={p.sections.vorteile} /></h2>
           </Reveal>
           <ul className="grid gap-x-10 gap-y-4 sm:grid-cols-2">
             {reasons.vorteile.map((v) => (
               <li key={v} className="flex gap-3 border-t border-steel pt-4">
                 <span className="font-mono text-go-soft">→</span>
-                {v}
+                <TranslatedText de={v} />
               </li>
             ))}
           </ul>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/kontakt" className="btn btn-signal">
-              Anmelden
+          <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
+            <Link href="/kontakt" className="btn btn-signal w-full sm:w-[10rem]">
+              <TranslatedText de="Anmelden" />
             </Link>
-            <Link href="/angebot-preise" className="btn btn-ghost text-white">
-              Preise ansehen
+            <Link href="/angebot-preise" className="btn btn-ghost w-full text-white sm:w-[12rem]">
+              <TranslatedText de="Preise ansehen" />
             </Link>
           </div>
         </div>

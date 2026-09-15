@@ -4,6 +4,9 @@ import { getNav, getSite } from "@/lib/data";
 import { absUrl } from "@/lib/site";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import ScrollProgress from "@/components/ScrollProgress";
+import TranslatedText from "@/components/TranslatedText";
+import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import "./globals.css";
 
 const display = Darker_Grotesque({
@@ -52,15 +55,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="de" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body className="font-body text-step-0">
-        <a
-          href="#inhalt"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-signal focus:px-4 focus:py-2 focus:text-white"
-        >
-          Zum Inhalt springen
-        </a>
-        <SiteHeader site={site} nav={nav} />
-        <main id="inhalt">{children}</main>
-        <SiteFooter />
+        <LanguageProvider>
+          <ScrollProgress />
+          <a
+            href="#inhalt"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-signal focus:px-4 focus:py-2 focus:text-white"
+          >
+            <TranslatedText path="ui.skipLink" de="Zum Inhalt springen" />
+          </a>
+          <SiteHeader site={site} nav={nav} />
+          <main id="inhalt">{children}</main>
+          <SiteFooter />
+        </LanguageProvider>
       </body>
     </html>
   );

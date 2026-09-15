@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { getSteps } from "@/lib/data";
+import { useT } from "@/lib/i18n/LanguageContext";
 
 export default function PathSteps({ steps }: { steps: Awaited<ReturnType<typeof getSteps>> }) {
   const items = steps.items;
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLElement | null)[]>([]);
+  const t = useT();
 
   useEffect(() => {
     if (!("IntersectionObserver" in window)) return;
@@ -28,7 +30,7 @@ export default function PathSteps({ steps }: { steps: Awaited<ReturnType<typeof 
   return (
     <div className="grid gap-8 lg:grid-cols-[240px_1fr]">
       <nav
-        aria-label="Schritte"
+        aria-label={t(["copy", "Schritte"], "Schritte")}
         className="top-[calc(var(--header-h)+1rem)] flex gap-1 overflow-x-auto lg:sticky lg:h-max lg:flex-col lg:overflow-visible"
       >
         {items.map((s, i) => (
@@ -41,7 +43,7 @@ export default function PathSteps({ steps }: { steps: Awaited<ReturnType<typeof 
             }`}
           >
             <b className="font-medium text-signal">{String(s.n).padStart(2, "0")}</b>
-            <span className="hidden lg:inline">{s.title}</span>
+            <span className="hidden lg:inline">{t(["copy", s.title], s.title)}</span>
           </button>
         ))}
       </nav>
@@ -60,11 +62,11 @@ export default function PathSteps({ steps }: { steps: Awaited<ReturnType<typeof 
               <span className="grid h-11 w-11 shrink-0 place-items-center bg-signal font-display text-xl font-extrabold text-white">
                 {s.n}
               </span>
-              <h3 className="font-display text-step-1 font-bold text-ink">{s.title}</h3>
+              <h3 className="font-display text-step-1 font-bold text-ink">{t(["copy", s.title], s.title)}</h3>
             </div>
-            <p className="text-[0.95rem] leading-relaxed">{s.body}</p>
+            <p className="text-[0.95rem] leading-relaxed">{t(["copy", s.body], s.body)}</p>
             <span className="mt-3 inline-flex border border-signal/40 bg-signal/5 px-3 py-1 font-mono text-[0.72rem] uppercase tracking-[0.04em] text-signal-600">
-              {s.badge}
+              {t(["copy", s.badge], s.badge)}
             </span>
           </li>
         ))}

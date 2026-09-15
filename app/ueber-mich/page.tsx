@@ -9,6 +9,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ModuleLadder from "@/components/ModuleLadder";
 import { SectionHead, ReasonGrid, InfoCard } from "@/components/ui";
+import TranslatedText from "@/components/TranslatedText";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter: fm } = await getPage("ueber-mich");
@@ -25,14 +26,14 @@ export default async function Page() {
 
   return (
     <>
-      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Über mich" />
+      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Über mich" i18nKey="about" />
 
       <section className="section block-light">
         <div className="wrap grid items-center gap-10 lg:grid-cols-2">
           <Reveal className="overflow-hidden rounded-lg">
             <Image
               src={asset("/img/hero-3.webp")}
-              alt={`${site.instructor} am Zürichsee`}
+              alt={`${site.instructor} — Zürichsee`}
               width={1400}
               height={933}
               unoptimized
@@ -40,9 +41,9 @@ export default async function Page() {
             />
           </Reveal>
           <Reveal>
-            <p className="eyebrow mb-3">Willkommen</p>
-            <h2 className="text-step-2">{p.sections.intro}</h2>
-            <p className="mt-3 text-ink-soft">{p.introBody}</p>
+            <p className="eyebrow mb-3"><TranslatedText de="Willkommen" /></p>
+            <h2 className="text-step-2"><TranslatedText de={p.sections.intro} /></h2>
+            <p className="mt-3 text-ink-soft"><TranslatedText de={p.introBody} /></p>
             <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
               {[
                 [site.stats.sinceYear, site.stats.sinceYearLabel],
@@ -52,7 +53,7 @@ export default async function Page() {
                 <div key={l}>
                   <dt className="font-display text-step-2 text-signal">{n}</dt>
                   <dd className="font-mono text-[0.76rem] uppercase tracking-[0.04em] text-ink-soft/60">
-                    {l}
+                    <TranslatedText de={l} />
                   </dd>
                 </div>
               ))}
@@ -80,13 +81,13 @@ export default async function Page() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {p.auszeichnetPunkte.map((x) => (
               <InfoCard key={x.title} title={x.title}>
-                {x.body}
+                <TranslatedText de={x.body} />
               </InfoCard>
             ))}
           </div>
           <Reveal className="mt-8">
-            <Link href="/kontakt" className="btn btn-signal">
-              Probelektion vereinbaren
+            <Link href="/kontakt" className="btn btn-signal w-full sm:w-[17rem]">
+              <TranslatedText de="Probelektion vereinbaren" />
             </Link>
           </Reveal>
         </div>

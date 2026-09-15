@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getNav, getSite } from "@/lib/data";
 import { asset } from "@/lib/site";
+import TranslatedText from "./TranslatedText";
 
 export default async function SiteFooter() {
   const [site, nav] = await Promise.all([getSite(), getNav()]);
@@ -11,19 +12,18 @@ export default async function SiteFooter() {
       {/* CTA-Statement */}
       <section className="block-dark border-t border-steel/60">
         <div className="wrap section">
-          <p className="eyebrow mb-5">Bereit?</p>
+          <p className="eyebrow mb-5"><TranslatedText de="Bereit?" /></p>
           <h2 className="max-w-[14ch] text-step-4 font-extrabold text-white">
-            Bereit, loszufahren?
+            <TranslatedText de="Bereit, loszufahren?" />
           </h2>
-          <p className="mt-5 max-w-[46ch] text-on-dark-soft">
-            Sichere dir deine Probelektion für CHF 50 – oder stelle einfach kurz deine Frage.
-            Ich melde mich schnell zurück.
+          <p className="mt-5 min-h-[4.5rem] max-w-[46ch] text-on-dark-soft">
+            <TranslatedText de="Sichere dir deine Probelektion für CHF 50 – oder stelle einfach kurz deine Frage. Ich melde mich schnell zurück." />
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/kontakt" className="btn btn-signal">
-              Probelektion buchen
+          <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
+            <Link href="/kontakt" className="btn btn-signal w-full sm:w-[15rem]">
+              <TranslatedText de="Probelektion buchen" />
             </Link>
-            <a href={`tel:${site.phone.tel}`} className="btn btn-ghost text-white">
+            <a href={`tel:${site.phone.tel}`} className="btn btn-ghost w-full text-white sm:w-[12rem]">
               {site.phone.display}
             </a>
           </div>
@@ -46,7 +46,7 @@ export default async function SiteFooter() {
                 />
               </span>
               <p className="text-[0.92rem] leading-relaxed">
-                {site.tagline}. {site.blurb}
+                <TranslatedText de={site.tagline} />. <TranslatedText de={site.blurb} />
               </p>
               <div className="mt-4 flex gap-2">
                 <a
@@ -79,13 +79,13 @@ export default async function SiteFooter() {
             {nav.footerColumns.map((col) => (
               <div key={col.title}>
                 <h3 className="mb-3.5 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-on-dark-soft/80">
-                  {col.title}
+                  <TranslatedText path={["nav", col.title]} de={col.title} />
                 </h3>
                 <ul className="grid gap-2 text-[0.92rem]">
                   {col.links.map((l) => (
                     <li key={l.href}>
                       <Link href={l.href} className="hover:text-white">
-                        {l.label}
+                        <TranslatedText path={["nav", l.label]} de={l.label} />
                       </Link>
                     </li>
                   ))}
@@ -95,7 +95,7 @@ export default async function SiteFooter() {
 
             <div>
               <h3 className="mb-3.5 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-on-dark-soft/80">
-                Kontakt
+                <TranslatedText de="Kontakt" />
               </h3>
               <address className="grid gap-1.5 not-italic text-[0.92rem]">
                 <span>Fahrschule CH – {site.instructor}</span>
@@ -112,7 +112,7 @@ export default async function SiteFooter() {
               </address>
               <div className="mt-4 border border-steel px-4 py-3.5 text-[0.86rem] leading-relaxed">
                 <strong className="mb-1 block font-mono text-[0.7rem] uppercase tracking-[0.08em] text-white">
-                  Treffpunkt Albisriederplatz
+                  <TranslatedText de="Treffpunkt Albisriederplatz" />
                 </strong>
                 {site.transit} —{" "}
                 <a
@@ -121,7 +121,7 @@ export default async function SiteFooter() {
                   rel="noopener"
                   className="font-semibold text-white hover:text-signal-soft"
                 >
-                  Route öffnen
+                  <TranslatedText de="Route öffnen" />
                 </a>
               </div>
             </div>
@@ -131,14 +131,14 @@ export default async function SiteFooter() {
             <span>
               © {year} {site.name} – {site.instructor}
             </span>
-            <span>{site.membership}</span>
+            <span><TranslatedText de={site.membership} /></span>
             <span>
               <Link href="/impressum" className="hover:text-white">
-                Impressum
+                <TranslatedText path={["nav", "Impressum"]} de="Impressum" />
               </Link>{" "}
               ·{" "}
               <Link href="/datenschutz" className="hover:text-white">
-                Datenschutz
+                <TranslatedText path={["nav", "Datenschutz"]} de="Datenschutz" />
               </Link>
             </span>
           </div>

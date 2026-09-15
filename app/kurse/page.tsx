@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import Prose from "@/components/Prose";
 import Reveal from "@/components/Reveal";
 import { SectionHead, ServiceRow } from "@/components/ui";
+import TranslatedText from "@/components/TranslatedText";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { frontmatter: fm } = await getPage("kurse");
@@ -17,7 +18,7 @@ export default async function Page() {
 
   return (
     <>
-      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Kurse" />
+      <PageHero eyebrow={fm.hero.eyebrow} title={fm.hero.title} lead={fm.hero.lead} crumb="Kurse" i18nKey="courses" />
 
       <section className="section block-light">
         <div className="wrap">
@@ -39,7 +40,7 @@ export default async function Page() {
                     {c.points.map((pt) => (
                       <li key={pt} className="flex gap-2">
                         <span className="text-signal">–</span>
-                        {pt}
+                        <TranslatedText de={pt} />
                       </li>
                     ))}
                   </ul>

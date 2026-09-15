@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { asset } from "@/lib/site";
 import Reveal from "./Reveal";
+import TranslatedText from "./TranslatedText";
 
 export function SectionHead({
   eyebrow,
@@ -17,11 +18,11 @@ export function SectionHead({
   return (
     <Reveal className="mb-10 max-w-[52ch]">
       <div className="flex items-baseline justify-between gap-4">
-        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+        {eyebrow && <p className="eyebrow"><TranslatedText de={eyebrow} /></p>}
         {num && <span className="seam-num">{num}</span>}
       </div>
-      <h2 className="mt-4 text-step-3 font-extrabold">{title}</h2>
-      {intro && <p className="mt-3">{intro}</p>}
+      <h2 className="mt-4 text-step-3 font-extrabold"><TranslatedText de={title} /></h2>
+      {intro && <p className="mt-3"><TranslatedText de={intro} /></p>}
     </Reveal>
   );
 }
@@ -34,8 +35,8 @@ export function ReasonGrid({ items }: { items: { title: string; body: string }[]
           <span className="font-mono text-[0.78rem] text-signal">
             {String(i + 1).padStart(2, "0")}
           </span>
-          <h3 className="mt-2 font-display text-step-1 font-bold">{r.title}</h3>
-          <p className="mt-1.5 text-[0.93rem] leading-relaxed">{r.body}</p>
+          <h3 className="mt-2 font-display text-step-1 font-bold"><TranslatedText de={r.title} /></h3>
+          <p className="mt-1.5 text-[0.93rem] leading-relaxed"><TranslatedText de={r.body} /></p>
         </Reveal>
       ))}
     </div>
@@ -71,15 +72,15 @@ export function ServiceRow({
           unoptimized
         />
         <span className="absolute bottom-0 left-0 bg-signal px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.06em] text-white">
-          {tag}
+          <TranslatedText de={tag} />
         </span>
       </div>
       <div>
-        <h3 className="text-step-2 font-extrabold">{title}</h3>
-        <p className="mt-3">{body}</p>
-        {price && <p className="mt-3 font-mono text-[0.9rem] text-signal">{price}</p>}
-        <Link href={href} className="btn btn-ghost mt-6">
-          Mehr Informationen
+        <h3 className="text-step-2 font-extrabold"><TranslatedText de={title} /></h3>
+        <p className="mt-3"><TranslatedText de={body} /></p>
+        {price && <p className="mt-3 font-mono text-[0.9rem] text-signal"><TranslatedText de={price} /></p>}
+        <Link href={href} className="btn btn-ghost mt-6 w-full sm:w-[14rem]">
+          <TranslatedText de="Mehr Informationen" />
         </Link>
       </div>
     </Reveal>
@@ -98,7 +99,7 @@ export function InfoCard({
   return (
     <div className="card">
       {big && <span className="font-display text-step-3 font-extrabold text-signal">{big}</span>}
-      <h3 className="mt-1 font-display text-step-1 font-bold">{title}</h3>
+      <h3 className="mt-1 font-display text-step-1 font-bold"><TranslatedText de={title} /></h3>
       <div className="mt-1.5 text-[0.93rem] leading-relaxed">{children}</div>
     </div>
   );
