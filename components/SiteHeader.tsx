@@ -76,9 +76,9 @@ export default function SiteHeader({ site, nav }: Props) {
             <LanguageToggle className="hidden xl:grid" />
             <Link
               href={nav.ctaHref}
-              className="btn btn-signal hidden w-[11rem] !min-h-0 !px-3 !py-2.5 sm:inline-flex"
+              className="btn btn-signal hidden w-[8.5rem] whitespace-nowrap !min-h-0 !px-2 !py-2 !text-[0.68rem] sm:inline-flex"
             >
-              {t(["copy", "Probelektion"], nav.ctaLabel)} · CHF 50
+              {t(["copy", "Probelektion"], nav.ctaLabel)}
             </Link>
             <button
               type="button"

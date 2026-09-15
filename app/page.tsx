@@ -59,10 +59,10 @@ export default async function HomePage() {
             <Reveal delay={200}>
               <p className="mt-6 min-h-[7.5rem] max-w-[50ch] text-step-1 text-ink-soft sm:min-h-[6rem] lg:min-h-[7.5rem]"><TranslatedText path="pages.home.lead" de={fm.hero.lead} /></p>
               <div className="mt-7 grid items-center gap-3 sm:flex sm:flex-wrap">
-                <Link href="/kontakt" className="btn btn-signal w-full sm:w-[18rem]">
+                <Link href="/kontakt" className="btn btn-signal w-full whitespace-nowrap sm:w-auto">
                   <TranslatedText de="Probelektion buchen · CHF 50" />
                 </Link>
-                <Link href="/angebot-preise" className="btn btn-ghost w-full sm:w-[8rem]">
+                <Link href="/angebot-preise" className="btn btn-ghost w-full whitespace-nowrap sm:w-auto">
                   <TranslatedText de="Preise" />
                 </Link>
               </div>
