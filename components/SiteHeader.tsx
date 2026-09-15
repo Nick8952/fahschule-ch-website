@@ -57,13 +57,13 @@ export default function SiteHeader({ site, nav }: Props) {
             />
           </Link>
 
-          <nav className="hidden items-center xl:flex" aria-label={t("ui.mainNav", "Hauptnavigation")}>
+          <nav className="hidden items-center gap-x-6 xl:flex" aria-label={t("ui.mainNav", "Hauptnavigation")}>
             {nav.primary.filter((item) => item.href !== "/driving-school").map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 hrefLang={"lang" in item ? (item as { lang: string }).lang : undefined}
-                className={`relative inline-flex h-10 w-[6.6rem] items-center justify-center whitespace-nowrap px-2 py-2 text-center font-mono text-[0.78rem] font-medium tracking-[0.01em] transition-colors first:w-[8.8rem] ${
+                className={`relative inline-flex h-10 items-center whitespace-nowrap font-mono text-[0.78rem] font-medium tracking-[0.01em] transition-colors ${
                   isActive(item.href) ? "text-signal-soft" : "text-on-dark-soft hover:text-white"
                 }`}
               >
